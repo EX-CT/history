@@ -79,7 +79,7 @@ Then open:
 
 A fresh MariaDB starts empty, so the homepage will have nothing to show until it is
 populated. `seed/eve-incursions-seed.sql.gz` is a gzipped MariaDB dump of all 11 tables
-(systems, spawns, communities, rat stats, etc.), taken on 2026-06-26. It contains only
+(systems, spawns, communities, rat stats, etc.), taken on 2026-08-03. It contains only
 public EVE/game data — no user data. Pipe it into the running `mysql` container:
 
 ```bash
