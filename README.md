@@ -23,7 +23,9 @@ The Forge 10000002). Buy orders and other stations are ignored.
    percentage of the orders.
 2. `p0` = the lowest price among the remaining orders.
 3. `band_max` = `p0 × (1 + band)`. The band is every remaining order with `p0 ≤ price ≤ band_max` (both edges inclusive).
-4. `price` = Σ(price × volume_remain) / Σ volume_remain over the band, rounded to 0.01 ISK, half to even.
+4. `price` = Σ(price × volume_remain) / Σ volume_remain over the band, rounded to 0.01 ISK half to even **on the
+   mean's 12-significant-digit decimal value** (exact decimal arithmetic: 100.335 → 100.34, 2.675 → 2.68, 4.085 → 4.08),
+   then clamped into [p0, band_max]. Orders priced ≤ 0 or non-finite are dropped with the min_units filter.
 5. If no order survives step 1, the type has no price and is listed in `missing`.
 
 | parameter | default | CLI | |
@@ -115,13 +117,17 @@ latest CCP SDE. `--dataset` (an eve-sde-pipeline dataset, a subset) still works.
 3. `sde_build` required (decided): `--ccp-sde` zip, `--dataset`, or `--sde-build`.
 4. Fuzzwork: clamped into [p0, band_max], `market_time` = fetch time, `rule.exact: false` (accepted). Source = `source.kind`.
 5. Coverage: all published marketable types from the CCP SDE (decided; `--ccp-sde`).
-6. **Rule details — settled (eve3 ruling 2026-10-03 15:11; bench `d22/README.md` in EX-CT/eve-dogma-bench pending-1.11,
-   reference `d22/rule.py` follows this implementation):** `price` = unit-weighted band mean rounded to 0.01 ISK
-   half-to-even on the value trimmed to 12 significant digits (decimal reading: a mean computed as 100.33499999999999
-   from 100.335 rounds to 100.34), then clamped into [p0, band_max]; orders with price ≤ 0 or non-finite are dropped
-   before the min_units filter; `band_max` = p0 × (1 + band) to 12 significant digits, order prices compared to it as
-   given; an unknown rule name / version / order_side / weighting or invalid parameters make `eve-market-prices rule`
-   exit non-zero (message on stderr).
+6. **Rule details — settled (eve3 ruling 2026-10-03 15:11; spec = bench `d22/README.md` "Pricing rule spec" in
+   EX-CT/eve-dogma-bench pending-1.11 b638e8a, reference `d22/rule.py`, 41 cases in `d22/cases/price_rule/`):**
+   `price` = band mean rounded half-to-even on its 12-significant-digit decimal value
+   (`Decimal(f"{mean:.12g}").quantize(Decimal("0.01"), ROUND_HALF_EVEN)`; `roundIsk` in `src/rule.ts` does the same
+   with BigInt, test vectors from Python `decimal` in `test/rule.test.ts`), then clamped into [p0, band_max]; orders
+   priced ≤ 0 or non-finite are dropped; `band_max` = p0 × (1 + band) at 12 significant digits, order prices compared
+   to it as given; an invalid rule makes `eve-market-prices rule` exit non-zero (bench: `RULE_REJECTED`). CI runs all
+   41 cases. Since 0.2.1 the rounding is exactly the spec (0.2.0 rounded `trim(v × 100)`, which differed for means with
+   more than 10 integer digits, e.g. 55174443703.65 → 55174443703.6 instead of …703.7).
+7. Fuzzwork entries are clamped into [p0, band_max]; such a snapshot has `rule.exact: false` and says so in
+   `source.notes` (docs/22 has `exact` only on `rule`, not per type).
 
 ## Development
 

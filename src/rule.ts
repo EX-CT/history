@@ -58,13 +58,29 @@ export function validateRule(r: Partial<RuleParams>): RuleParams {
 /** Strip binary noise (4.2000000000000002 -> 4.2) so decimal edges compare as written. */
 export const trim = (v: number) => Number(v.toPrecision(12));
 
-/** Round to 0.01 ISK, half to even (docs/22 §4.5), on the noise-trimmed value: 4.075 -> 4.08, 4.085 -> 4.08. */
+/**
+ * Round to 0.01 ISK, half to even, on the **12-significant-digit decimal value** of v (docs/22 §4.5; bench
+ * eve-dogma-bench d22/README.md "Pricing rule spec" step 7, Python
+ * `float(Decimal(f"{v:.12g}").quantize(Decimal("0.01"), ROUND_HALF_EVEN))`): 100.335 -> 100.34, 100.345 -> 100.34,
+ * 2.675 -> 2.68, 4.085 -> 4.08. Exact decimal arithmetic (BigInt); the result is the double nearest that decimal.
+ */
 export function roundIsk(v: number): number {
-  const c = trim(v * 100);
-  const f = Math.floor(c);
-  const d = trim(c - f);
-  const r = d > 0.5 ? f + 1 : d < 0.5 ? f : f % 2 === 0 ? f : f + 1;
-  return trim(r / 100);
+  if (!Number.isFinite(v)) throw new Error(`roundIsk: non-finite ${v}`);
+  const m = /^(-?)(\d+)(?:\.(\d+))?(?:e([+-]\d+))?$/.exec(v.toPrecision(12));
+  if (!m) throw new Error(`roundIsk: cannot parse ${v.toPrecision(12)}`);
+  const [, sign, ip, fp = "", ex = "0"] = m;
+  const digits = BigInt(ip + fp);
+  const k = Number(ex) - fp.length + 2; // value * 100 = digits * 10^k
+  let n: bigint;
+  if (k >= 0) n = digits * 10n ** BigInt(k);
+  else {
+    const d = 10n ** BigInt(-k);
+    n = digits / d;
+    const r2 = (digits % d) * 2n;
+    if (r2 > d || (r2 === d && n % 2n === 1n)) n += 1n;
+  }
+  const t = n.toString().padStart(3, "0");
+  return Number(`${sign}${t.slice(0, -2)}.${t.slice(-2)}`) || 0;
 }
 
 /** Price one type from its sell orders; null when no order has at least min_units units. */

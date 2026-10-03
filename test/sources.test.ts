@@ -2,7 +2,7 @@
 // Last-Modified consistency, retries, User-Agent.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { EsiSource, FuzzworkSource, MemoryCache, createSource, registerSource, SOURCES, userAgent } from "../src/index.js";
+import { buildSnapshot, EsiSource, FuzzworkSource, MemoryCache, createSource, registerSource, SOURCES, userAgent } from "../src/index.js";
 import { mockFetch, order, AMARR, JITA } from "./mock.js";
 
 const LM = "Sat, 03 Oct 2026 06:00:00 GMT";
@@ -140,18 +140,27 @@ test("fuzzwork: aggregates map onto p0 / price / units / orders; empty types unp
     const all: Record<string, unknown> = {
       "34": { buy: side("1", "1", "1", "1"), sell: side("3.91", "3.9100000000000006", "7605818556.0", "26") },
       "587": { buy: side("1", "1", "1", "1"), sell: side("249800.0", "249800.0", "2603.0", "50") },
+      "35": { buy: side("1", "1", "1", "1"), sell: side("10", "11.5", "1000", "4") },
+      "36": { buy: side("1", "1", "1", "1"), sell: side("20", "19.994", "1000", "4") },
       "999": { buy: side("0", "0", "0", "0"), sell: { weightedAverage: 0, max: 0, min: 0, stddev: 0, median: 0, volume: 0, orderCount: 0, percentile: 0 } },
     };
     return { body: Object.fromEntries(ids.map((i) => [i, all[i]])) };
   });
   const s = new FuzzworkSource({ userAgent: UA, fetch: m.fetch, batch: 2, sleep: noSleep });
-  const r = await s.fetchPrices({ rule, types: [999, 34, 587] });
-  assert.equal(m.calls.length, 2);
+  const r = await s.fetchPrices({ rule, types: [999, 34, 587, 35, 36] });
+  assert.equal(m.calls.length, 3);
   assert.deepEqual(Object.fromEntries(r.prices), {
     34: { price: 3.91, p0: 3.91, band_max: 4.1055, units: 7605818556, orders: 26, units_considered: 7605818556, orders_considered: 26, orders_total: 26 },
     587: { price: 249800, p0: 249800, band_max: 262290, units: 2603, orders: 50, units_considered: 2603, orders_considered: 50, orders_total: 50 },
+    // clamped into [p0, band_max] (docs/22 eccf455, Fuzzwork accepted): percentile above the band -> band_max, below p0 -> p0
+    35: { price: 10.5, p0: 10, band_max: 10.5, units: 1000, orders: 4, units_considered: 1000, orders_considered: 4, orders_total: 4 },
+    36: { price: 20, p0: 20, band_max: 21, units: 1000, orders: 4, units_considered: 1000, orders_considered: 4, orders_total: 4 },
   });
   assert.equal(r.exact, false);
+  // a snapshot from clamped / approximated entries says so: rule.exact false (+ notes)
+  const snap = buildSnapshot({ result: r, source: s.descriptor, rule, sde_build: 3569502, generated_at: "2026-10-03T07:00:00Z", updater: { name: "eve-market-prices", version: "test" } });
+  assert.equal(snap.rule.exact, false);
+  assert.match(snap.source.notes ?? "", /clamped/);
   assert.match(r.notes!, /approximate/);
   assert.equal(r.market_time, r.fetched_to);
   assert.deepEqual(r.missing, [999]);
