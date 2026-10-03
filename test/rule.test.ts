@@ -2,7 +2,7 @@
 // single order, no order, determinism, rounding.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { priceAll, priceOrders, roundIsk, validateRule, DEFAULT_RULE, type Order, type RuleParams, type TypePrice } from "../src/rule.js";
+import { applyRule, priceAll, priceOrders, roundIsk, validateRule, DEFAULT_RULE, type Order, type RuleParams, type TypePrice } from "../src/rule.js";
 
 const o = (price: number, volume_remain: number, type_id = 34): Order => ({ type_id, price, volume_remain });
 const R1: RuleParams = { min_units: 1, band: 0.05 };
@@ -104,4 +104,24 @@ test("rule: parameters and defaults (docs/22: min_units 10, band 0.05)", () => {
   assert.throws(() => validateRule({ min_units: 1.5 }), /min_units/);
   assert.throws(() => validateRule({ band: -0.1 }), /band/);
   assert.throws(() => validateRule({ band: Number.NaN }), /band/);
+});
+
+test("rule: an order one ulp above band_max is outside the band (order prices are not rounded; bench d22 band_edge_just_above)", () => {
+  const p = priceOrders([o(1000, 10), o(1050.0000000000002, 30), o(1050, 5)], { min_units: 5, band: 0.05 })!;
+  assert.deepEqual(core(p), { p0: 1000, price: 1016.67, units: 15, orders: 2 });
+  assert.equal(p.band_max, 1050);
+});
+
+test("applyRule: rule descriptor + raw ESI book (CLI `rule`): location / buy filter, descriptor checks", () => {
+  const book = [
+    { type_id: 34, price: 5, volume_remain: 100, location_id: 60003760, is_buy_order: false },
+    { type_id: 34, price: 4, volume_remain: 100, location_id: 60008494, is_buy_order: false },
+    { type_id: 34, price: 6, volume_remain: 100, location_id: 60003760, is_buy_order: true },
+  ];
+  const rule = { name: "jita_sell_band_weighted", version: 1, order_side: "sell", location_id: 60003760, min_units: 10, band: 0.05, weighting: "units" };
+  assert.deepEqual(applyRule({ rule, orders: book }), { price: 5, p0: 5, band_max: 5.25, units: 100, orders: 1, units_considered: 100, orders_considered: 1, orders_total: 1 });
+  assert.equal(applyRule({ rule, orders: [] }), null);
+  assert.throws(() => applyRule({ rule: { ...rule, version: 2 }, orders: book }), /version/);
+  assert.throws(() => applyRule({ rule: { ...rule, weighting: "orders" }, orders: book }), /weighting/);
+  assert.throws(() => applyRule({ rule: { ...rule, name: "x" }, orders: book }), /unknown rule/);
 });

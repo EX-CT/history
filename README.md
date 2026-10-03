@@ -45,7 +45,13 @@ node dist/src/cli.js snapshot --types 587,2048 --sde-build 3569502 --min-units 1
 node dist/src/cli.js snapshot --source fuzzwork --types 587,2048 --sde-build 3569502 > p-fw.json
 node dist/src/cli.js validate out/prices-jita44-20261003T063356Z.json.gz   # schema, invariants, content_hash
 node dist/src/cli.js price p.json 587 2048
+# the rule alone on one type's ESI order book (stdin {"rule": {...}, "orders": [...]}) -> §4.5 entry or null
+echo '{"rule":{"name":"jita_sell_band_weighted","version":1,"location_id":60003760,"min_units":10,"band":0.05},"orders":[{"type_id":34,"price":5,"volume_remain":100,"location_id":60003760,"is_buy_order":false}]}' | node dist/src/cli.js rule
 ```
+
+`rule` is the `PRICE_RULE_CMD` of eve3's bench suite `d22/price_rule` (EX-CT/eve-dogma-bench pending-1.11); CI runs
+it at a pinned bench commit and requires every case to pass. Buy orders and orders at another `location_id` are
+ignored; a rule with another `name` / `version` / `order_side` / `weighting` is an error.
 
 Options: `--source esi|fuzzwork`, `--min-units`, `--band`, `--types` / `--types-file` / `--dataset` (+ `--dataset-name`),
 `--sde-build`, `--contact` (or env `EVE_MARKET_PRICES_CONTACT`; it goes into the User-Agent), `--cache-dir` (keeps ETag /
@@ -85,7 +91,7 @@ To add a source, implement `Source` (`src/sources/types.ts`: `descriptor` + `fet
 ### Gaps / ambiguities in docs/22 (reported to eve / F)
 1. **Number form in the hash (§4.6):** "Python repr / Rust ryu" writes `1240000.0`, but "no trailing zeros" suggests `1240000`. This tool writes `1240000` (ECMAScript). Engines must use the same form, otherwise hashes differ for integral prices.
 2. **Key order (§4.6):** "keys sorted" is read as code-point order (`"1000" < "34"`), like Python `sort_keys` and serde `BTreeMap`.
-3. **`band_max`** is unrounded `p0 × (1 + band)`. It is computed with 12 significant digits (binary noise trimmed), and orders are compared against that value, so 4.0 × 1.05 = 4.2 includes an order at 4.2.
+3. **`band_max`** is unrounded `p0 × (1 + band)`. It is computed with 12 significant digits (binary noise trimmed, as docs/22 §4.5 now says), and order prices are compared against that value as given (not rounded), so 4.0 × 1.05 = 4.2 includes an order at 4.2 but an order one ulp above 1050 (p0 1000) is out.
 4. **`sde_build` is required** even for ad-hoc type lists, so the CLI needs `--dataset` or `--sde-build`.
 5. **Aggregate sources:** §4.5 invariants (`price ≤ band_max`) force a clamp of Fuzzwork's percentile price; documented in `source.notes`.
 6. **`market_time` for sources without `Last-Modified`** (Fuzzwork): the fetch end time is used.
@@ -93,7 +99,8 @@ To add a source, implement `Source` (`src/sources/types.ts`: `descriptor` + `fet
 
 ## Development
 
-`npm test` runs rule, mocked-source and snapshot tests (no network). `npm run smoke` is a small live ESI + Fuzzwork run;
+`npm test` runs rule, mocked-source and snapshot tests (no network). CI also runs the bench `d22/price_rule` suite
+through `cli.js rule`. `npm run smoke` is a small live ESI + Fuzzwork run;
 it is non-gating in CI.
 
 License: MIT. EVE Online and all related names are trademarks of CCP hf.

@@ -20,6 +20,31 @@ jobs:
       - run: npm test
       - name: CLI round trip (mocked data only; validate the committed example)
         run: node dist/src/cli.js validate examples/prices-jita44-sample.json
+  price-rule-bench:
+    # eve3's docs/22 rule suite (EX-CT/eve-dogma-bench pending-1.11 d22/price_rule, pinned): PRICE_RULE_CMD = `eve-market-prices rule`
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BENCH_REPO: EX-CT/eve-dogma-bench
+      BENCH_SHA: d151cb3bf3dba1c91edf4aa7e8260db520d4104f
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm ci && npm run build
+      - name: d22/price_rule (21 cases; every case must pass)
+        run: |
+          git clone -q "https://github.com/$BENCH_REPO" "$RUNNER_TEMP/bench"
+          git -C "$RUNNER_TEMP/bench" checkout -q "$BENCH_SHA"
+          set -o pipefail
+          python3 "$RUNNER_TEMP/bench/d22/run_d22.py" --suite price_rule --rule-cmd "node $PWD/dist/src/cli.js rule" --out price_rule.json | tee rule.log
+          grep -qE 'price_rule ([0-9]+)/\1 pass' rule.log
+          grep -E 'price_rule' rule.log >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: price-rule-results, path: price_rule.json, if-no-files-found: ignore }
   live-smoke:
     # network: ESI + Fuzzwork, a handful of types. Informational, never gates a merge.
     runs-on: ubuntu-latest

@@ -83,7 +83,8 @@ export function priceOrders(orders: readonly Order[], rule: RuleParams = DEFAULT
   let units_considered = 0;
   for (const o of kept) {
     units_considered += o.volume_remain;
-    if (trim(o.price) <= band_max) {
+    // docs/22 §4.5: band_max (12 significant digits) is the inclusive edge; the order price is compared as given
+    if (o.price <= band_max) {
       units += o.volume_remain;
       isk += o.price * o.volume_remain;
       n++;
@@ -111,4 +112,31 @@ export function priceAll(orders: Iterable<Order>, rule: RuleParams = DEFAULT_RUL
     else missing.push(t);
   }
   return { prices, missing };
+}
+
+/** docs/22 §3.2 rule descriptor as written in a snapshot (`rule`) or handed to the `rule` CLI command */
+export interface RuleSpec {
+  name?: string;
+  version?: number;
+  order_side?: string;
+  location_id?: number;
+  min_units?: number;
+  band?: number;
+  weighting?: string;
+}
+
+/**
+ * Apply a full rule descriptor to one type's raw order book (the `eve-market-prices rule` command and the bench
+ * d22/price_rule transport): checks name / version / side / weighting, keeps the sell orders at `location_id` (when
+ * given), then runs priceOrders. Returns the §4.5 entry or null (the type would be `missing`).
+ */
+export function applyRule(input: { rule?: RuleSpec; orders?: readonly Order[] }): TypePrice | null {
+  const r = input.rule ?? {};
+  if (r.name !== undefined && r.name !== RULE_NAME) throw new Error(`unknown rule '${r.name}' (only ${RULE_NAME})`);
+  if (r.version !== undefined && r.version !== RULE_VERSION) throw new Error(`unsupported rule version ${r.version} (only ${RULE_VERSION})`);
+  if (r.order_side !== undefined && r.order_side !== "sell") throw new Error(`order_side must be 'sell' (got ${r.order_side})`);
+  if (r.weighting !== undefined && r.weighting !== "units") throw new Error(`weighting must be 'units' (got ${r.weighting})`);
+  const params = validateRule({ min_units: r.min_units, band: r.band });
+  const orders = (input.orders ?? []).filter((o) => r.location_id === undefined || o.location_id === r.location_id);
+  return priceOrders(orders, params);
 }

@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { parseArgs } from "node:util";
-import { DEFAULT_RULE, priceOf, serializeSnapshot, snapshotFileName, VERSION, SOURCES } from "./index.js";
+import { applyRule, DEFAULT_RULE, priceOf, serializeSnapshot, snapshotFileName, VERSION, SOURCES } from "./index.js";
 import { makeSnapshot, readDataset, readSnapshotFile, writeSnapshotFiles } from "./node.js";
 
 const USAGE = `eve-market-prices ${VERSION}
@@ -12,6 +12,10 @@ usage:
   eve-market-prices snapshot [--source esi|fuzzwork] [--out FILE | --out-dir DIR] [options]
   eve-market-prices validate FILE
   eve-market-prices price FILE TYPE_ID...
+  eve-market-prices rule < {"rule": {...}, "orders": [ESI orders]}
+      apply the pricing rule to one type's order book; prints the docs/22 §4.5 entry or null
+      (rule: name jita_sell_band_weighted, version 1, order_side sell, location_id, min_units, band, weighting units;
+      orders: ESI market orders; buy orders and orders at other locations are ignored)
 
 snapshot options:
   --source ID          price source: ${Object.keys(SOURCES).join(", ")} (default esi)
@@ -46,6 +50,11 @@ async function main(argv: string[]) {
     const [file, ...ids] = rest;
     const s = readSnapshotFile(file);
     for (const id of ids) process.stdout.write(`${id}\t${priceOf(s, Number(id)) ?? "-"}\n`);
+    return;
+  }
+  if (cmd === "rule") {
+    const input = JSON.parse(readFileSync(0, "utf8"));
+    process.stdout.write(JSON.stringify(applyRule(input)) + "\n");
     return;
   }
   if (cmd !== "snapshot") throw new Error(`unknown command '${cmd}'\n\n${USAGE}`);
