@@ -39,23 +39,26 @@ test("esi: paginates, keeps Jita 4-4 sells only, de-duplicates orders seen on tw
   assert.equal(m.calls.length, 2);
   // 34: 9.0 is outside the band, Amarr's 3.0 is not at Jita 4-4; 587: 255000 <= 250000 * 1.05, buy order ignored
   assert.deepEqual(Object.fromEntries(r.prices), {
-    34: { p0: 4, price: 4.08, units: 4000, orders: 2 },
-    587: { p0: 250000, price: 253000, units: 5, orders: 2 },
+    34: { price: 4.08, p0: 4, band_max: 4.2, units: 4000, orders: 2, units_considered: 4010, orders_considered: 3, orders_total: 3 },
+    587: { price: 253000, p0: 250000, band_max: 262500, units: 5, orders: 2, units_considered: 5, orders_considered: 2, orders_total: 2 },
   });
-  assert.equal(r.data_as_of, "2026-10-03T06:00:00Z");
+  assert.equal(r.market_time, "2026-10-03T06:00:00Z");
   assert.equal(r.stats.pages, 2);
   assert.equal(r.stats.orders_seen, 8);
   assert.equal(r.stats.orders_at_location, 5);
-  assert.deepEqual(r.unpriced, []);
-  assert.deepEqual(s.descriptor.params.location_id, JITA);
+  assert.deepEqual(r.missing, []);
+  assert.deepEqual(s.descriptor, { kind: "esi", endpoint: "https://esi.evetech.net/latest/markets/10000002/orders/", region_id: 10000002, location_id: JITA, market: "jita44" });
+  assert.equal(r.exact, true);
+  assert.match(r.fetched_from, /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$/);
 });
 
 test("esi: min_units drops small orders; a type left without orders is unpriced", async () => {
   const s = new EsiSource({ userAgent: UA, fetch: esiMock().fetch, sleep: noSleep });
   const r = await s.fetchPrices({ rule: { min_units: 5, band: 0.05 } });
   assert.deepEqual([...r.prices.keys()], [34]);
-  assert.deepEqual(r.unpriced, [587]);
-  assert.equal(r.prices.get(34)!.units, 4000 + 0); // 9.0 x10 is >= 5 units but outside the band
+  assert.deepEqual(r.missing, [587]);
+  assert.equal(r.prices.get(34)!.units, 4000); // 9.0 x10 is >= 5 units but outside the band
+  assert.equal(r.prices.get(34)!.orders_considered, 3);
 });
 
 test("esi: Expires serves fresh pages from cache; afterwards ETag revalidates with 304", async () => {
@@ -87,7 +90,7 @@ test("esi: pages from different book versions are refetched until Last-Modified 
   const s = new EsiSource({ userAgent: UA, fetch: m.fetch, sleep: noSleep });
   const r = await s.fetchPrices({ rule });
   assert.equal(m.calls.length, 3);
-  assert.equal(r.data_as_of, "2026-10-03T06:00:00Z");
+  assert.equal(r.market_time, "2026-10-03T06:00:00Z");
   assert.equal(r.stats.inconsistent_pages, undefined);
 });
 
@@ -123,8 +126,8 @@ test("esi: a short type list is queried per type (?type_id=), other types are ig
   const r = await new EsiSource({ userAgent: UA, fetch: m.fetch, sleep: noSleep }).fetchPrices({ rule, types: [587, 999] });
   assert.equal(m.calls.length, 2);
   assert.deepEqual([...r.prices.keys()], [587]);
-  assert.deepEqual(r.unpriced, [999]);
-  assert.equal(r.data_as_of, "2026-10-03T06:05:00Z");
+  assert.deepEqual(r.missing, [999]);
+  assert.equal(r.market_time, "2026-10-03T06:05:00Z");
 });
 
 test("fuzzwork: aggregates map onto p0 / price / units / orders; empty types unpriced; batches", async () => {
@@ -144,17 +147,30 @@ test("fuzzwork: aggregates map onto p0 / price / units / orders; empty types unp
   const s = new FuzzworkSource({ userAgent: UA, fetch: m.fetch, batch: 2, sleep: noSleep });
   const r = await s.fetchPrices({ rule, types: [999, 34, 587] });
   assert.equal(m.calls.length, 2);
-  assert.deepEqual(Object.fromEntries(r.prices), { 34: { p0: 3.91, price: 3.91, units: 7605818556, orders: 26 }, 587: { p0: 249800, price: 249800, units: 2603, orders: 50 } });
-  assert.deepEqual(r.unpriced, [999]);
-  assert.equal(r.rule, null);
-  await assert.rejects(s.fetchPrices({ rule }), /type list/);
+  assert.deepEqual(Object.fromEntries(r.prices), {
+    34: { price: 3.91, p0: 3.91, band_max: 4.1055, units: 7605818556, orders: 26, units_considered: 7605818556, orders_considered: 26, orders_total: 26 },
+    587: { price: 249800, p0: 249800, band_max: 262290, units: 2603, orders: 50, units_considered: 2603, orders_considered: 50, orders_total: 50 },
+  });
+  assert.equal(r.exact, false);
+  assert.match(r.notes!, /approximate/);
+  assert.equal(r.market_time, r.fetched_to);
+  assert.deepEqual(r.missing, [999]);
+    await assert.rejects(s.fetchPrices({ rule }), /type list/);
 });
 
 test("sources: registry is pluggable", async () => {
   assert.deepEqual(Object.keys(SOURCES).sort(), ["esi", "fuzzwork"]);
   registerSource("fixed", () => ({
-    descriptor: { id: "fixed", kind: "aggregate", method: "fixed", params: {} },
-    fetchPrices: async () => ({ prices: new Map([[34, { p0: 1, price: 1, units: 1, orders: 1 }]]), unpriced: [], data_as_of: null, rule: null, stats: {} }),
+    descriptor: { kind: "fixed", endpoint: "test", region_id: 1, location_id: 2, market: "test" },
+    fetchPrices: async () => ({
+      prices: new Map([[34, { price: 1, p0: 1, band_max: 1.05, units: 1, orders: 1, units_considered: 1, orders_considered: 1, orders_total: 1 }]]),
+      missing: [],
+      market_time: null,
+      fetched_from: "2026-10-03T00:00:00Z",
+      fetched_to: "2026-10-03T00:00:00Z",
+      exact: true,
+      stats: {},
+    }),
   }));
   const r = await createSource("fixed", { userAgent: UA }).fetchPrices({ rule });
   assert.equal(r.prices.get(34)!.price, 1);
