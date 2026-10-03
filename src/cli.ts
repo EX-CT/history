@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 // eve-market-prices CLI: make, validate and query price snapshots.
 import { readFileSync, writeFileSync } from "node:fs";
+import { gzipSync } from "node:zlib";
 import { parseArgs } from "node:util";
-import { DEFAULT_RULE, parseSnapshot, priceOf, serializeSnapshot, VERSION, SOURCES } from "./index.js";
-import { makeSnapshot, readDataset } from "./node.js";
+import { DEFAULT_RULE, priceOf, serializeSnapshot, snapshotFileName, VERSION, SOURCES } from "./index.js";
+import { makeSnapshot, readDataset, readSnapshotFile, writeSnapshotFiles } from "./node.js";
 
 const USAGE = `eve-market-prices ${VERSION}
 
 usage:
-  eve-market-prices snapshot [--source esi|fuzzwork] [--out FILE] [options]
+  eve-market-prices snapshot [--source esi|fuzzwork] [--out FILE | --out-dir DIR] [options]
   eve-market-prices validate FILE
   eve-market-prices price FILE TYPE_ID...
 
@@ -19,7 +20,10 @@ snapshot options:
   --types IDS          comma-separated type ids to price (default: every type the source has; fuzzwork needs a list)
   --types-file FILE    type ids, one per line / comma separated
   --dataset FILE       eve-sde-pipeline dataset-<build>.json[.gz]: price its marketable types, record coverage
-  --dataset-name S     label for the dataset in the snapshot (e.g. "eve-sde-pipeline sde-3569502-r5")
+  --dataset-name S     label for the dataset in the snapshot (default: the file name)
+  --sde-build N        SDE build of the type list (required without --dataset; docs/22 sde_build)
+  --out FILE           write the snapshot here (.json, or .json.gz for gzip); default stdout
+  --out-dir DIR        write prices-<market>-<market_time>.json and .json.gz into DIR
   --contact S          contact for the User-Agent (ESI asks for one), e.g. an e-mail or "EVE: <character>"
   --cache-dir DIR      keep ETag / Expires between runs (default: no cache)
   --generated-at ISO   fix the timestamp (reproducible output)
@@ -34,15 +38,13 @@ async function main(argv: string[]) {
   if (cmd === "--version") return void process.stdout.write(VERSION + "\n");
   if (cmd === "validate") {
     if (!rest[0]) throw new Error("validate FILE");
-    const s = parseSnapshot(readFileSync(rest[0], "utf8"));
-    const again = serializeSnapshot(s);
-    const canonical = again === readFileSync(rest[0], "utf8");
-    process.stdout.write(`${rest[0]}: ok (${s.source.id}, ${Object.keys(s.prices).length} prices, generated ${s.generated_at}, canonical: ${canonical})\n`);
+    const s = readSnapshotFile(rest[0]);
+    process.stdout.write(`${rest[0]}: ok ${s.snapshot_id} (${s.source.kind}, ${s.type_count} types, ${s.missing.length} missing, min_units ${s.rule.min_units}, band ${s.rule.band}, exact ${s.rule.exact}, ${s.content_hash})\n`);
     return;
   }
   if (cmd === "price") {
     const [file, ...ids] = rest;
-    const s = parseSnapshot(readFileSync(file, "utf8"));
+    const s = readSnapshotFile(file);
     for (const id of ids) process.stdout.write(`${id}\t${priceOf(s, Number(id)) ?? "-"}\n`);
     return;
   }
@@ -52,6 +54,8 @@ async function main(argv: string[]) {
     options: {
       source: { type: "string", default: "esi" },
       out: { type: "string" },
+      "out-dir": { type: "string" },
+      "sde-build": { type: "string" },
       "min-units": { type: "string" },
       band: { type: "string" },
       types: { type: "string" },
@@ -83,6 +87,7 @@ async function main(argv: string[]) {
     rule: { ...(v["min-units"] !== undefined ? { min_units: Number(v["min-units"]) } : {}), ...(v.band !== undefined ? { band: Number(v.band) } : {}) },
     types,
     dataset: v.dataset ? readDataset(v.dataset, v["dataset-name"] ?? null) : null,
+    sde_build: v["sde-build"] !== undefined ? Number(v["sde-build"]) : null,
     generated_at: v["generated-at"],
     contact: v.contact ?? process.env.EVE_MARKET_PRICES_CONTACT ?? null,
     cache_dir: v["cache-dir"] ?? null,
@@ -90,9 +95,12 @@ async function main(argv: string[]) {
     log,
   });
   const text = serializeSnapshot(snap);
-  if (v.out) writeFileSync(v.out, text);
+  if (v["out-dir"]) {
+    const w = writeSnapshotFiles(snap, v["out-dir"]);
+    log?.(`wrote ${w.json} and ${w.gz}`);
+  } else if (v.out) writeFileSync(v.out, v.out.endsWith(".gz") ? gzipSync(Buffer.from(text, "utf8"), { level: 9 }) : text);
   else process.stdout.write(text);
-  log?.(`${snap.source.id}: ${snap.coverage.types_priced} types priced, ${snap.coverage.types_unpriced.length} unpriced${snap.coverage.types_requested !== null ? ` of ${snap.coverage.types_requested} requested` : ""}; data as of ${snap.data_as_of ?? "?"}`);
+  log?.(`${snap.snapshot_id} (${snapshotFileName(snap)}): ${snap.type_count} types priced, ${snap.missing.length} missing${snap.coverage?.types_requested != null ? ` of ${snap.coverage.types_requested} requested` : ""}; ${snap.content_hash}`);
 }
 
 main(process.argv.slice(2)).catch((e) => {

@@ -56,6 +56,11 @@ export interface HttpResponse {
 const HEADERS_KEPT = ["x-pages", "last-modified", "expires", "etag"];
 
 export class HttpClient {
+  /** the injected clock (ms since epoch) */
+  clock(): number {
+    return this.now();
+  }
+
   readonly stats = { requests: 0, cache_fresh: 0, cache_revalidated: 0, retries: 0, error_limit_waits: 0 };
   private readonly f: FetchFn;
   private readonly now: () => number;

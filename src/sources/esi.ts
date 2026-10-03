@@ -7,7 +7,7 @@
 // newer/older snapshot is fetched again so the book is consistent).
 import { priceAll, type Order } from "../rule.js";
 import { HttpClient, type HttpOptions } from "./http.js";
-import type { FetchOptions, OrderSource, SourceDescriptor, SourceResult } from "./types.js";
+import { isoSecond, type FetchOptions, type OrderSource, type SourceDescriptor, type SourceResult } from "./types.js";
 
 export const THE_FORGE = 10000002;
 export const JITA_4_4 = 60003760;
@@ -15,6 +15,8 @@ export const JITA_4_4 = 60003760;
 export interface EsiOptions extends HttpOptions {
   region_id?: number;
   location_id?: number;
+  /** market id for snapshot ids (default "jita44" for Jita 4-4, else "loc<location_id>") */
+  market?: string;
   base_url?: string;
   /** parallel page requests (default 8) */
   concurrency?: number;
@@ -44,10 +46,11 @@ export class EsiSource implements OrderSource {
     this.base = (o.base_url ?? "https://esi.evetech.net/latest").replace(/\/$/, "");
     this.http = new HttpClient(o);
     this.descriptor = {
-      id: "esi",
-      kind: "orders",
-      method: "band-weighted-sell",
-      params: { region_id: this.region, location_id: this.location, order_type: "sell", endpoint: `${this.base}/markets/${this.region}/orders/`, datasource: "tranquility" },
+      kind: "esi",
+      endpoint: `${this.base}/markets/${this.region}/orders/`,
+      region_id: this.region,
+      location_id: this.location,
+      market: o.market ?? (this.location === JITA_4_4 ? "jita44" : `loc${this.location}`),
     };
   }
 
@@ -116,14 +119,16 @@ export class EsiSource implements OrderSource {
     const uniq = new Map<number | string, Order>();
     for (const o of orders) uniq.set(o.order_id ?? `${o.type_id}:${o.price}:${o.volume_remain}:${uniq.size}`, o);
     Object.assign(stats, { orders_seen: seen, orders_at_location: uniq.size }, this.http.stats);
-    return { orders: [...uniq.values()], data_as_of: newest ? new Date(Date.parse(newest)).toISOString().replace(/\.000Z$/, "Z") : null, stats };
+    return { orders: [...uniq.values()], market_time: newest ? isoSecond(Date.parse(newest)) : null, stats };
   }
 
   async fetchPrices(opts: FetchOptions): Promise<SourceResult> {
-    const { orders, data_as_of, stats } = await this.fetchOrders(opts);
-    const { prices, unpriced } = priceAll(orders, opts.rule);
-    if (opts.types) for (const t of opts.types) if (!prices.has(t) && !unpriced.includes(t)) unpriced.push(t);
-    unpriced.sort((a, b) => a - b);
-    return { prices, unpriced, data_as_of, rule: opts.rule, stats };
+    const fetched_from = isoSecond(this.http.clock());
+    const { orders, market_time, stats } = await this.fetchOrders(opts);
+    const fetched_to = isoSecond(this.http.clock());
+    const { prices, missing } = priceAll(orders, opts.rule);
+    const miss = new Set(missing);
+    if (opts.types) for (const t of opts.types) if (!prices.has(t)) miss.add(t);
+    return { prices, missing: [...miss].sort((a, b) => a - b), market_time, fetched_from, fetched_to, exact: true, stats };
   }
 }

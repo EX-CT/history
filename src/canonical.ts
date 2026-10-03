@@ -1,31 +1,36 @@
-// Deterministic JSON: object keys sorted (numeric-looking keys numerically, so type ids read in order), 2-space
-// indent, "\n" line ends, trailing newline. Same input -> same bytes on every platform.
+// Canonical JSON (docs/22 §4.6): object keys sorted by code point (like Python sort_keys / Rust BTreeMap<String>,
+// so "1000" < "34"), UTF-8, numbers as the shortest round-trip representation (ECMAScript Number -> String: integers
+// without exponent or ".0"). `canonicalJson` (no whitespace) is what content_hash covers; `stableStringify` is the
+// same order with a 2-space indent and a trailing newline, used for the files (stable, diffable).
+// JSON.stringify cannot be used for objects: it always emits integer-like keys first, in numeric order.
 
-const isIndex = (k: string) => /^(0|[1-9]\d*)$/.test(k);
-const cmpKeys = (a: string, b: string) => {
-  const ia = isIndex(a);
-  const ib = isIndex(b);
-  if (ia && ib) return Number(a) - Number(b);
-  if (ia !== ib) return ia ? -1 : 1;
-  return a < b ? -1 : a > b ? 1 : 0;
-};
+const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 
-export function canonicalize(v: unknown): unknown {
-  if (Array.isArray(v)) return v.map(canonicalize);
-  if (v && typeof v === "object") {
-    const o = v as Record<string, unknown>;
-    const out: Record<string, unknown> = {};
-    for (const k of Object.keys(o).sort(cmpKeys)) if (o[k] !== undefined) out[k] = canonicalize(o[k]);
-    return out;
+function emit(v: unknown, indent: string, depth: number): string {
+  if (v === null) return "null";
+  if (typeof v === "number") {
+    if (!Number.isFinite(v)) throw new Error(`non-finite number in snapshot: ${v}`);
+    return JSON.stringify(v);
   }
-  if (typeof v === "number" && !Number.isFinite(v)) throw new Error(`non-finite number in snapshot: ${v}`);
-  return v;
+  if (typeof v === "string" || typeof v === "boolean") return JSON.stringify(v);
+  const nl = indent ? "\n" + indent.repeat(depth + 1) : "";
+  const end = indent ? "\n" + indent.repeat(depth) : "";
+  const sep = indent ? ": " : ":";
+  if (Array.isArray(v)) {
+    if (!v.length) return "[]";
+    return "[" + v.map((x) => nl + emit(x === undefined ? null : x, indent, depth + 1)).join(",") + end + "]";
+  }
+  if (typeof v === "object") {
+    const o = v as Record<string, unknown>;
+    const keys = Object.keys(o).filter((k) => o[k] !== undefined).sort(cmp);
+    if (!keys.length) return "{}";
+    return "{" + keys.map((k) => nl + JSON.stringify(k) + sep + emit(o[k], indent, depth + 1)).join(",") + end + "}";
+  }
+  throw new Error(`cannot serialise ${typeof v}`);
 }
 
-/**
- * Stable formatting. JS engines keep integer-like keys in ascending numeric order regardless of insertion order,
- * which is exactly cmpKeys' order for those keys; the remaining keys follow in sorted insertion order.
- */
-export function stableStringify(v: unknown): string {
-  return JSON.stringify(canonicalize(v), null, 2) + "\n";
-}
+/** docs/22 §4.6 canonical form: sorted keys, no insignificant whitespace. */
+export const canonicalJson = (v: unknown): string => emit(v, "", 0);
+
+/** Same order, 2-space indent, trailing newline: the on-disk form. */
+export const stableStringify = (v: unknown): string => emit(v, "  ", 0) + "\n";
