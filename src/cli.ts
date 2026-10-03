@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { parseArgs } from "node:util";
 import { applyRule, DEFAULT_RULE, priceOf, serializeSnapshot, snapshotFileName, VERSION, SOURCES } from "./index.js";
-import { makeSnapshot, readDataset, readSnapshotFile, writeSnapshotFiles } from "./node.js";
+import { makeSnapshot, readCcpSde, readDataset, readSnapshotFile, writeSnapshotFiles } from "./node.js";
 
 const USAGE = `eve-market-prices ${VERSION}
 
@@ -23,8 +23,10 @@ snapshot options:
   --band X             average the sell orders priced within p0 * (1 + X) (default ${DEFAULT_RULE.band})
   --types IDS          comma-separated type ids to price (default: every type the source has; fuzzwork needs a list)
   --types-file FILE    type ids, one per line / comma separated
-  --dataset FILE       eve-sde-pipeline dataset-<build>.json[.gz]: price its marketable types, record coverage
-  --dataset-name S     label for the dataset in the snapshot (default: the file name)
+  --ccp-sde FILE       CCP's JSONL SDE zip (eve-online-static-data-<build>-jsonl.zip) or its types.jsonl: price every
+                       published type with a market group (docs/22 coverage), sde_build from the zip
+  --dataset FILE       eve-sde-pipeline dataset-<build>.json[.gz]: price its marketable types (subset), record coverage
+  --dataset-name S     label for the type list in coverage.dataset (default: derived from the file)
   --sde-build N        SDE build of the type list (required without --dataset; docs/22 sde_build)
   --out FILE           write the snapshot here (.json, or .json.gz for gzip); default stdout
   --out-dir DIR        write prices-<market>-<market_time>.json and .json.gz into DIR
@@ -70,6 +72,7 @@ async function main(argv: string[]) {
       types: { type: "string" },
       "types-file": { type: "string" },
       dataset: { type: "string" },
+      "ccp-sde": { type: "string" },
       "dataset-name": { type: "string" },
       contact: { type: "string" },
       "cache-dir": { type: "string" },
@@ -85,6 +88,7 @@ async function main(argv: string[]) {
     if (!Number.isInteger(n) || n <= 0) throw new Error(`bad type id '${x}'`);
     return n;
   });
+  if (v["ccp-sde"] && v.dataset) throw new Error("give one of --ccp-sde / --dataset");
   const types = v.types ? ids(v.types) : v["types-file"] ? ids(readFileSync(v["types-file"], "utf8")) : null;
   const log = v.quiet ? undefined : (m: string) => process.stderr.write(m + "\n");
   const so: Record<string, unknown> = {};
@@ -95,7 +99,7 @@ async function main(argv: string[]) {
     source: v.source!,
     rule: { ...(v["min-units"] !== undefined ? { min_units: Number(v["min-units"]) } : {}), ...(v.band !== undefined ? { band: Number(v.band) } : {}) },
     types,
-    dataset: v.dataset ? readDataset(v.dataset, v["dataset-name"] ?? null) : null,
+    dataset: v["ccp-sde"] ? readCcpSde(v["ccp-sde"], v["dataset-name"] ?? null) : v.dataset ? readDataset(v.dataset, v["dataset-name"] ?? null) : null,
     sde_build: v["sde-build"] !== undefined ? Number(v["sde-build"]) : null,
     generated_at: v["generated-at"],
     contact: v.contact ?? process.env.EVE_MARKET_PRICES_CONTACT ?? null,

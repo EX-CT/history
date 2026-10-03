@@ -12,7 +12,7 @@ pricing math happens in engines, MCP or web clients: they read `types[id].price`
 - TypeScript library (Node ≥ 20 and browsers, no runtime dependencies) + CLI `eve-market-prices`
 - Pluggable sources: **ESI** market orders (exact rule) and **Fuzzwork** aggregates (approximation, `rule.exact: false`); add your own with `registerSource`
 - JSON Schema: [`schema/eve-price-snapshot.v1.schema.json`](schema/eve-price-snapshot.v1.schema.json); sample: [`examples/prices-jita44-sample.json`](examples/prices-jita44-sample.json)
-- Daily snapshots are published as GitHub Releases `prices-jita44-<YYYYMMDDTHHMMSSZ>` ([workflow](.github/workflows/snapshot.yml))
+- Daily snapshots are published as GitHub Releases `prices-jita44-<YYYYMMDDTHHMMSSZ>` ([workflow](.github/workflows/snapshot.yml)), covering every published marketable type of the latest CCP SDE
 
 ## Pricing rule `jita_sell_band_weighted` v1 (docs/22 §3.2)
 
@@ -38,8 +38,10 @@ Each type entry records `price`, `p0`, `band_max`, `units` and `orders` (the ban
 
 ```sh
 npm ci && npm run build
-# every marketable type of an eve-sde-pipeline dataset (sde_build taken from the dataset); ~8 s, 273 ESI pages
-node dist/src/cli.js snapshot --dataset dataset-3569502-r5.json.gz --contact you@example.com --out-dir out
+# every published marketable type of CCP's SDE (sde_build from the zip); ~10 s, 273 ESI pages
+curl -sSLO https://developers.eveonline.com/static-data/tranquility/eve-online-static-data-3569502-jsonl.zip
+node dist/src/cli.js snapshot --ccp-sde eve-online-static-data-3569502-jsonl.zip --contact you@example.com --out-dir out
+# or only an eve-sde-pipeline dataset's types: --dataset dataset-3569502-r5.json.gz
 # -> out/prices-jita44-20261003T063356Z.json and .json.gz
 node dist/src/cli.js snapshot --types 587,2048 --sde-build 3569502 --min-units 1 --band 0.1 > p.json
 node dist/src/cli.js snapshot --source fuzzwork --types 587,2048 --sde-build 3569502 > p-fw.json
@@ -54,7 +56,7 @@ it at a pinned bench commit and requires every case to pass. Buy orders and orde
 ignored; a rule with another `name` / `version` / `order_side` / `weighting` is an error.
 
 Options: `--source esi|fuzzwork`, `--min-units`, `--band`, `--types` / `--types-file` / `--dataset` (+ `--dataset-name`),
-`--sde-build`, `--contact` (or env `EVE_MARKET_PRICES_CONTACT`; it goes into the User-Agent), `--cache-dir` (keeps ETag /
+`--ccp-sde`, `--sde-build`, `--contact` (or env `EVE_MARKET_PRICES_CONTACT`; it goes into the User-Agent), `--cache-dir` (keeps ETag /
 Expires between runs), `--generated-at`, `--region` / `--location` (ESI), `--station` (Fuzzwork), `--out` / `--out-dir`, `--quiet`.
 
 ## Library
@@ -82,24 +84,47 @@ snapshot the same way the engine does.
 To add a source, implement `Source` (`src/sources/types.ts`: `descriptor` + `fetchPrices` → §4.5 entries, `missing`,
 `market_time`, fetch window, `exact`) and register it with `registerSource("name", factory)`.
 
+## Type coverage (docs/22, decision 2026-10-03 14:56)
+
+A snapshot prices **every published type with a market group** in CCP's SDE of `sde_build` (fits carry cargo such
+as minerals, fuel and ammo stacks), not only the pipeline dataset's fitting-relevant types. `--ccp-sde FILE` takes
+CCP's JSONL SDE zip (`https://developers.eveonline.com/static-data/eve-online-static-data-latest-jsonl.zip`, which
+redirects to `…-<build>-jsonl.zip`; `sde_build` is read from its `_sde.jsonl`) or a bare `types.jsonl` (then pass
+`--sde-build`). The zip is read in-process (no unzip tool needed). `coverage` records the list used:
+`{"dataset": "CCP SDE 3569502 (eve-online-static-data-3569502-jsonl.zip)", "dataset_sha256": <sha256 of that file>,
+"types_requested": 19566}`. Types without a qualifying Jita sell order are in `missing`. The daily workflow uses the
+latest CCP SDE. `--dataset` (an eve-sde-pipeline dataset, a subset) still works.
+
 ## Snapshot format notes
 
-- Files are UTF-8 JSON with keys sorted by code point and a 2-space indent. The `.json.gz` form has mtime 0. Both are byte-identical for the same input.
-- `content_hash` = `sha256:` + SHA-256 of the canonical JSON (no whitespace, code-point key order) without `content_hash`. Numbers use the shortest round-trip form (ECMAScript), so `1240000.0` is written `1240000`. See "Gaps" below.
-- `coverage` (`dataset`, `dataset_sha256`, `types_requested`) is an optional additive field. docs/22 §4.1 allows additive optional fields within v1.
+- Files are UTF-8 JSON with keys in JCS order (UTF-16 code units; all keys are ASCII, so this is also code-point
+  order) and a 2-space indent. The `.json.gz` form has mtime 0. Both are byte-identical for the same input.
+- `content_hash` = `sha256:` + SHA-256 of the **RFC 8785 (JCS)** canonical JSON of the snapshot without
+  `content_hash` (docs/22 §4.6 as ruled 14:56): no whitespace, keys by UTF-16 code units (`"1000"` before `"34"`),
+  ECMAScript number form (`1240000`, not `1240000.0`; `1e+21`), JSON.stringify string escapes; lone surrogates are
+  rejected. `src/canonical.ts`; vectors from RFC 8785 and the Python `jcs` package in `test/canonical.test.ts`. The
+  published snapshots `prices-jita44-20261003T063856Z` and later and the committed sample hash identically with
+  Python `jcs`.
+- `coverage` (`dataset`, `dataset_sha256`, `types_requested`) is an optional field (accepted in docs/22 §4.2).
 
-### Gaps / ambiguities in docs/22 (reported to eve / F)
-1. **Number form in the hash (§4.6):** "Python repr / Rust ryu" writes `1240000.0`, but "no trailing zeros" suggests `1240000`. This tool writes `1240000` (ECMAScript). Engines must use the same form, otherwise hashes differ for integral prices.
-2. **Key order (§4.6):** "keys sorted" is read as code-point order (`"1000" < "34"`), like Python `sort_keys` and serde `BTreeMap`.
-3. **`band_max`** is unrounded `p0 × (1 + band)`. It is computed with 12 significant digits (binary noise trimmed, as docs/22 §4.5 now says), and order prices are compared against that value as given (not rounded), so 4.0 × 1.05 = 4.2 includes an order at 4.2 but an order one ulp above 1050 (p0 1000) is out.
-4. **`sde_build` is required** even for ad-hoc type lists, so the CLI needs `--dataset` or `--sde-build`.
-5. **Aggregate sources:** §4.5 invariants (`price ≤ band_max`) force a clamp of Fuzzwork's percentile price; documented in `source.notes`.
-6. **`market_time` for sources without `Last-Modified`** (Fuzzwork): the fetch end time is used.
-7. The pipeline datasets only contain fitting-relevant types (no minerals, for example), so a `--dataset` snapshot covers those.
+### docs/22 points (status after eve's 14:56 rulings)
+1. Hash: RFC 8785 JCS (decided; implemented, see above). Integers and integral floats hash the same.
+2. `band_max` = p0 × (1 + band) rounded to 12 significant digits (decided); order prices are compared to it as
+   given, so 4.0 × 1.05 = 4.2 includes an order at 4.2 but an order one ulp above 1050 (p0 1000) is out. Invariants
+   use `tol = max(0.005, 1e-9 × band_max)`.
+3. `sde_build` required (decided): `--ccp-sde` zip, `--dataset`, or `--sde-build`.
+4. Fuzzwork: clamped into [p0, band_max], `market_time` = fetch time, `rule.exact: false` (accepted). Source = `source.kind`.
+5. Coverage: all published marketable types from the CCP SDE (decided; `--ccp-sde`).
+6. **Still open — rounding of `price`:** docs/22 says "0.01 ISK, round half to even" without fixing decimal vs
+   binary. This tool rounds half-to-even on the value trimmed to 12 significant digits (decimal reading: a mean
+   computed as 100.33499999999999 from 100.335 rounds to 100.34). The bench reference `d22/rule.py` uses Python
+   `round(mean, 2)` on the exact double (→ 100.33). The two only differ when the mean lands within ~1e-12 of a half
+   cent; no bench case hits it. This tool also clamps the rounded price into [p0, band_max] and drops orders with
+   price ≤ 0; the reference does neither.
 
 ## Development
 
-`npm test` runs rule, mocked-source and snapshot tests (no network). CI also runs the bench `d22/price_rule` suite
+`npm test` runs rule, JCS, coverage, mocked-source and snapshot tests (no network). CI also runs the bench `d22/price_rule` suite
 through `cli.js rule`. `npm run smoke` is a small live ESI + Fuzzwork run;
 it is non-gating in CI.
 

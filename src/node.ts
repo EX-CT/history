@@ -1,9 +1,9 @@
-// Node-only helpers: on-disk HTTP cache (ETag / Expires survive between runs), eve-sde-pipeline dataset reader
-// (the type universe for coverage), and makeSnapshot (source -> snapshot).
+// Node-only helpers: on-disk HTTP cache (ETag / Expires survive between runs), type universes for coverage (CCP SDE
+// types.jsonl / its jsonl zip, docs/22 decision 14:56; eve-sde-pipeline dataset), and makeSnapshot (source -> snapshot).
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { basename, join } from "node:path";
-import { gunzipSync, gzipSync } from "node:zlib";
+import { gunzipSync, gzipSync, inflateRawSync } from "node:zlib";
 import { validateRule, type RuleParams } from "./rule.js";
 import { buildSnapshot, parseSnapshot, serializeSnapshot, snapshotFileName, type Snapshot } from "./snapshot.js";
 import { createSource, userAgent, type CacheEntry, type HttpCache, type HttpOptions } from "./sources/index.js";
@@ -50,6 +50,62 @@ export function readDataset(path: string, name?: string | null): DatasetTypes {
   for (const [id, t] of Object.entries<any>(d.types ?? {})) if (t.published && t.market_group !== null && t.market_group !== undefined) types.push(Number(id));
   types.sort((a, b) => a - b);
   return { name: name ?? basename(path), sha256, sde_build: d.sde?.build ?? null, types };
+}
+
+/** Read one member of a zip archive (stored or deflate; no zip64, no encryption). Minimal, no dependencies. */
+export function unzipEntry(zip: Buffer, name: string): Buffer | null {
+  let eocd = -1;
+  for (let i = zip.length - 22; i >= Math.max(0, zip.length - 22 - 0xffff); i--) if (zip.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  if (eocd < 0) throw new Error("not a zip file (no end of central directory)");
+  const count = zip.readUInt16LE(eocd + 10);
+  let p = zip.readUInt32LE(eocd + 16);
+  if (p === 0xffffffff) throw new Error("zip64 archives are not supported");
+  for (let k = 0; k < count; k++) {
+    if (zip.readUInt32LE(p) !== 0x02014b50) throw new Error("corrupt zip central directory");
+    const method = zip.readUInt16LE(p + 10);
+    const csize = zip.readUInt32LE(p + 20);
+    const nlen = zip.readUInt16LE(p + 28), xlen = zip.readUInt16LE(p + 30), clen = zip.readUInt16LE(p + 32);
+    const local = zip.readUInt32LE(p + 42);
+    const n = zip.toString("utf8", p + 46, p + 46 + nlen);
+    if (n === name) {
+      if (zip.readUInt32LE(local) !== 0x04034b50) throw new Error("corrupt zip local header");
+      const start = local + 30 + zip.readUInt16LE(local + 26) + zip.readUInt16LE(local + 28);
+      const data = zip.subarray(start, start + csize);
+      if (method === 0) return Buffer.from(data);
+      if (method === 8) return inflateRawSync(data);
+      throw new Error(`zip method ${method} not supported (${name})`);
+    }
+    p += 46 + nlen + xlen + clen;
+  }
+  return null;
+}
+
+/**
+ * docs/22 type coverage (decision 2026-10-03 14:56): every **published type with a market group** in CCP's SDE.
+ * `path` is CCP's JSONL SDE zip (eve-online-static-data-<build>-jsonl.zip from developers.eveonline.com; sde_build from
+ * its _sde.jsonl) or a bare types.jsonl (then sde_build is null and must be passed). sha256 = of the given file.
+ */
+export function readCcpSde(path: string, name?: string | null): DatasetTypes {
+  const raw = readFileSync(path);
+  const sha256 = createHash("sha256").update(raw).digest("hex");
+  let typesText: string;
+  let sde_build: number | null = null;
+  if (raw.readUInt32LE(0) === 0x04034b50) {
+    const t = unzipEntry(raw, "types.jsonl");
+    if (!t) throw new Error(`${path}: no types.jsonl in the zip (expected CCP's JSONL SDE)`);
+    typesText = t.toString("utf8");
+    const meta = unzipEntry(raw, "_sde.jsonl");
+    if (meta) for (const l of meta.toString("utf8").split("\n")) if (l.trim()) { const m = JSON.parse(l); if (m._key === "sde" && Number.isInteger(m.buildNumber)) sde_build = m.buildNumber; }
+  } else typesText = (path.endsWith(".gz") ? gunzipSync(raw) : raw).toString("utf8");
+  const types: number[] = [];
+  for (const l of typesText.split("\n")) {
+    if (!l.trim()) continue;
+    const t = JSON.parse(l);
+    if (t.published === true && t.marketGroupID !== undefined && t.marketGroupID !== null) types.push(Number(t._key));
+  }
+  if (!types.length) throw new Error(`${path}: no published types with a market group (not a CCP types.jsonl?)`);
+  types.sort((a, b) => a - b);
+  return { name: name ?? `CCP SDE${sde_build ? " " + sde_build : ""} (${basename(path)})`, sha256, sde_build, types };
 }
 
 export interface MakeSnapshotOptions extends Partial<HttpOptions> {

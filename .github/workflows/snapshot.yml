@@ -23,16 +23,17 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: "22", cache: npm }
       - run: npm ci && npm run build && npm test
-      - name: Latest eve-sde-pipeline dataset (type universe + sde_build)
+      - name: Latest CCP SDE (type universe = published types with a market group; sde_build) — docs/22 coverage
         run: |
           mkdir -p data
-          gh release download -R EX-CT/eve-sde-pipeline -D data -p 'dataset-*.json.gz'
-          TAG=$(gh release view -R EX-CT/eve-sde-pipeline --json tagName -q .tagName)
-          echo "DATASET=$(ls data/dataset-*.json.gz | head -1)" >> "$GITHUB_ENV"
-          echo "DATASET_NAME=eve-sde-pipeline $TAG" >> "$GITHUB_ENV"
+          BUILD=$(curl -fsS https://developers.eveonline.com/static-data/tranquility/latest.jsonl | python3 -c "import json,sys;print(json.loads(sys.stdin.readline())['buildNumber'])")
+          F="data/eve-online-static-data-$BUILD-jsonl.zip"
+          curl -fsSL --retry 3 -o "$F" "https://developers.eveonline.com/static-data/tranquility/eve-online-static-data-$BUILD-jsonl.zip"
+          echo "CCP_SDE=$F" >> "$GITHUB_ENV"
+          echo "CCP SDE build $BUILD ($(du -h "$F" | cut -f1))" >> "$GITHUB_STEP_SUMMARY"
       - name: Snapshot (ESI, The Forge sell orders at Jita 4-4)
         run: |
-          node dist/src/cli.js snapshot --source esi --dataset "$DATASET" --dataset-name "$DATASET_NAME" \
+          node dist/src/cli.js snapshot --source esi --ccp-sde "$CCP_SDE" \
             --min-units "${{ inputs.min_units || '10' }}" --band "${{ inputs.band || '0.05' }}" \
             --contact "https://github.com/${{ github.repository }}" --out-dir out
           F=$(ls out/prices-*.json); node dist/src/cli.js validate "$F"; node dist/src/cli.js validate "$F.gz"
@@ -43,5 +44,5 @@ jobs:
           ID=$(node -p "require('./$FILE').snapshot_id")
           TAG="prices-$ID"
           if gh release view "$TAG" >/dev/null 2>&1; then echo "$TAG exists (snapshots are immutable)"; exit 0; fi
-          node -e "const s=require('./$FILE');console.log('Snapshot '+s.snapshot_id+'\n\n- market_time: '+s.market_time+'\n- sde_build: '+s.sde_build+'\n- rule: '+s.rule.name+' v'+s.rule.version+' min_units '+s.rule.min_units+' band '+s.rule.band+'\n- types: '+s.type_count+' priced, '+s.missing.length+' missing\n- content_hash: '+s.content_hash)" > notes.md
+          node -e "const s=require('./$FILE');console.log('Snapshot '+s.snapshot_id+'\n\n- market_time: '+s.market_time+'\n- sde_build: '+s.sde_build+'\n- rule: '+s.rule.name+' v'+s.rule.version+' min_units '+s.rule.min_units+' band '+s.rule.band+'\n- types: '+s.type_count+' priced, '+s.missing.length+' missing of '+s.coverage.types_requested+' requested ('+s.coverage.dataset+', sha256 '+s.coverage.dataset_sha256+')\n- content_hash: '+s.content_hash)" > notes.md
           gh release create "$TAG" out/prices-* out/SHA256SUMS --title "$TAG" --notes-file notes.md

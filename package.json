@@ -1,6 +1,6 @@
 {
   "name": "eve-market-prices",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Standalone EVE Online market price updater: pluggable sources (ESI Jita 4-4 sell orders, Fuzzwork aggregates), a band-weighted sell price rule, deterministic self-contained price snapshots for offline engines",
   "type": "module",
   "main": "dist/src/index.js",

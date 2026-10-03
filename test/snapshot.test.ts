@@ -131,7 +131,7 @@ test("makeSnapshot + files: mocked ESI end to end; .json and .json.gz determinis
   let t = Date.parse("2026-10-03T06:01:00Z");
   const opts = { source: "esi", types: [34, 35], sde_build: 3569502, fetch: m.fetch, now: () => (t += 1000), sleep: async () => {}, contact: "tests@example.invalid" };
   const s = await makeSnapshot(opts);
-  assert.equal(m.calls[0].headers["User-Agent"], "eve-market-prices/0.1.0 (tests@example.invalid; +https://github.com/EX-CT/eve-market-prices)");
+  assert.equal(m.calls[0].headers["User-Agent"], "eve-market-prices/0.2.0 (tests@example.invalid; +https://github.com/EX-CT/eve-market-prices)");
   assert.deepEqual(Object.keys(s.types), ["34"]);
   assert.deepEqual(s.missing, [35]);
   assert.equal(s.types["34"].orders_total, 3);
