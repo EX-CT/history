@@ -1,0 +1,144 @@
+{
+  "content_hash": "sha256:ec2f8911450e6a390b432502159a4ebc9e3ab0eacbad7c346bfb6c8056d0c7cc",
+  "coverage": {
+    "dataset": null,
+    "dataset_sha256": null,
+    "types_requested": 11
+  },
+  "currency": "ISK",
+  "generated_at": "2026-10-03T06:38:46Z",
+  "market": "jita44",
+  "market_time": "2026-10-03T06:38:46Z",
+  "missing": [
+    12345678
+  ],
+  "rule": {
+    "band": 0.05,
+    "exact": true,
+    "location_id": 60003760,
+    "min_units": 10,
+    "name": "jita_sell_band_weighted",
+    "order_side": "sell",
+    "version": 1,
+    "weighting": "units"
+  },
+  "schema": "eve-price-snapshot",
+  "schema_version": 1,
+  "sde_build": 3569502,
+  "snapshot_id": "jita44-20261003T063846Z",
+  "source": {
+    "endpoint": "https://esi.evetech.net/latest/markets/10000002/orders/",
+    "fetched_from": "2026-10-03T06:38:45Z",
+    "fetched_to": "2026-10-03T06:38:46Z",
+    "kind": "esi",
+    "location_id": 60003760,
+    "region_id": 10000002
+  },
+  "type_count": 10,
+  "types": {
+    "1999": {
+      "band_max": 817530,
+      "orders": 26,
+      "orders_considered": 29,
+      "orders_total": 43,
+      "p0": 778600,
+      "price": 793084.96,
+      "units": 6308,
+      "units_considered": 6391
+    },
+    "2048": {
+      "band_max": 389340,
+      "orders": 32,
+      "orders_considered": 95,
+      "orders_total": 119,
+      "p0": 370800,
+      "price": 376831.51,
+      "units": 13926,
+      "units_considered": 37916
+    },
+    "24698": {
+      "band_max": 54600000,
+      "orders": 3,
+      "orders_considered": 4,
+      "orders_total": 29,
+      "p0": 52000000,
+      "price": 52717307.69,
+      "units": 52,
+      "units_considered": 81
+    },
+    "2873": {
+      "band_max": 306495,
+      "orders": 14,
+      "orders_considered": 45,
+      "orders_total": 57,
+      "p0": 291900,
+      "price": 296880.98,
+      "units": 4506,
+      "units_considered": 8055
+    },
+    "2889": {
+      "band_max": 565950,
+      "orders": 34,
+      "orders_considered": 69,
+      "orders_total": 76,
+      "p0": 539000,
+      "price": 550403.23,
+      "units": 1920,
+      "units_considered": 13663
+    },
+    "31718": {
+      "band_max": 106155,
+      "orders": 4,
+      "orders_considered": 13,
+      "orders_total": 13,
+      "p0": 101100,
+      "price": 101240.37,
+      "units": 3654,
+      "units_considered": 5995
+    },
+    "3831": {
+      "band_max": 510930,
+      "orders": 13,
+      "orders_considered": 48,
+      "orders_total": 66,
+      "p0": 486600,
+      "price": 491022.23,
+      "units": 2290,
+      "units_considered": 5260
+    },
+    "438": {
+      "band_max": 1761900,
+      "orders": 17,
+      "orders_considered": 22,
+      "orders_total": 34,
+      "p0": 1678000,
+      "price": 1706904.95,
+      "units": 5176,
+      "units_considered": 5800
+    },
+    "519": {
+      "band_max": 828345,
+      "orders": 22,
+      "orders_considered": 49,
+      "orders_total": 72,
+      "p0": 788900,
+      "price": 799765.88,
+      "units": 3482,
+      "units_considered": 8723
+    },
+    "587": {
+      "band_max": 262290,
+      "orders": 3,
+      "orders_considered": 29,
+      "orders_total": 58,
+      "p0": 249800,
+      "price": 249808.56,
+      "units": 374,
+      "units_considered": 2534
+    }
+  },
+  "updater": {
+    "name": "eve-market-prices",
+    "version": "0.1.0"
+  }
+}

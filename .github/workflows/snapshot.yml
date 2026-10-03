@@ -1,0 +1,47 @@
+name: snapshot
+# Daily Jita 4-4 price snapshot (docs/22 eve-price-snapshot v1), published as an immutable GitHub Release
+# `prices-jita44-<market_time>` with the .json.gz, the .json and a SHA256SUMS file. Engines pick the newest release
+# at their own release time (docs/22 §3.1). Manual runs can change min_units / band.
+on:
+  schedule:
+    - cron: "17 3 * * *" # 03:17 UTC daily
+  workflow_dispatch:
+    inputs:
+      min_units: { description: "min_units (orders with fewer units are dropped)", default: "10" }
+      band: { description: "band above p0", default: "0.05" }
+permissions:
+  contents: write
+concurrency: { group: snapshot, cancel-in-progress: false }
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - run: npm ci && npm run build && npm test
+      - name: Latest eve-sde-pipeline dataset (type universe + sde_build)
+        run: |
+          mkdir -p data
+          gh release download -R EX-CT/eve-sde-pipeline -D data -p 'dataset-*.json.gz'
+          TAG=$(gh release view -R EX-CT/eve-sde-pipeline --json tagName -q .tagName)
+          echo "DATASET=$(ls data/dataset-*.json.gz | head -1)" >> "$GITHUB_ENV"
+          echo "DATASET_NAME=eve-sde-pipeline $TAG" >> "$GITHUB_ENV"
+      - name: Snapshot (ESI, The Forge sell orders at Jita 4-4)
+        run: |
+          node dist/src/cli.js snapshot --source esi --dataset "$DATASET" --dataset-name "$DATASET_NAME" \
+            --min-units "${{ inputs.min_units || '10' }}" --band "${{ inputs.band || '0.05' }}" \
+            --contact "https://github.com/${{ github.repository }}" --out-dir out
+          F=$(ls out/prices-*.json); node dist/src/cli.js validate "$F"; node dist/src/cli.js validate "$F.gz"
+          (cd out && sha256sum prices-* > SHA256SUMS)
+          echo "FILE=$F" >> "$GITHUB_ENV"
+      - name: Publish release
+        run: |
+          ID=$(node -p "require('./$FILE').snapshot_id")
+          TAG="prices-$ID"
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "$TAG exists (snapshots are immutable)"; exit 0; fi
+          node -e "const s=require('./$FILE');console.log('Snapshot '+s.snapshot_id+'\n\n- market_time: '+s.market_time+'\n- sde_build: '+s.sde_build+'\n- rule: '+s.rule.name+' v'+s.rule.version+' min_units '+s.rule.min_units+' band '+s.rule.band+'\n- types: '+s.type_count+' priced, '+s.missing.length+' missing\n- content_hash: '+s.content_hash)" > notes.md
+          gh release create "$TAG" out/prices-* out/SHA256SUMS --title "$TAG" --notes-file notes.md
