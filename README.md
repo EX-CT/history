@@ -107,7 +107,7 @@ latest CCP SDE. `--dataset` (an eve-sde-pipeline dataset, a subset) still works.
   Python `jcs`.
 - `coverage` (`dataset`, `dataset_sha256`, `types_requested`) is an optional field (accepted in docs/22 §4.2).
 
-### docs/22 points (status after eve's 14:56 rulings)
+### docs/22 points (status after the 2026-10-03 rulings: eve 14:56, eve3 15:11)
 1. Hash: RFC 8785 JCS (decided; implemented, see above). Integers and integral floats hash the same.
 2. `band_max` = p0 × (1 + band) rounded to 12 significant digits (decided); order prices are compared to it as
    given, so 4.0 × 1.05 = 4.2 includes an order at 4.2 but an order one ulp above 1050 (p0 1000) is out. Invariants
@@ -115,12 +115,13 @@ latest CCP SDE. `--dataset` (an eve-sde-pipeline dataset, a subset) still works.
 3. `sde_build` required (decided): `--ccp-sde` zip, `--dataset`, or `--sde-build`.
 4. Fuzzwork: clamped into [p0, band_max], `market_time` = fetch time, `rule.exact: false` (accepted). Source = `source.kind`.
 5. Coverage: all published marketable types from the CCP SDE (decided; `--ccp-sde`).
-6. **Still open — rounding of `price`:** docs/22 says "0.01 ISK, round half to even" without fixing decimal vs
-   binary. This tool rounds half-to-even on the value trimmed to 12 significant digits (decimal reading: a mean
-   computed as 100.33499999999999 from 100.335 rounds to 100.34). The bench reference `d22/rule.py` uses Python
-   `round(mean, 2)` on the exact double (→ 100.33). The two only differ when the mean lands within ~1e-12 of a half
-   cent; no bench case hits it. This tool also clamps the rounded price into [p0, band_max] and drops orders with
-   price ≤ 0; the reference does neither.
+6. **Rule details — settled (eve3 ruling 2026-10-03 15:11; bench `d22/README.md` in EX-CT/eve-dogma-bench pending-1.11,
+   reference `d22/rule.py` follows this implementation):** `price` = unit-weighted band mean rounded to 0.01 ISK
+   half-to-even on the value trimmed to 12 significant digits (decimal reading: a mean computed as 100.33499999999999
+   from 100.335 rounds to 100.34), then clamped into [p0, band_max]; orders with price ≤ 0 or non-finite are dropped
+   before the min_units filter; `band_max` = p0 × (1 + band) to 12 significant digits, order prices compared to it as
+   given; an unknown rule name / version / order_side / weighting or invalid parameters make `eve-market-prices rule`
+   exit non-zero (message on stderr).
 
 ## Development
 
