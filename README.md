@@ -118,13 +118,13 @@ latest CCP SDE. `--dataset` (an eve-sde-pipeline dataset, a subset) still works.
 4. Fuzzwork: clamped into [p0, band_max], `market_time` = fetch time, `rule.exact: false` (accepted). Source = `source.kind`.
 5. Coverage: all published marketable types from the CCP SDE (decided; `--ccp-sde`).
 6. **Rule details — settled (eve3 ruling 2026-10-03 15:11; spec = bench `d22/README.md` "Pricing rule spec" in
-   EX-CT/eve-dogma-bench pending-1.11 b638e8a, reference `d22/rule.py`, 41 cases in `d22/cases/price_rule/`):**
+   EX-CT/eve-dogma-bench pending-1.11 01e6724, reference `d22/rule.py`, 42 cases in `d22/cases/price_rule/`):**
    `price` = band mean rounded half-to-even on its 12-significant-digit decimal value
    (`Decimal(f"{mean:.12g}").quantize(Decimal("0.01"), ROUND_HALF_EVEN)`; `roundIsk` in `src/rule.ts` does the same
    with BigInt, test vectors from Python `decimal` in `test/rule.test.ts`), then clamped into [p0, band_max]; orders
    priced ≤ 0 or non-finite are dropped; `band_max` = p0 × (1 + band) at 12 significant digits, order prices compared
    to it as given; an invalid rule makes `eve-market-prices rule` exit non-zero (bench: `RULE_REJECTED`). CI runs all
-   41 cases. Since 0.2.1 the rounding is exactly the spec (0.2.0 rounded `trim(v × 100)`, which differed for means with
+   42 cases. Since 0.2.1 the rounding is exactly the spec (0.2.0 rounded `trim(v × 100)`, which differed for means with
    more than 10 integer digits, e.g. 55174443703.65 → 55174443703.6 instead of …703.7).
 7. Fuzzwork entries are clamped into [p0, band_max]; such a snapshot has `rule.exact: false` and says so in
    `source.notes` (docs/22 has `exact` only on `rule`, not per type).

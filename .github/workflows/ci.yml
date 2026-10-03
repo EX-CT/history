@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 10
     env:
       BENCH_REPO: EX-CT/eve-dogma-bench
-      BENCH_SHA: b638e8a37c733f9430c7a185a70357b9324be8ed
+      BENCH_SHA: 01e6724d06b7aac9e0dde59bf05665344bfe61d6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: npm ci && npm run build
-      - name: d22/price_rule (41 cases; every case must pass)
+      - name: d22/price_rule (42 cases; every case must pass)
         run: |
           git clone -q "https://github.com/$BENCH_REPO" "$RUNNER_TEMP/bench"
           git -C "$RUNNER_TEMP/bench" checkout -q "$BENCH_SHA"
