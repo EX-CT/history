@@ -1,0 +1,15 @@
+{
+  "id": "0001-skill-self-bonuses",
+  "description": "Skill effects that CCP ships without modifierInfo (applied client/server-side by skill identity). Encoded as modifiers whose skill filter 0 means 'the skill that owns the effect' (EXCT convention). Behaviour matches Pyfa handlers droneDmgBonus, missile*DmgBonus, selfRof, cloakingTargetingDelayBonus... Bonus attributes are already multiplied by skill level via their *SkillBoost* PreMul effects.",
+  "set": {
+    "effects": {
+      "1730": {"mods": [[4, 2, 64, 292, 6, 0]]},
+      "660":  {"mods": [[4, 2, 114, 292, 6, 0]]},
+      "661":  {"mods": [[4, 2, 116, 292, 6, 0]]},
+      "662":  {"mods": [[4, 2, 118, 292, 6, 0]]},
+      "668":  {"mods": [[4, 2, 117, 292, 6, 0]]},
+      "1851": {"mods": [[3, 1, 51, 293, 6, 0]]},
+      "848":  {"mods": [[3, 1, 560, 619, 6, 11579]]}
+    }
+  }
+}

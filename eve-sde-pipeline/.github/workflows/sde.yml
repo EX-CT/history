@@ -1,0 +1,127 @@
+name: sde-dataset
+# Auto-discovers new CCP SDE builds (TQ latest.jsonl) every 6 h, converts them into a versioned engine dataset,
+# validates + tests it, diffs it against the previous release, refreshes the Pyfa effect-coverage report and
+# publishes everything as GitHub Release `sde-<build>-r<revision>`.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "SDE build number (default: latest)"
+        required: false
+        default: "latest"
+      force:
+        description: "Rebuild even if the release exists (replaces assets of that tag)"
+        type: boolean
+        required: false
+        default: false
+  push:
+    branches: [main]
+    paths: ["sdepipe/**", "patches/**", "tests/**", "tools/**", ".github/workflows/sde.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: sde-dataset
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Resolve build and release tag
+        id: b
+        run: |
+          IN="${{ github.event.inputs.build }}"
+          if [ -z "$IN" ] || [ "$IN" = "latest" ]; then B=$(python -m sdepipe latest); else B="$IN"; fi
+          read TAG FILE <<< "$(python -m sdepipe names "$B")"
+          echo "build=$B" >> "$GITHUB_OUTPUT"; echo "tag=$TAG" >> "$GITHUB_OUTPUT"; echo "file=$FILE" >> "$GITHUB_OUTPUT"
+          echo "SDE build $B -> release $TAG ($FILE)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Skip if already released
+        id: chk
+        run: |
+          if gh release view "${{ steps.b.outputs.tag }}" >/dev/null 2>&1 && [ "${{ github.event.inputs.force }}" != "true" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"; echo "Release ${{ steps.b.outputs.tag }} exists - nothing to do." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Download SDE
+        if: steps.chk.outputs.skip != '1'
+        run: python -m sdepipe download --build ${{ steps.b.outputs.build }} --dest sde
+      - name: Build + validate dataset
+        if: steps.chk.outputs.skip != '1'
+        run: python -m sdepipe build --sde sde --out dist
+      - name: Presets (presets.json from this SDE build; copyleft Pyfa tables separately)
+        if: steps.chk.outputs.skip != '1'
+        run: |
+          git clone -q --depth 1 https://github.com/pyfa-org/Pyfa pyfa || echo "Pyfa clone failed: presets-pyfa skipped"
+          PY=""; [ -d pyfa/eos ] && PY="--pyfa pyfa"
+          python tools/make_presets.py --sde sde $PY --out dist/presets
+      - name: Unit tests
+        if: steps.chk.outputs.skip != '1'
+        env: { SDEPIPE_DIST: dist, SDEPIPE_PRESETS: dist/presets }
+        run: python -m unittest discover -s tests -v
+      - name: Diff against previous release
+        if: steps.chk.outputs.skip != '1'
+        run: |
+          B=${{ steps.b.outputs.build }}; TAG=${{ steps.b.outputs.tag }}
+          curl -sfL "https://developers.eveonline.com/static-data/tranquility/changes/$B.jsonl" -o ccp-changes.jsonl || rm -f ccp-changes.jsonl
+          PREV=$(gh release list --limit 50 --json tagName,createdAt --jq '[.[] | select(.tagName|startswith("sde-")) | select(.tagName != "'"$TAG"'")] | sort_by(.createdAt) | last | .tagName // empty')
+          EXTRA=""; [ -f ccp-changes.jsonl ] && EXTRA="--ccp-changes ccp-changes.jsonl"
+          if [ -n "$PREV" ]; then
+            mkdir -p prev && gh release download "$PREV" -D prev -p 'dataset-*.json.gz'
+            python -m sdepipe diff prev/dataset-*.json.gz dist/${{ steps.b.outputs.file }} --md dist/CHANGELOG-$B.md --json dist/diff-$B.json $EXTRA
+          else
+            echo "# SDE build $B (first release, no previous dataset)" > dist/CHANGELOG-$B.md
+          fi
+          echo "Previous release: ${PREV:-none}" >> "$GITHUB_STEP_SUMMARY"
+          head -c 60000 dist/CHANGELOG-$B.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Pyfa effect coverage
+        if: steps.chk.outputs.skip != '1'
+        continue-on-error: true
+        run: bash tools/ci_coverage.sh dist/${{ steps.b.outputs.file }} dist
+      - name: Publish release
+        if: steps.chk.outputs.skip != '1'
+        run: |
+          B=${{ steps.b.outputs.build }}; TAG=${{ steps.b.outputs.tag }}; F=${{ steps.b.outputs.file }}
+          cp dist/manifest.json "dist/manifest-$B.json"; cp LICENSE.EVE dist/
+          ASSETS="dist/$F dist/manifest.json dist/manifest-$B.json dist/CHANGELOG-$B.md dist/LICENSE.EVE dist/presets/presets.json"
+          # Pyfa-derived tables are LGPL/GPL: separately named asset, never part of the CCP/MIT default set.
+          if [ -f dist/presets/presets-pyfa.json ]; then cp dist/presets/presets-pyfa.json dist/presets-pyfa-LGPL-GPL.json; ASSETS="$ASSETS dist/presets-pyfa-LGPL-GPL.json"; fi
+          for f in dist/diff-$B.json dist/pyfa-effects-coverage.md dist/pyfa-effects.json; do [ -f "$f" ] && ASSETS="$ASSETS $f"; done
+          { echo "Engine dataset for CCP SDE build $B ($F, format v1, revision $(python -c 'import sdepipe;print(sdepipe.DATASET_REVISION)'))."
+            echo "Built by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. EVE data © CCP hf., see LICENSE.EVE."
+            echo; head -c 100000 dist/CHANGELOG-$B.md; } > notes.md
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" $ASSETS --clobber && gh release edit "$TAG" --notes-file notes.md
+          else
+            gh release create "$TAG" $ASSETS --title "SDE build $B (r$(python -c 'import sdepipe;print(sdepipe.DATASET_REVISION)'))" --notes-file notes.md --latest
+          fi
+          echo "Published ${{ github.server_url }}/${{ github.repository }}/releases/tag/$TAG" >> "$GITHUB_STEP_SUMMARY"
+
+  # Refreshes the Pyfa coverage report on every run (also when the dataset release is skipped), using the live
+  # public engine source (EX-CT/eve-dogma-rs) and the committed tools/engine-effect-names.json as fallback/union.
+  coverage:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Coverage against latest release
+        run: |
+          TAG=$(gh release list --limit 50 --json tagName,createdAt --jq '[.[] | select(.tagName|startswith("sde-"))] | sort_by(.createdAt) | last | .tagName')
+          mkdir -p latest out && gh release download "$TAG" -D latest -p 'dataset-*.json.gz'
+          bash tools/ci_coverage.sh latest/dataset-*.json.gz out
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          { echo "### Pyfa coverage ($TAG)"; head -c 30000 out/pyfa-effects-coverage.md; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: { name: pyfa-coverage, path: out/ }
+      - name: Update coverage assets on latest release
+        run: gh release upload "$TAG" out/pyfa-effects-coverage.md out/pyfa-effects.json out/engine-effect-names.json --clobber

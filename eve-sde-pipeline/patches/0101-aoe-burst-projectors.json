@@ -1,0 +1,175 @@
+{
+ "id": "0101-aoe-burst-projectors",
+ "status": "applied",
+ "description": "Burst projectors / Standup burst projectors (doomsdayAOE*) and Standup weapon disruptor. Pyfa: when projected onto a ship that does not have disallowOffensiveModifiers, PostPercent the target ship attribute by the module attribute (web: maxVelocity by speedFactor; paint: signatureRadius by signatureRadiusBonus; damp: maxTargetRange by maxTargetRangeBonus and scanResolution by scanResolutionBonus; track/weapon disruption: missile charges (Missile Launcher Operation) aoeCloudSize/aoeVelocity/maxVelocity/explosionDelay and Gunnery turrets trackingSpeed/maxRange/falloff by the matching *Bonus attribute), all stacking-penalised. Standup Weapon Disruptor additionally scales by the optimal/falloff range factor, which the engine must apply (as for ordinary weapon disruptors). ECM and neut bursts (doomsdayAOEECM/Neut) are not modifiers (jam chance / cap drain stats) and stay engine-side. Engine notes (review by engine owner A, 2026-10-03): the burst effects are category 1 with no range_attr; Pyfa applies them at full strength, so engines must use range factor 1 when an effect has no range attribute. structureModuleEffectWeaponDisruption has range_attr 54 / falloff_attr 2044, so the normal range factor applies to it. disallowOffensiveModifiers still blocks all of them. Neut/ECM bursts are not expressible as modifiers and stay engine-side.",
+ "reference": "Pyfa eos/effects.py (behaviour only)",
+ "set": {
+  "effects": {
+   "6476": {
+    "mods": [
+     [
+      0,
+      5,
+      37,
+      20,
+      6,
+      0
+     ]
+    ]
+   },
+   "6478": {
+    "mods": [
+     [
+      0,
+      5,
+      552,
+      554,
+      6,
+      0
+     ]
+    ]
+   },
+   "6481": {
+    "mods": [
+     [
+      0,
+      5,
+      76,
+      309,
+      6,
+      0
+     ],
+     [
+      0,
+      5,
+      564,
+      566,
+      6,
+      0
+     ]
+    ]
+   },
+   "6479": {
+    "mods": [
+     [
+      4,
+      5,
+      654,
+      848,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      653,
+      847,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      37,
+      547,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      281,
+      596,
+      6,
+      3319
+     ],
+     [
+      3,
+      5,
+      160,
+      767,
+      6,
+      3300
+     ],
+     [
+      3,
+      5,
+      54,
+      351,
+      6,
+      3300
+     ],
+     [
+      3,
+      5,
+      158,
+      349,
+      6,
+      3300
+     ]
+    ]
+   },
+   "6686": {
+    "mods": [
+     [
+      4,
+      5,
+      654,
+      848,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      653,
+      847,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      37,
+      547,
+      6,
+      3319
+     ],
+     [
+      4,
+      5,
+      281,
+      596,
+      6,
+      3319
+     ],
+     [
+      3,
+      5,
+      160,
+      767,
+      6,
+      3300
+     ],
+     [
+      3,
+      5,
+      54,
+      351,
+      6,
+      3300
+     ],
+     [
+      3,
+      5,
+      158,
+      349,
+      6,
+      3300
+     ]
+    ]
+   }
+  }
+ },
+ "applied_in_revision": 4
+}

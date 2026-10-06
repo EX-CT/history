@@ -1,0 +1,23 @@
+{
+ "id": "0103-breacher-pod-damage-control",
+ "status": "applied",
+ "description": "moduleBonusBreacherPodDamageControl (Breach Control). Pyfa: while active, PostPercent ship breacherPodDamageResistance by breacherPodActivatedDamageReceivedPercentage. Approved by engine owner A, 2026-10-03.",
+ "reference": "Pyfa eos/effects.py (behaviour only)",
+ "set": {
+  "effects": {
+   "12916": {
+    "mods": [
+     [
+      0,
+      1,
+      6255,
+      6257,
+      6,
+      0
+     ]
+    ]
+   }
+  }
+ },
+ "applied_in_revision": 4
+}

@@ -1,0 +1,210 @@
+{
+ "schema": 1,
+ "description": "Known differences between Pyfa's bundled game data (eve.db) and the eve-sde-pipeline dataset, where the dataset follows CCP's current SDE on purpose. Oracle comparisons and fuzzers that use Pyfa as the reference should treat matching values as expected differences, not engine bugs. See docs/pyfa-data-drift.md.",
+ "pyfa": {
+  "version": "v2.69.0",
+  "commit": "1d9f72b",
+  "client_build": 3532181,
+  "sde_release_date": "2026-09-22T11:08:58Z"
+ },
+ "dataset": {
+  "sde_build": 3569502,
+  "files": [
+   "dataset-3569502.json.gz",
+   "dataset-3569502-r2..r5.json.gz"
+  ]
+ },
+ "verified": "2026-10-03 against CCP SDE zips 3532181 and 3569502 (developers.eveonline.com), ESI /universe/types (server 3569502) and Pyfa eve.db + staticdata/fsd_built",
+ "entries": [
+  {
+   "id": "paladin-agility",
+   "status": "expected_difference",
+   "kind": "type_attribute",
+   "type_ids": [
+    28659
+   ],
+   "type_names": [
+    "Paladin"
+   ],
+   "attribute_id": 70,
+   "attribute": "agility",
+   "pyfa": 0.858,
+   "sde": 0.0858,
+   "esi": 0.0858,
+   "metrics": [
+    "align_time_s"
+   ],
+   "match": "the fit's ship is one of type_ids",
+   "reason": "Pyfa data outdated: CCP shipped 0.858 in SDE 3532181 (Pyfa's client build) and fixed it to 0.0858 by SDE 3552227 (2026-09-28). The dataset keeps CCP's corrected value.",
+   "ccp_changed_in": {
+    "after": 3532181,
+    "by": 3552227
+   },
+   "ruling": "eve 2026-10-03: keep CCP data"
+  },
+  {
+   "id": "golem-agility",
+   "status": "expected_difference",
+   "kind": "type_attribute",
+   "type_ids": [
+    28710
+   ],
+   "type_names": [
+    "Golem"
+   ],
+   "attribute_id": 70,
+   "attribute": "agility",
+   "pyfa": 0.963,
+   "sde": 0.0963,
+   "esi": 0.0963,
+   "metrics": [
+    "align_time_s"
+   ],
+   "match": "the fit's ship is one of type_ids",
+   "reason": "Same CCP fix as paladin-agility (0.963 in SDE 3532181, 0.0963 from SDE 3552227).",
+   "ccp_changed_in": {
+    "after": 3532181,
+    "by": 3552227
+   },
+   "ruling": "eve 2026-10-03: keep CCP data"
+  },
+  {
+   "id": "remote-capacitor-impedance",
+   "status": "expected_difference",
+   "kind": "mechanic",
+   "attribute_ids": [
+    6463,
+    6464
+   ],
+   "attributes": [
+    "remoteCapacitorImpedance",
+    "remoteCapacitorImpedanceBonus"
+   ],
+   "effect_ids": [
+    6184
+   ],
+   "effects": [
+    "shipModuleRemoteCapacitorTransmitter"
+   ],
+   "pyfa": "effect 6184 resistanceID = 2116 (remoteRepairImpedance); attributes 6463/6464 do not exist",
+   "sde": "effect 6184 resistanceAttributeID = 6463 (default 1.0); capitals carry 6463 = 1.0; Siege/Triage/Bastion modules and Industrial Cores multiply the ship's 6463 by (1 + 6464/100) with 6464 = -99.9999 (effects 6581, 6582, 6658, 4575, 8119)",
+   "target_ship_type_ids": [
+    671,
+    3514,
+    3764,
+    11567,
+    19720,
+    19722,
+    19724,
+    19726,
+    22852,
+    23757,
+    23773,
+    23911,
+    23913,
+    23915,
+    23917,
+    23919,
+    24483,
+    37604,
+    37605,
+    37606,
+    37607,
+    42124,
+    42125,
+    42126,
+    42132,
+    42133,
+    42241,
+    42242,
+    42243,
+    45645,
+    45647,
+    45649,
+    52907,
+    73787,
+    73790,
+    73792,
+    73793,
+    77281,
+    77283,
+    77284,
+    77288,
+    78576,
+    87381,
+    92822,
+    92823,
+    92824,
+    92825
+   ],
+   "target_ship_groups": [
+    "Carrier",
+    "Command Carrier",
+    "Dreadnought",
+    "Force Auxiliary",
+    "Lancer Dreadnought",
+    "Supercarrier",
+    "Titan"
+   ],
+   "impedance_module_type_ids": [
+    4292,
+    4294,
+    20280,
+    27951,
+    28583,
+    33400,
+    42890,
+    58945,
+    58950,
+    62590,
+    62591,
+    87444,
+    88266,
+    93999,
+    94008,
+    94009,
+    94010
+   ],
+   "metrics": [
+    "cap_stable",
+    "cap_stable_percent"
+   ],
+   "match": "a remote capacitor transmitter (effect 6184) is projected onto the fit, and the fit's ship is in target_ship_type_ids or has an active module in impedance_module_type_ids (this also covers Marauders in Bastion and Rorqual/Orca/Porpoise in an Industrial Core). Also any outgoing remote-capacitor output computed against such a target.",
+   "reason": "Pyfa data outdated: CCP added remoteCapacitorImpedance (6463/6464) and switched the transmitter's resistance attribute from 2116 to 6463 after SDE 3532181 (present in 3552227). Targets with neither attribute modified resolve to 1.0 on both sides, so other remote-cap cases are unaffected.",
+   "ccp_changed_in": {
+    "after": 3532181,
+    "by": 3552227
+   },
+   "ruling": "eve 2026-10-03: keep CCP data; reconfirmed 14:26 (drift entry, no scoring impact)",
+   "also_on": "fighters (6463 = 0.0) and Upwell structures (1e-05 or 0.0): outside bench/fuzz scope (no remote cap onto fighters; structures excluded); tools/pyfa_drift.py reports them as 'only-dataset 6463' on 111 types",
+   "engine_handling": "eve-dogma follows the dataset (CCP 6463/6464); recorded for oracle comparisons only, does not affect scoring (no scored bench case projects remote cap onto these targets)."
+  },
+  {
+   "id": "t3c-max-subsystems",
+   "status": "decision_no_pipeline_patch",
+   "kind": "type_attribute",
+   "type_ids": [
+    29984,
+    29986,
+    29988,
+    29990
+   ],
+   "type_names": [
+    "Tengu",
+    "Legion",
+    "Proteus",
+    "Loki"
+   ],
+   "attribute_id": 1367,
+   "attribute": "maxSubSystems",
+   "pyfa": 4.0,
+   "sde": 5.0,
+   "esi": 5.0,
+   "metrics": [],
+   "match": "only if a metric or legality check reads maxSubSystems directly; no bench metric does today",
+   "reason": "Not CCP drift: Pyfa's db_update.py overwrites attribute 1367 with 4 because only 4 subsystem slots are usable. The dataset keeps CCP's 5; fit legality (4 subsystems, one per slot type) belongs to the engine/validation layer, which should behave like Pyfa.",
+   "ruling": "eve 2026-10-03: keep CCP's 5, no pipeline patch; reconfirmed 14:26 (engine still validates with 4; no scoring impact)",
+   "engine_handling": "eve-dogma validation keeps 4 subsystems (one per subsystem slot type), as Pyfa does; the dataset value 5 is not used for legality. Seen as a data difference on Proteus (29988) in the F effects-parity audit; applies to all four T3Cs."
+  }
+ ]
+}

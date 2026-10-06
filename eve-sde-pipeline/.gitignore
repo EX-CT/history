@@ -1,0 +1,6 @@
+dist/
+sde/
+__pycache__/
+*.pyc
+presets/presets.json
+presets/presets-pyfa.json
