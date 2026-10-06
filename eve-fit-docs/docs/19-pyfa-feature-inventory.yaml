@@ -1,0 +1,2229 @@
+# Generated source of truth for docs/19; edit here, then: python3 tools/render_inventory.py
+schema: pyfa-feature-inventory/1
+pyfa_ref: v2.69.0 (master 1d9f72b)
+status_values:
+- have
+- partial
+- missing
+- n/a
+columns:
+  f: 'EX-CT/eve-dogma main 2da8150 (Rust mainline, binary eve-fit; dataset-3569502 compiled in). Verified 2026-10-03 13:37 CST against eve-dogma-bench pending-1.11 97e4cc5: core 339/339 (22513/22513 values),
+    ext 187/187, effects 2352/2378, graphs-round2 84f7c2e 178/178, cap-suite 150/150, mutated-suite 93/93, formats-suite 4779/4779. Items not named in the 2026-10-03 13:40 update keep their earlier per-item
+    text.'
+  mcp: 'EX-CT/eve-fit-mcp v0.3.0 (64d6cd6: graph, market and price tools; CI success). Test ids from main 8c6b93d (same tests, ids added). have = a non-weak MCP test exists (eve-dogma-bench inventory/tests.yaml,
+    tools/check_inventory.py); engine passthrough alone is partial.'
+  web: 'EX-CT/eve-fit-web 40e6044 (Pages run 37098282654 success: e2e 64/64 on wasm-worker = F eve-dogma 597b7fc, 54/54 ts-worker; vitest 33/33). have = a non-weak e2e/unit test or a browser bench suite
+    exists.'
+  formats: 'eve-fit-formats: a separate crate inside the EX-CT/eve-dogma workspace (crates/eve-fit-formats, 2da8150), outside the engine. There is no separate repo, by decision (eve 2026-10-03). F will
+    add the crate''s own unit tests. Current tests: eve-dogma-bench formats-suite (CONTRACT-FORMATS 0.1) 4779/4779 via eve-fit serve-stdio, eve-cli/tests/formats_static_fit.rs and the CI formats-wasm parity
+    check. Only FMT-* items have this column.'
+evidence_keys:
+  B19: eve-dogma-bench v1.9.0 (331 cases)
+  CAP: cap-suite d80cc38 (150)
+  MUT: mutated-suite 2ac7c00 (93)
+  FMT: formats-suite 7c716e7 (4779 checks)
+  GR2: graphs-round2 84f7c2e
+  FZ: pending-1.10 b4deddd e_fz_* (8)
+  a08d943: eve-fit-docs drafts/mcp-web-features.md (eve4 MCP/web evidence)
+  e2e: eve-fit-web tools/e2e.mjs ids web.e2e.<slug>; web.unit.<slug> = vitest (docs/test-ids.md @ 40e6044)
+  MPF: eve-dogma-lab variant-f-perf 102f4d4 variant-f/docs/MISSING-PYFA-FEATURES.md
+  ED: EX-CT/eve-dogma 2da8150 bench run 2026-10-03 13:37 CST (see columns.f)
+items:
+- id: ENG-CORE-001
+  name: Dogma modifier engine
+  description: Apply SDE effects/modifiers (ItemModifier, LocationModifier, LocationGroup/RequiredSkill, OwnerRequiredSkill) with all operators (preAssign, preMul, preDiv, modAdd, modSub, postMul, postDiv,
+    postPercent, postAssign)
+  pyfa_src: eos/modifiedAttributeDict.py; eos/effects.py; eos/gamedata.py
+  f: have
+  f_evidence: B19 330/331 (22044/22046 values), probe lab-fp f5b709f
+  mcp: have
+  mcp_evidence: compute_fit passes the full FitRequest to the engine backend (src/schemas.ts)
+  web: have
+  web_evidence: 'FitStats from engine worker (src/engine/adapter.ts) [2026-10-03 15:40: stays have; site tests web-bench esf_* / exct_* pass in the browser; web-effects 2353/2378: the 25 failures are a
+    subset of eve-dogma 2da8150''s 26 and pass on d990818 / 8bde0ba, so the site''s wasm (20aa425) needs bumping; eve-fit-web run 37104154159 (F wasm 20aa425; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-CORE-002
+  name: Stacking penalties
+  description: Penalised multiplier chains per attribute/operator group, stackable-attribute exemptions, penalty groups
+  pyfa_src: eos/modifiedAttributeDict.py (calculateValue, penalized)
+  f: have
+  f_evidence: B19 esf_stacking_per*, e_fz_cloak_wcs_penalty_group_ninazu (FZ 8/8)
+  mcp: have
+  mcp_evidence: 'compute_fit passes the full FitRequest to the engine backend (src/schemas.ts) [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in
+    eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: FitStats from engine worker (src/engine/adapter.ts)
+- id: ENG-CORE-003
+  name: Hand-written effects (eos/effects.py, 2402 classes)
+  description: Pyfa overrides/complements SDE expressions with hand-written handlers (incl. runTime early/normal/late, projected-only, activeByDefault quirks)
+  pyfa_src: eos/effects.py (class EffectNNNN)
+  f: have
+  f_evidence: 'eve-dogma d990818: effects/ 2378/2378 (every carrier kind full), handler-only 112/112, unverified handler-only 37/37 (bench results-1.11/ED-d990818.md) [2026-10-03 14:58: partial -> have;
+    2da8150 was 2352/2378]'
+  mcp: have
+  mcp_evidence: 'engine pass-through [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 15:20:
+    new suite mcp-effects: eve-fit-mcp v0.3.1 2378/2378 with engine d990818, 2352/2378 with the pinned 2da8150; stays partial until the engine pin is bumped] [2026-10-03 15:50: partial -> have; mcp-effects
+    2378/2378; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'engine pass-through [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00:
+    stays partial; web-effects 2353/2378 (wasm F 20aa425 predates the effects fixes); eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-CORE-004
+  name: Skills as modifier sources
+  description: Skill levels drive skill effects; per-skill level; character-wide skill bonuses
+  pyfa_src: eos/saveddata/character.py (Skill.calculateModifiedAttributes)
+  f: have
+  f_evidence: B19 skills0/2/3/4_* (70 cases)
+  mcp: have
+  mcp_evidence: compute_fit character.skills; skill_requirements tool
+  web: have
+  web_evidence: src/ui/Character.tsx
+- id: ENG-CORE-005
+  name: Attribute overrides
+  description: User-set base attribute value overrides per type (Attribute Overrides menu/editor)
+  pyfa_src: eos/saveddata/override.py; gui/propertyEditor.py; mainMenuBar 'Attribute Overrides'
+  f: have
+  f_evidence: request.overrides (src/request.rs, engine.rs)
+  mcp: have
+  mcp_evidence: v0.3.0 mcp.features.fleet-overrides
+  web: have
+  web_evidence: 'show-info override editor (e2e tools/e2e.mjs: ''attribute override raises weapon dps'')'
+- id: ENG-CORE-006
+  name: Full modified attribute dump per item
+  description: All modified attributes of ship/module/charge/drone/fighter (item stats Attributes tab)
+  pyfa_src: gui/builtinItemStatsViews/itemAttributes.py
+  f: have
+  f_evidence: options.include_attributes (stats.rs attributes)
+  mcp: have
+  mcp_evidence: 'get_type gives base attrs; fitted values only via compute_fit include_attributes [2026-10-03 15:50: partial -> have; mcp-effects 2378/2378 via compute_fit include_attributes; eve-fit-mcp
+    v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Market show info with fitted values [2026-10-03 15:40: have -> partial; the site''s only test (web.e2e.show-info-fitted-values) checks presence (> 0 changed rows), no values; web-effects
+    2353/2378 with the stale wasm 20aa425 (needs bumping; native 8bde0ba 2378); eve-fit-web run 37104154159 (F wasm 20aa425; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-CORE-007
+  name: Attribute modifier sources (Affected by)
+  description: 'Per attribute: which items/skills modified it, operator, value; skill affectors context menu'
+  pyfa_src: gui/builtinItemStatsViews/itemAffectedBy.py; gui/builtinContextMenus/skillAffectors.py
+  f: missing
+  f_evidence: options.sources parsed but unused (MPF A6; rg '.sources' src/ 0 hits); Pyfa-backed bench pending-1.11 cases ext:src_* 6 (0/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: no tool exposes modifier sources (src/ grep 'affected' 0)
+  web: missing
+  web_evidence: no Affected-by tab (src/ grep 'affected' 0)
+- id: ENG-CORE-008
+  name: Dependants view
+  description: Which attributes/items an item affects (itemDependants)
+  pyfa_src: gui/builtinItemStatsViews/itemDependants.py
+  f: missing
+  f_evidence: no reverse-modifier output; Pyfa-backed bench pending-1.11 cases ext:dep_* 4 (0/4) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: grep dependants 0
+  web: missing
+  web_evidence: grep dependants 0
+- id: ENG-CORE-009
+  name: Alpha clone restrictions
+  description: 'Alpha clone skill caps (alphaCloneID) on character. Planned for 1.0 (TODO, low priority; user 2026-10-03): eve-character `clone: alpha`, docs/21 §1'
+  pyfa_src: eos/saveddata/character.py (alphaCloneID); gui/characterEditor.py
+  deferred: planned for 1.0, low priority (user 2026-10-03); needs alpha skill caps from eve-sde-pipeline
+  f: missing
+  f_evidence: 'request has no clone state; rg alpha src/ 0. Planned/TODO for 1.0 (until implemented the engine answers clone: alpha with an UNSUPPORTED error); Pyfa-backed bench pending-1.11 cases ext:alpha_*
+    5 (0/5) on eve-dogma 2da8150 (stays missing until F passes)'
+  mcp: missing
+  mcp_evidence: only pirate-set names match 'alpha'
+  web: missing
+  web_evidence: Character.tsx has All 0/4/5/custom only
+- id: ENG-MOD-001
+  name: Module states
+  description: offline/online/active/overheated with per-state effect application, canHaveState/isValidState/getMaxState
+  pyfa_src: eos/saveddata/module.py (isValidState, canHaveState, getMaxState, getProposedState)
+  f: have
+  f_evidence: B19 overheat_order*, e_fz_offline_* (FZ)
+  mcp: have
+  mcp_evidence: schema modules[].state
+  web: have
+  web_evidence: 'click/right-click state cycle; no e2e check (eve4 a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 4/4 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench
+    c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-MOD-002
+  name: Charges / ammo
+  description: Loaded charge modifies module; charge capacity, numCharges, valid charges per launcher/turret
+  pyfa_src: module.py (charge, getValidCharges, isValidCharge, numCharges)
+  f: have
+  f_evidence: B19 esf_charges*, validation CHARGE_GROUP/SIZE/CAPACITY (stats.rs validate)
+  mcp: have
+  mcp_evidence: suggest_charges tool
+  web: have
+  web_evidence: charge picker
+- id: ENG-MOD-003
+  name: Change ammo for all same modules
+  description: moduleAmmoChange (ammoChangeAll setting)
+  pyfa_src: gui/builtinContextMenus/moduleAmmoChange.py; settings ammoChangeAll
+  f: n/a
+  f_evidence: UI feature
+  mcp: partial
+  mcp_evidence: what_if can set charges per module
+  web: have
+  web_evidence: 40e6044 what-if charge scenario loads every module of the type (web.unit.whatif-charges, web.e2e.whatif-charges)
+- id: ENG-MOD-004
+  name: Reload time / factor reload
+  description: DPS/cap with reload factored (factorReload pref + context menu)
+  pyfa_src: module.py (reloadTime, forceReload); gui/builtinContextMenus/factorReload.py
+  f: have
+  f_evidence: options.factor_reload; B19 sustain_reload_*; CAP reload 8/8
+  mcp: have
+  mcp_evidence: 'options passthrough [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 20/20 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'options tab; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 20/20 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in
+    Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-MOD-005
+  name: Spool-up weapons/remote reps
+  description: 'Triglavian disintegrators, mutadaptive reps: spool type/amount; default spool pref; per-module spool menu'
+  pyfa_src: module.py (getSpoolData); gui/builtinContextMenus/moduleSpool.py; eos/utils/spoolSupport.py
+  f: have
+  f_evidence: B19 esf_spool*, CAP spool 6/6, modules[].spool, options.default_spool
+  mcp: have
+  mcp_evidence: 'FitRequest spool (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 9/9 pass
+    on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'per-module spool (e2e tools/e2e.mjs: ''per-module spool 0% lowers disintegrator dps'')'
+- id: ENG-MOD-006
+  name: Overheat bonuses
+  description: Overheated state bonuses (heat damage modelled separately)
+  pyfa_src: module.py; effects overload*
+  f: have
+  f_evidence: B19 overheat_order*, CAP overheat 15/15, FZ e_fz_capsim_overheat_*
+  mcp: have
+  mcp_evidence: 'state overheated [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 21/21 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: state toggle
+- id: ENG-MOD-007
+  name: Heat column (heat generation/damage)
+  description: Heat per module column (heatDamage, heatAbsorbtionRateModifier)
+  pyfa_src: gui/builtinViewColumns/heat.py
+  f: have
+  f_evidence: 'ED ext heat 30/30 (pool_heat_*: heat generation, damage, burnout)'
+  mcp: have
+  mcp_evidence: 'not exposed [2026-10-03 15:50: missing -> have; mcp-ext pool_heat_* 30/30 (modules[].heat); mcp.stats.overheat is weak; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: no heat column
+- id: ENG-MOD-008
+  name: Mutated / abyssal modules
+  description: Mutaplasmid rolls per attribute, base type, mutator; mutated drones
+  pyfa_src: eos/saveddata/mutatedMixin.py, mutator.py
+  f: have
+  f_evidence: MUT 86/93 (mm_*, mwd_*, edge_*, drone_* pass; 7 combo_/slot_ booster/implant cases fail, see ENG-IMP-004)
+  mcp: have
+  mcp_evidence: v0.3.0 mcp.features.mutated-fighters (mutation part)
+  web: have
+  web_evidence: 'sliders (e2e tools/e2e.mjs: ''mutated module imported'', ''mutated module EFT round trip'') [2026-10-03 14:00 strict gate: have -> partial, web tests are weak (web.e2e.mutated-module-import,
+    eft-export-mutated: text only) or partial (web.unit.builtin-eft-mutation: no stat check)] [2026-10-03 16:00: partial -> have; mapped web-* cases 51/51 pass in the browser; eve-fit-web CI run 37104154159
+    (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-MOD-009
+  name: Mutation stats view
+  description: 'Item stats Mutator tab: roll range/percentage per attribute'
+  pyfa_src: gui/builtinItemStatsViews/itemMutator.py; gui/builtinContextMenus/itemMutations.py
+  f: partial
+  f_evidence: F returns modified values; no roll-range output
+  mcp: missing
+  mcp_evidence: no mutaplasmid range output (src/ grep mutaplasmid 0)
+  web: partial
+  web_evidence: 'slider UI shows ranges [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: ENG-MOD-010
+  name: Module ranges
+  description: Optimal/falloff, missile range (incl. Pyfa missileMaxRangeData lower/upper chance)
+  pyfa_src: module.py (maxRange, falloff, missileMaxRangeData, calculateRange)
+  f: partial
+  f_evidence: stats.rs optimal_m/falloff_m/max_range_m; missile range-chance pair not output
+  mcp: have
+  mcp_evidence: via compute_fit
+  web: partial
+  web_evidence: 'maxRange column [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: ENG-MOD-011
+  name: Capacitor use per module
+  description: capUse incl. reactivation delay, cycle time
+  pyfa_src: module.py (capUse, rawCycleTime, reactivationDelay, disallowRepeatingAction)
+  f: have
+  f_evidence: stats.rs modules cycle_time_ms/use; CAP 147/150
+  mcp: have
+  mcp_evidence: 'via compute_fit [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 14/14 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'capacitorUse column [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00:
+    partial -> have; mapped web-* cases 14/14 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-MOD-012
+  name: Breacher pods
+  description: Pure-damage breachers (% HP + flat cap) DPS
+  pyfa_src: module.py (isBreacher, getVolleyParameters)
+  f: have
+  f_evidence: ED core breacher_kestrel pass (core 339/339)
+  mcp: have
+  mcp_evidence: 'depends on engine [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'depends on engine [2026-10-03 16:00: partial -> have; mapped web-* cases 1/1 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench
+    results-1.11/web-fdbb014.md)]'
+- id: ENG-MOD-013
+  name: Module variations / meta swap
+  description: Switch module to meta variation (itemVariationChange), market group siblings
+  pyfa_src: gui/builtinContextMenus/itemVariationChange.py; service/market.py (getVariationsByItems)
+  f: missing
+  f_evidence: no variation lookup over RPC (MPF E2); Pyfa-backed bench pending-1.11 cases ext-rpc:var_* 6 (0/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: have
+  mcp_evidence: get_type same_group variations (src/server.ts:145); suggest_modules
+  web: have
+  web_evidence: 40e6044 what-if variations (web.e2e.whatif-variations, web.unit.whatif-variations)
+- id: ENG-MOD-014
+  name: Module position / rack handling
+  description: Slot positions, rack labels, empty slot placeholders
+  pyfa_src: module.py (modPosition, buildEmpty, buildRack)
+  f: n/a
+  f_evidence: fit model concern
+  mcp: partial
+  mcp_evidence: order preserved in EFT
+  web: partial
+  web_evidence: 'Fitting.tsx slots [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: ENG-SHIP-001
+  name: T3D tactical modes
+  description: Mode item applies bonuses; shipModeChange menu
+  pyfa_src: eos/saveddata/mode.py; ship.py (modes, validateModeItem); gui/builtinContextMenus/shipModeChange.py
+  f: have
+  f_evidence: B19 esf_tactical*, request.mode
+  mcp: have
+  mcp_evidence: 'mode_type_id (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on
+    eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'mode selector; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 2/2 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in
+    Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-SHIP-002
+  name: T3C subsystems
+  description: Subsystem slot, slot/hardpoint additions
+  pyfa_src: eos/effects.py (subsystem effects); fit.py getNumSlots
+  f: have
+  f_evidence: B19 esf_slots*, Slot::Subsystem in validate
+  mcp: have
+  mcp_evidence: 'subsystems (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 3/3 pass on eve-fit-mcp
+    8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'subsystem slots; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 3/3 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425
+    in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-SHIP-003
+  name: Structures / citadels
+  description: Citadel fits, service slots, structure rigs, standup modules, fuel
+  pyfa_src: eos/saveddata/citadel.py; fit.py isStructure
+  f: have
+  f_evidence: B19 esf_structure*, standup_*
+  mcp: have
+  mcp_evidence: 'structures supported (src/ grep citadel 8 files) [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]
+    [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 8/8 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: structures
+- id: ENG-SHIP-004
+  name: Pilot security status
+  description: Security-status dependent effects (e.g. Pirate faction / Concord)
+  pyfa_src: fit.py getPilotSecurity; gui/builtinContextMenus/fitPilotSecurity.py
+  f: have
+  f_evidence: B19 esf_security_status; character security
+  mcp: have
+  mcp_evidence: 'character.security_status (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py)
+    1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'Character page; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 1/1 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in
+    Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-SHIP-005
+  name: System security
+  description: High/low/null/WH system effects (e.g. Cynosural, Upwell modules)
+  pyfa_src: fit.py getSystemSecurity; gui/builtinContextMenus/fitSystemSecurity.py
+  f: have
+  f_evidence: environment.system_security; B19 esf_security
+  mcp: have
+  mcp_evidence: 'schema environment [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: environment security
+- id: ENG-SHIP-006
+  name: Ship traits / role bonuses
+  description: Traits text per ship
+  pyfa_src: gui/builtinItemStatsViews/itemTraits.py
+  f: partial
+  f_evidence: type RPC returns data; traits text not checked
+  mcp: have
+  mcp_evidence: 'get_ship [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 15:50: partial
+    -> have; mcp.integration.get-ship-traits: Cerberus role / per-skill trait lines and the HAC bonus in the numbers; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Market show info traits [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: ENG-DRN-001
+  name: 'Drones: active/inactive stacks'
+  description: Drone stacks with amount/active count, bandwidth, bay, release/store limits
+  pyfa_src: eos/saveddata/drone.py; fit.py getReleaseLimitForDrone, getStoreLimitForDrone
+  f: have
+  f_evidence: B19 drones_*, DRONE_BANDWIDTH validation
+  mcp: have
+  mcp_evidence: schema drones
+  web: have
+  web_evidence: drone pane
+- id: ENG-DRN-002
+  name: Drone DPS/volley/mining/RR
+  description: Per-drone damage, mining, remote reps
+  pyfa_src: drone.py getDps, getMiningYPS, getRemoteReps
+  f: have
+  f_evidence: ED ext mining_porpoise_drones, rr_vexor_light_bots pass (mining 11/11, outgoing 25/25)
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'engine [2026-10-03 16:00: partial -> have; mapped web-* cases 2/2 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-DRN-003
+  name: Drone EHP and shield regen columns
+  description: droneEhp/droneRegen view columns
+  pyfa_src: gui/builtinViewColumns/droneEhp.py, droneRegen.py; drone.py hp/ehp/calculateShieldRecharge
+  f: have
+  f_evidence: ED ext drone_ehp 16/16 (dehp_*)
+  mcp: have
+  mcp_evidence: 'not exposed [2026-10-03 15:50: missing -> have; mcp.stats.drone-fighter-hp + mcp-ext dehp_* 5/5; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: no column
+- id: ENG-DRN-004
+  name: Drone speed/range/sig
+  description: Drone max velocity, optimal, falloff, control range
+  pyfa_src: drone.py maxRange, falloff
+  f: have
+  f_evidence: FZ e_fz_drone_speed_* 2/2; stats.rs control_range_m
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'drone pane [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial
+    -> have; mapped web-* cases 2/2 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-DRN-005
+  name: Split/merge drone stacks
+  description: droneAddStack/SplitStack
+  pyfa_src: gui/builtinContextMenus/droneAddStack.py, droneSplitStack.py
+  f: n/a
+  f_evidence: fit-model op
+  mcp: partial
+  mcp_evidence: what_if edits
+  web: partial
+  web_evidence: amount edit only
+- id: ENG-FTR-001
+  name: Fighters squadrons
+  description: Fighter tubes, squadron size, light/heavy/support slots, bay
+  pyfa_src: eos/saveddata/fighter.py; fit.py fighterTubesUsed
+  f: have
+  f_evidence: B19 fighters_*, stats.rs fighter_tubes/squadron_size
+  mcp: have
+  mcp_evidence: 'schema fighters [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03
+    14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 4/4 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: fighter pane
+- id: ENG-FTR-002
+  name: Fighter abilities
+  description: Per-ability on/off (attack, missiles, bombs, MWD, MJD, evasive, ECM, web, point, neut)
+  pyfa_src: eos/saveddata/fighterAbility.py; gui/builtinContextMenus/fighterAbilities.py
+  f: have
+  f_evidence: B19 fighters_*, pfighter_*
+  mcp: have
+  mcp_evidence: 'FitRequest abilities (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: mcp-* suites 6/10 on eve-fit-mcp 8c6b93d; MCP bugs: nested empty booster_fits rejected / projected
+    fighter quantity 1 (bench results-1.11/mcp-8c6b93d-F2da8150.md)] [2026-10-03 15:20: partial -> have; mcp-* 10/10 on eve-fit-mcp v0.3.1 e7b794a with eve-dogma 2da8150 (pinned) and d990818 (bench results-1.11/mcp-v0.3.1.md)]'
+  web: have
+  web_evidence: 'Pyfa-default abilities (e2e tools/e2e.mjs: ''disabling an attack ability lowers fighter dps'')'
+- id: ENG-FTR-003
+  name: Fighter DPS per effect
+  description: Volley/DPS per ability incl. bomb cycles
+  pyfa_src: fighter.py getDpsPerEffect, getCycleParametersPerEffect*
+  f: have
+  f_evidence: stats.rs fighter_dps; B19 fighters_*
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 4/4 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-FTR-004
+  name: Fighter EHP / regen
+  description: fighter.py hp/ehp/calculateShieldRecharge
+  pyfa_src: fighter.py hp, ehp
+  f: have
+  f_evidence: 'ED 2da8150 ext fighter_ehp 15/15 (fehp_*: Thanatos, Archon, Chimera, Nidhoggur, Nyx, Aeon, Wyvern, Hel; light/support/heavy squadrons, Fighter Support Unit II, skills 0 / Fighters 1, damage
+    patterns, inactive squadron) + pool_fighter_ehp_fsweep06420; fighters[].hp/ehp/shield_peak_recharge_hp_s vs Pyfa'
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.drone-fighter-hp + mcp-ext fehp_* / pool_fighter_ehp_* 16/16; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: '-'
+- id: ENG-IMP-001
+  name: Implants
+  description: Implant slots, set bonuses (pirate sets multiply)
+  pyfa_src: eos/saveddata/implant.py
+  f: have
+  f_evidence: B19 implants_*
+  mcp: have
+  mcp_evidence: schema implants; implant_set presets
+  web: have
+  web_evidence: implant pane
+- id: ENG-IMP-002
+  name: Character implants vs fit implants
+  description: implantSource (fit or character), useCharacterImplantsByDefault
+  pyfa_src: fit.py implantSource, appliedImplants
+  f: missing
+  f_evidence: implants only per request; Pyfa-backed bench pending-1.11 cases ext:cimp_* 6 (2/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: implants per fit only
+- id: ENG-IMP-003
+  name: Boosters and side effects
+  description: Booster slots, side effects toggles (boosterSideEffects menu)
+  pyfa_src: eos/saveddata/booster.py, boosterSideEffect.py; gui/builtinContextMenus/boosterSideEffects.py
+  f: have
+  f_evidence: B19 booster_se_* (7), booster_*
+  mcp: have
+  mcp_evidence: 'FitRequest side_effects (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 18/18
+    pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'side effects (e2e tools/e2e.mjs: ''booster side effect lowers armor HP'')'
+- id: ENG-IMP-004
+  name: Implant/booster slot conflicts
+  description: 'Same-slot implants/boosters: Pyfa keeps first; boosters slot rules'
+  pyfa_src: fit.py; service/fit.py addImplant/addBooster (replace by slot)
+  f: have
+  f_evidence: ED mutated-suite 93/93 (slot_*, combo_two_boosters_dda_*)
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 11/11 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'engine [2026-10-03 16:00: partial -> have; mapped web-* cases 11/11 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-IMP-005
+  name: Implant sets (saved + precalculated)
+  description: Implant Set Editor, apply/save set to fit, precalc faction sets
+  pyfa_src: eos/saveddata/implantSet.py; service/implantSet.py; service/precalcImplantSet.py; gui/setEditor.py; gui/builtinContextMenus/implantSetApply.py, implantSetSave.py
+  f: missing
+  f_evidence: 'implants: [type_id] only (MPF C2); Pyfa-backed bench pending-1.11 cases ext-rpc:isets_* 1 (0/1) on eve-dogma 2da8150 (stays missing until F passes)'
+  mcp: have
+  mcp_evidence: list_presets implant_set (src/profiles.ts)
+  web: have
+  web_evidence: 'SDE + saved sets (e2e tools/e2e.mjs: ''implant set applied (6 Snake + kept RP-905, faster)'')'
+- id: ENG-CAP-001
+  name: Capacitor capacity/recharge/peak
+  description: capacitorCapacity, recharge time, peak recharge, capUsed, capDelta
+  pyfa_src: fit.py capUsed, capRecharge, capDelta, calculateCapRecharge
+  f: have
+  f_evidence: CAP capacity/recharge/peak 150/150
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 12/12 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats capacitor
+- id: ENG-CAP-002
+  name: Capacitor simulation (stable %, lasts)
+  description: Event sim with stagger, reload, injectors, max time
+  pyfa_src: eos/capSim.py; fit.py simulateCap, getCapSimData
+  f: have
+  f_evidence: CAP 147/150 (f5b709f); 150/150 on variant-f-capfix 9bf10a4
+  mcp: have
+  mcp_evidence: 'options.cap_sim [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 22/22 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats capacitor
+- id: ENG-CAP-003
+  name: Cap injectors / boosters
+  description: Charges inject cap, reload
+  pyfa_src: capSim.py; module charges
+  f: have
+  f_evidence: CAP injectors 14/14
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 14/14 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-CAP-004
+  name: Own neuts/nos in cap sim
+  description: Own neutralizer use, nosferatu gain (incl. no-target option)
+  pyfa_src: fit.py addDrain/getCapRegenGainFromMod
+  f: have
+  f_evidence: CAP own_neut_nos 10/10; options.nos_no_target_cap
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 11/11 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-CAP-005
+  name: Incoming neut / remote cap in sim
+  description: Projected neuts/nos/cap transfers into cap sim
+  pyfa_src: fit.py addDrain, iterDrains
+  f: have
+  f_evidence: ED cap-suite 150/150 (hard_*, incoming incl. void bombs)
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 14/14 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-CAP-006
+  name: Capacitor graph data (cap over time)
+  description: capacitor vs time series
+  pyfa_src: graphs/data/fitCapacitor
+  f: have
+  f_evidence: ED graphs-round2 capacitor 14/14 (cap_*, cap_time_*)
+  mcp: have
+  mcp_evidence: 'sweep tool not time-series [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench tools/mcp_batch.py) 10/10 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Graphs capacitor
+- id: ENG-DEF-001
+  name: HP and resists per layer
+  description: Shield/armor/hull HP and EM/Th/Kin/Ex resonance
+  pyfa_src: fit.py hp; resistancesViewFull
+  f: have
+  f_evidence: B19 all cases (hp.*, resonance)
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats defense
+- id: ENG-DEF-002
+  name: EHP vs damage pattern
+  description: Effective HP vs selected damage pattern; raw/effective toggle
+  pyfa_src: fit.py ehp; damagePattern
+  f: have
+  f_evidence: B19 dmgpattern_*
+  mcp: have
+  mcp_evidence: damage_pattern
+  web: have
+  web_evidence: Profiles
+- id: ENG-DEF-003
+  name: 'Tank: active/sustained/reinforced'
+  description: Active shield boost, armor/hull repair, passive regen; sustainable (cap) and effective
+  pyfa_src: fit.py tank, effectiveTank, sustainableTank, calculateSustainableTank; rechargeViewFull
+  f: have
+  f_evidence: stats.rs tank raw/sustained/sustained_effective; B19 sustain_*
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 11/11 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-DEF-004
+  name: Reactive armor hardener sim
+  description: RAH adaptation to damage pattern; resistMode/moduleRahPattern
+  pyfa_src: eos/effects.py (Effect4928 adaptive armor hardener); gui/builtinContextMenus/moduleRahPattern.py
+  f: have
+  f_evidence: B19 esf_reactive_armor, dmgpattern_rah; options.rah
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'options tab RAH; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 2/2 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425
+    in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-DEF-005
+  name: Ancillary repairers (charged)
+  description: AAR/ASB with paste/charges, reload
+  pyfa_src: effects; module charges
+  f: have
+  f_evidence: B19 esf_ancillary*, proj_aar_*
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 7/7 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-DEF-006
+  name: Shield recharge peak
+  description: calculateShieldRecharge peak passive regen
+  pyfa_src: fit.py calculateShieldRecharge
+  f: have
+  f_evidence: stats.rs passive_shield
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-DEF-007
+  name: Incoming remote reps in tank
+  description: Projected RR applied to sustained tank
+  pyfa_src: fit.py getRemoteReps (incoming via projected)
+  f: have
+  f_evidence: stats.rs incoming RR (MPF); B19 proj_ars/rar/rsb
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 4/4 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-OFF-001
+  name: Weapon DPS/volley
+  description: Turrets, missiles, smartbombs, bombs per module; with spool and reload
+  pyfa_src: module.py getVolley/getDps/getCycleParametersForDps; fit.py getWeaponDps
+  f: have
+  f_evidence: B19 (weapon_dps/volley all)
+  mcp: have
+  mcp_evidence: engine
+  web: have
+  web_evidence: Stats offense
+- id: ENG-OFF-002
+  name: Drone and fighter DPS totals
+  description: fit.py getDroneDps/Volley, total
+  pyfa_src: fit.py getTotalDps
+  f: have
+  f_evidence: B19 drone_dps, fighter_dps
+  mcp: have
+  mcp_evidence: engine
+  web: have
+  web_evidence: Stats
+- id: ENG-OFF-003
+  name: DPS vs target profile (applied)
+  description: Resist-aware DPS vs target profile
+  pyfa_src: fit.py calculateWeaponDmgStats; targetProfile
+  f: have
+  f_evidence: stats.rs vs_target_profile
+  mcp: have
+  mcp_evidence: evaluate_profiles
+  web: have
+  web_evidence: 'Profiles [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial
+    -> have; mapped web-* cases 11/11 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-OFF-004
+  name: Doomsdays / superweapons
+  description: Doomsday damage
+  pyfa_src: effects; stats
+  f: have
+  f_evidence: stats.rs doomsday (engine.rs); covered in B19 exct_avatar?
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-OFF-005
+  name: Spool min/max/current DPS display
+  description: firepowerViewFull spool-up tooltip (min/max)
+  pyfa_src: gui/builtinStatsViews/firepowerViewFull.py
+  f: partial
+  f_evidence: single spool value per request; min/max need two calls
+  mcp: partial
+  mcp_evidence: what_if
+  web: partial
+  web_evidence: spool option
+- id: ENG-OFF-006
+  name: Mining yield (modules + drones)
+  description: m3/s mining and drain (residue), mining panel
+  pyfa_src: fit.py minerYield, droneYield, minerDrain, totalYield; miningyieldViewFull
+  f: have
+  f_evidence: ED ext mining 11/11 (+ mining with fleet buffs 1/1)
+  mcp: have
+  mcp_evidence: 'no mining metric (src/ grep mining 0) [2026-10-03 15:50: missing -> have; mcp.stats.mining + mcp-ext mining_* 10/10; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Stats.tsx shows st.mining only if backend provides (D ts-worker), not F [2026-10-03 16:00: stays partial; web-ext mining_* 10/10 in the browser engine; UI rendering of F''s mining section
+    unverified (Stats.tsx read D''s shape); eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-OFF-007
+  name: Bombing panel
+  description: Bombs needed per bomb type vs target
+  pyfa_src: gui/builtinStatsViews/bombingViewFull.py
+  f: have
+  f_evidence: ED ext bombing 15/15 (bomb_*)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.bombing + mcp-ext bomb_* 11/11; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: '-'
+- id: ENG-OFF-008
+  name: Ammo to damage pattern
+  description: Create damage pattern from loaded ammo
+  pyfa_src: gui/builtinContextMenus/ammoToDmgPattern.py
+  f: n/a
+  f_evidence: UI over type attrs
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: grep ammo pattern 0
+- id: ENG-NAV-001
+  name: Speed, align, agility, mass, sig
+  description: Max velocity, align time, agility, signature
+  pyfa_src: fit.py maxSpeed, alignTime
+  f: have
+  f_evidence: B19 max_velocity/align_time_s
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:00 strict gate: have -> partial, only test mcp.integration.what-if is partial (velocity only)] [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through
+    compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats navigation
+- id: ENG-NAV-002
+  name: Warp speed and max warp distance
+  description: warpSpeed, maxWarpDistance (cap)
+  pyfa_src: fit.py warpSpeed, maxWarpDistance
+  f: have
+  f_evidence: stats.rs warp_speed_au_s, max_warp_distance_au
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-NAV-003
+  name: Warp core strength / scram status
+  description: Warp scramble status
+  pyfa_src: targetingMiscViewMinimal (Warp Core Strength)
+  f: have
+  f_evidence: stats.rs warp_scramble_status
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 24/24 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-NAV-004
+  name: Propulsion mods (AB/MWD/MJD/bastion/siege)
+  description: Speed boosts, sig bloom, MJD; cloaks/WCS penalties
+  pyfa_src: effects
+  f: have
+  f_evidence: B19 + FZ e_fz_cloak_wcs_*
+  mcp: have
+  mcp_evidence: engine
+  web: have
+  web_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial
+    -> have; mapped web-* cases 1/1 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-TGT-001
+  name: Targeting stats
+  description: Max targets, lock range, scan res, sensor strength/type
+  pyfa_src: fit.py maxTargets, maxTargetRange, scanStrength, scanType
+  f: have
+  f_evidence: stats.rs targeting
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:00 strict gate: have -> partial, only test mcp.features.compute-graph-stats is partial (lock time only)] [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases
+    through compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats targeting
+- id: ENG-TGT-002
+  name: Lock time vs ship classes
+  description: Lock times vs Frigate…Carrier sigs (tooltip)
+  pyfa_src: targetingMiscViewMinimal; fit.py calculateLockTime
+  f: partial
+  f_evidence: lock_time_s vs target-profile sig only
+  mcp: have
+  mcp_evidence: v0.3.0 mcp.features.compute-graph-stats (lock time vs signature agrees with the fit stats)
+  web: have
+  web_evidence: Stats lock time
+- id: ENG-TGT-003
+  name: ECM jam chance
+  description: '% chance to be jammed (incoming ECM)'
+  pyfa_src: fit.py jamChance
+  f: have
+  f_evidence: stats.rs jam_chance_percent; B19 ecm_*
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 6/6 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-TGT-004
+  name: Probe size / scan
+  description: Probe size
+  pyfa_src: fit.py probeSize
+  f: have
+  f_evidence: stats.rs probe_size
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 10/10 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'Stats [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial ->
+    have; mapped web-* cases 10/10 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-TGT-005
+  name: Drone control range
+  description: droneControlRange
+  pyfa_src: targetingMisc
+  f: have
+  f_evidence: stats.rs control_range_m
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 6/6 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats
+- id: ENG-TGT-006
+  name: Cargo and special holds
+  description: Cargo, ore/fuel/fleet/ammo/... holds volumes
+  pyfa_src: targetingMiscViewMinimal (holds list)
+  f: partial
+  f_evidence: stats.rs cargo capacity; special holds not all output
+  mcp: partial
+  mcp_evidence: engine
+  web: partial
+  web_evidence: cargo only
+- id: ENG-PROJ-001
+  name: Projected modules
+  description: Remote modules (webs, TP, neut, nos, ECM, damp, TD, GD, RR, cap transfer) on the fit
+  pyfa_src: fit.py projectedModules; gui/builtinContextMenus/itemProject.py
+  f: have
+  f_evidence: B19 proj_* (30)
+  mcp: have
+  mcp_evidence: v0.3.0 mcp.features.projected-environment (stasis webifier)
+  web: have
+  web_evidence: 'Projected tab (e2e tools/e2e.mjs: ''projected web slows the ship'')'
+- id: ENG-PROJ-002
+  name: Projected drones / fighters
+  description: Drones/fighters projected, amounts
+  pyfa_src: fit.py projectedDrones/Fighters
+  f: have
+  f_evidence: B19 proj_*drone*, pfighter_* (6)
+  mcp: have
+  mcp_evidence: 'FitRequest projected (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: mcp-* suites 2/6 on eve-fit-mcp 8c6b93d; MCP bugs: nested empty booster_fits rejected / projected
+    fighter quantity 1 (bench results-1.11/mcp-8c6b93d-F2da8150.md)] [2026-10-03 15:20: partial -> have; mcp-* 6/6 on eve-fit-mcp v0.3.1 e7b794a with eve-dogma 2da8150 (pinned) and d990818 (bench results-1.11/mcp-v0.3.1.md)]'
+  web: have
+  web_evidence: projected
+- id: ENG-PROJ-003
+  name: Projected fits
+  description: Whole fits projected (with amount, active)
+  pyfa_src: fit.py projectedFits, getProjectionInfo
+  f: have
+  f_evidence: B19 projfit_* (10)
+  mcp: have
+  mcp_evidence: 'projected[kind=fit] (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: mcp-* suites 0/10 on eve-fit-mcp 8c6b93d; MCP bugs: nested empty booster_fits rejected / projected
+    fighter quantity 1 (bench results-1.11/mcp-8c6b93d-F2da8150.md)] [2026-10-03 15:20: partial -> have; mcp-* 10/10 on eve-fit-mcp v0.3.1 e7b794a with eve-dogma 2da8150 (pinned) and d990818 (bench results-1.11/mcp-v0.3.1.md)]'
+  web: have
+  web_evidence: 'nested toRequest (fit/model.ts); no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 10/10 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2,
+    F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-PROJ-004
+  name: Projection range (distance)
+  description: Range-dependent strength (falloff) for projected items
+  pyfa_src: itemProjectionRange context menu; projectionRange column
+  f: have
+  f_evidence: projected distance; B19 *_falloff
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: mcp-* suites
+    4/6 on eve-fit-mcp 8c6b93d; MCP bugs: nested empty booster_fits rejected / projected fighter quantity 1 (bench results-1.11/mcp-8c6b93d-F2da8150.md)] [2026-10-03 15:20: partial -> have; mcp-* 6/6 on
+    eve-fit-mcp v0.3.1 e7b794a with eve-dogma 2da8150 (pinned) and d990818 (bench results-1.11/mcp-v0.3.1.md)]'
+  web: have
+  web_evidence: projected distance
+- id: ENG-PROJ-005
+  name: Burst projectors / AoE / doomsday AoE
+  description: Burst jammers, AoE structure modules
+  pyfa_src: effects
+  f: have
+  f_evidence: B19 esf_burst*, aoe_* (5), ecm_burst
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 10/10 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-PROJ-006
+  name: Outgoing remote reps / cap transfer stats
+  description: Outgoing shield/armor/hull/cap per s (with spool)
+  pyfa_src: fit.py getRemoteReps; gui/builtinStatsViews/outgoingViewFull.py
+  f: have
+  f_evidence: 'ED ext outgoing 25/25 (rr_*: remote reps / cap transfer)'
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.remote-repair(-spool) + mcp-ext rr_* 10/10; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Stats ''Remote assistance'' section only when backend provides [2026-10-03 16:00: stays partial; web-ext rr_* 10/10 in the browser engine; Remote assistance section rendering with F unverified;
+    eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-PROJ-007
+  name: Bombs vs cap (void bomb)
+  description: Void bomb neut projection
+  pyfa_src: effects
+  f: have
+  f_evidence: ED cap-suite in_void_bomb pass (150/150)
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'engine [2026-10-03 16:00: partial -> have; mapped web-* cases 1/1 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-PROJ-008
+  name: Target resists column / ignore resists
+  description: targetResists column
+  pyfa_src: gui/builtinViewColumns/targetResists.py
+  f: partial
+  f_evidence: projected resist applied; no per-row output
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: ENG-FLT-001
+  name: Command bursts / warfare buffs
+  description: Command burst modules + charges → warfare buffs (shield/armor/skirmish/info/mining)
+  pyfa_src: fit.py addCommandBonus; effects warfare*
+  f: have
+  f_evidence: B19 fleet_*, esf_burst
+  mcp: have
+  mcp_evidence: v0.3.0 mcp.features.fleet-overrides
+  web: have
+  web_evidence: 'buff editor (e2e tools/e2e.mjs: ''manual fleet buff raises shield resist'')'
+- id: ENG-FLT-002
+  name: Command fits (booster fits)
+  description: Other fits as command boosters; strongest-wins
+  pyfa_src: fit.py commandFits, getCommandInfo; gui/builtinContextMenus/commandFitAdd.py
+  f: have
+  f_evidence: booster_fits; B19 fleet_two_boosters; stats strongest
+  mcp: have
+  mcp_evidence: 'fleet.booster_fits (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: mcp-* suites 0/3 on eve-fit-mcp 8c6b93d; MCP bugs: nested empty booster_fits rejected / projected
+    fighter quantity 1 (bench results-1.11/mcp-8c6b93d-F2da8150.md)] [2026-10-03 15:20: partial -> have; mcp-* 3/3 on eve-fit-mcp v0.3.1 e7b794a with eve-dogma 2da8150 (pinned) and d990818 (bench results-1.11/mcp-v0.3.1.md)]'
+  web: have
+  web_evidence: 'booster-fit picker; no e2e (a08d943) [2026-10-03 16:00: partial -> have; mapped web-* cases 3/3 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425
+    in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-ENV-001
+  name: Wormhole effects
+  description: Pulsar/Magnetar/Black hole/WR/Cataclysmic/Red giant classes 1-6
+  pyfa_src: fit.py systemEffect; envEffectAdd
+  f: have
+  f_evidence: B19 env_* (8)
+  mcp: have
+  mcp_evidence: 'v0.3.0 mcp.features.projected-environment, but the environment assertions are skipped silently inside an if (weak) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through
+    compute_fit, bench tools/mcp_batch.py) 8/8 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: environment
+- id: ENG-ENV-002
+  name: Abyssal weather
+  description: Electric/Caustic/Darkness/Infernal/Xenon/… + tiers
+  pyfa_src: envEffectAdd
+  f: have
+  f_evidence: B19 weather_* (6)
+  mcp: have
+  mcp_evidence: 'environment (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 6/6 pass on eve-fit-mcp
+    8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: environment
+- id: ENG-ENV-003
+  name: Incursion / Drifter / metaliminal / filament clouds
+  description: Incursion effects, Drifter, cloud filaments
+  pyfa_src: envEffectAdd
+  f: have
+  f_evidence: B19 incursion_* (3), cloud_* (3)
+  mcp: have
+  mcp_evidence: 'environment (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 6/6 pass on eve-fit-mcp
+    8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: environment
+- id: ENG-ENV-004
+  name: Beacons / location bonus
+  description: Beacons and location effects
+  pyfa_src: effects
+  f: have
+  f_evidence: B19 esf_beacons, esf_location_bonus_not_on
+  mcp: have
+  mcp_evidence: 'environment (eve4 draft a08d943: works, no dedicated MCP test) [2026-10-03 14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp
+    8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'beacon selector (e2e tools/e2e.mjs: ''environment beacon applied'')'
+- id: ENG-VAL-001
+  name: Resources overflow
+  description: CPU/PG/calibration/bandwidth over limit
+  pyfa_src: fit.py cpuUsed, pgUsed, calibrationUsed, droneBandwidthUsed
+  f: have
+  f_evidence: validate CPU/POWER/CALIBRATION/DRONE_BANDWIDTH; FZ e_fz_cpu_round_tie_*
+  mcp: have
+  mcp_evidence: 'validate_fit [2026-10-03 14:00 strict gate: have -> partial, only test mcp.integration.suggest-modules is partial (no overflow flagging)] [2026-10-03 14:40: partial -> have, mcp-* suites
+    (bench cases through compute_fit, bench tools/mcp_batch.py) 4/4 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'Problems section [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00:
+    partial -> have; mapped web-* cases 4/4 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-VAL-002
+  name: Slots and hardpoints
+  description: Slots per rack, turret/launcher hardpoints
+  pyfa_src: fit.py getSlotsUsed, getHardpointsUsed
+  f: have
+  f_evidence: SLOTS_EXCEEDED, TURRET/LAUNCHER_HARDPOINTS
+  mcp: have
+  mcp_evidence: validate_fit
+  web: have
+  web_evidence: 'Fitting [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial
+    -> have; mapped web-* cases 4/4 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-VAL-003
+  name: canFit restrictions
+  description: canFitShipGroup/Type, rig size, maxGroupFitted/Online/Active, maxTypeFitted
+  pyfa_src: module.py fits; fit.py canFit
+  f: have
+  f_evidence: SHIP_RESTRICTION, RIG_SIZE, MAX_GROUP_*, MAX_TYPE_FITTED
+  mcp: have
+  mcp_evidence: 'validate_fit [2026-10-03 14:00 strict gate: have -> partial, only test mcp.unit.can-fit is partial (rig size, no ship restriction)] [2026-10-03 14:40: partial -> have, mcp-* suites (bench
+    cases through compute_fit, bench tools/mcp_batch.py) 7/7 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'Problems [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: partial
+    -> have; mapped web-* cases 7/7 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-VAL-004
+  name: Missing skills (prereqs)
+  description: Required skills per item vs character
+  pyfa_src: service/prereqsCheck.py; itemRequirements view
+  f: have
+  f_evidence: MISSING_SKILL
+  mcp: have
+  mcp_evidence: skill_requirements
+  web: have
+  web_evidence: missing/train-required skills
+- id: ENG-VAL-005
+  name: Disable fitting restrictions
+  description: Toggle ignore restrictions (mainMenu)
+  pyfa_src: gui/mainMenuBar.py 'Disable Fitting Restrictions'
+  f: have
+  f_evidence: violations reported, never block
+  mcp: have
+  mcp_evidence: 'allow_violations [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 2/2 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: partial
+  web_evidence: 'fits always allowed; no strict mode toggle found [2026-10-03 16:00: stays partial; web-ext val_disable_restrictions_stats / unit_val_validate_false pass in the browser engine; UI has no
+    strict-mode toggle; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-VAL-006
+  name: Charge validity
+  description: Charge group/size/capacity
+  pyfa_src: module.py isValidCharge
+  f: have
+  f_evidence: CHARGE_GROUP/SIZE/CAPACITY
+  mcp: have
+  mcp_evidence: 'validate_fit [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 4/4 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 'charge picker filtered [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03
+    16:00: partial -> have; mapped web-* cases 4/4 pass in the browser; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: ENG-VAL-007
+  name: Fit-level special restrictions
+  description: e.g. one cloak, max 1 per group, structure-only modules, T3D/T3C subsystem completeness
+  pyfa_src: fit.py isInvalid; ship.py validate
+  f: partial
+  f_evidence: generic max-group checks; subsystem completeness not checked
+  mcp: partial
+  mcp_evidence: engine
+  web: partial
+  web_evidence: engine
+- id: GRF-DMG-001
+  name: Damage stats graph
+  description: dps/volley/damage vs distance, time, target speed (m/s, %), target sig (m, %); inputs attacker/target speed+angle, target profile or fit, ignore resists, apply projected, drone mobile mode
+  pyfa_src: graphs/data/fitDamageStats/*; gui/builtinContextMenus/graphDmg*
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: v0.3.0 compute_graph; mcp.features.compute-graph-target, mcp.features.list-graphs
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-APP-001
+  name: Ammo application profile graph
+  description: best ammo dps/volley vs distance, ammo picker, ammo quality
+  pyfa_src: graphs/data/fitApplicationProfile; graphFitAmmoPicker, graphAmmoOptimal*
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 14/14 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-CAP-001
+  name: Capacitor graph
+  description: cap amount (GJ/%) and regen vs time / cap amount
+  pyfa_src: graphs/data/fitCapacitor
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'compute_graph serves it; mcp.features.compute-graph-target has no capacitor value check (weak) [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 13/13 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-ECM-001
+  name: ECM/burst/scan-res/damps graph
+  description: source damage / target lock time / lock uptime vs target DPS or scan res
+  pyfa_src: graphs/data/fitEcmBurstScanresDamps
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 10/10 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: 40e6044 ECM burst graph (web.e2e.graph-ecm-burst, graph-ecm-damage)
+- id: GRF-EWAR-001
+  name: EWAR stats graph
+  description: neut, web %, ECM, damp lock range %, TD optimal %, GD range %, TP % vs distance
+  pyfa_src: graphs/data/fitEwarStats
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 21/21 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-LOCK-001
+  name: Lock time graph
+  description: lock time vs target sig
+  pyfa_src: graphs/data/fitLockTime; graphLockRange
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: v0.3.0 compute_graph; mcp.features.compute-graph-stats
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-MOB-001
+  name: Mobility graph
+  description: speed, distance, momentum, bump speed/distance vs time
+  pyfa_src: graphs/data/fitMobility
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: v0.3.0 compute_graph; mcp.features.compute-graph-stats
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-RR-001
+  name: Remote reps graph
+  description: RR HP/s and total vs distance/time (spool)
+  pyfa_src: graphs/data/fitRemoteReps
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 11/11 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-SHLD-001
+  name: Shield regen graph
+  description: shield amount/regen (HP/EHP) vs time / amount
+  pyfa_src: graphs/data/fitShieldRegen
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 5/5 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-WARP-001
+  name: Warp time graph
+  description: warp time vs distance (AU/km)
+  pyfa_src: graphs/data/fitWarpTime
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'v0.3.0 compute_graph serves it (mcp.features.list-graphs: 10 graphs); no value test for this graph [2026-10-03 14:50: partial -> have, mcp-graphs (graphs suite through compute_graph, bench
+    tools/mcp_batch.py) 8/8 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: src/ui/Graphs.tsx engine graph on wasm-g4-worker (browser GR2 178/178 CI; e2e 'graph * (engine)'); default ts-worker backend uses UI approximations (a08d943 §9)
+- id: GRF-UI-001
+  name: Graph frame features
+  description: 'multiple source fits and targets in one graph, target profiles as targets, legend, colors/line styles, export? (Pyfa: copy/save image)'
+  pyfa_src: graphs/gui/frame.py, lists.py, canvasPanel.py
+  f: n/a
+  f_evidence: UI
+  mcp: n/a
+  mcp_evidence: '-'
+  web: have
+  web_evidence: 40e6044 multi-fit overlay and target fit (web.e2e.graph-overlay, graph-target-fit)
+- id: CHR-001
+  name: All 0 / All 5 built-in characters
+  description: Default characters with all skills 0 or 5
+  pyfa_src: service/character.py (all0, all5)
+  f: have
+  f_evidence: character.skills.default_level
+  mcp: have
+  mcp_evidence: default all V; skills param
+  web: have
+  web_evidence: All 5/4/0
+- id: CHR-002
+  name: Custom characters (per-skill levels, save/rename/copy/delete)
+  description: Character editor
+  pyfa_src: gui/characterEditor.py; service/character.py
+  f: partial
+  f_evidence: per-request levels only (MPF C1)
+  mcp: partial
+  mcp_evidence: skills map per call; no saved characters
+  web: have
+  web_evidence: 'Character.tsx custom levels (e2e tools/e2e.mjs: ''custom character (all 0) lowers dps'')'
+- id: CHR-003
+  name: Import character from ESI (SSO)
+  description: Fetch skills via ESI for logged-in character
+  pyfa_src: service/esi.py; eos/saveddata/ssocharacter.py; gui/ssoLogin.py
+  f: n/a
+  f_evidence: 'ruling 2026-10-03: ESI login/character fetch is a web-frontend job (owner eve4, later); engine input = character.skills/security (request.rs) — have'
+  mcp: n/a
+  mcp_evidence: 'web frontend first; MCP may later accept the same skills input (already does: skills param)'
+  web: missing
+  web_evidence: missing — web frontend, later (eve4)
+  owner: eve-fit-web (eve4), later; engine owns the character/skill input format
+- id: CHR-004
+  name: Import character file (EVEMon/XML)
+  description: Import skills from XML (EVEMon / API char sheet)
+  pyfa_src: service/character.py importCharacter; gui/mainMenuBar.py 'Import Character File'
+  f: missing
+  f_evidence: -; Pyfa-backed bench pending-1.11 cases ext-rpc:evemon_* 4 (0/4) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: CHR-005
+  name: Export skills needed (EVEMon plan)
+  description: Export required skills for fit as EVEMon plan
+  pyfa_src: eos/saveddata/character.py / service/character.py exportText; mainMenu 'Export Skills Needed'
+  f: partial
+  f_evidence: MISSING_SKILL list
+  mcp: partial
+  mcp_evidence: skill_requirements (list, no plan export)
+  web: partial
+  web_evidence: missing skills list, no export
+- id: CHR-006
+  name: Character implants
+  description: Implants on the character applied to all fits
+  pyfa_src: eos/saveddata/character.py implants
+  f: missing
+  f_evidence: -; Pyfa-backed bench pending-1.11 cases ext:cimp_* 6 (2/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: CHR-007
+  name: Security status on character
+  description: secStatus
+  pyfa_src: character.py secStatus
+  f: have
+  f_evidence: character security
+  mcp: have
+  mcp_evidence: 'schema [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Character.tsx
+- id: CHR-008
+  name: Skill prerequisites tree / requirements view
+  description: Item stats Requirements tab with levels
+  pyfa_src: gui/builtinItemStatsViews/itemRequirements.py
+  f: partial
+  f_evidence: type RPC?
+  mcp: have
+  mcp_evidence: skill_requirements
+  web: partial
+  web_evidence: 'Market show info required skills [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: CHR-009
+  name: Skill planner needs (train time)
+  description: Pyfa shows missing skills; train time via SP/attributes (planner-adjacent)
+  pyfa_src: characterEditor skill tree
+  f: missing
+  f_evidence: no SP/train time
+  mcp: missing
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: train-required skills list
+- id: PRC-001
+  name: Market price fetch with sources
+  description: fuzzwork, evemarketdata, evetycoon, cevemarket; price system (Jita…); caching, timeouts
+  pyfa_src: service/price.py; service/marketSources/*
+  f: missing
+  f_evidence: 'offline engine (MPF A5: price → UNKNOWN_METHOD)'
+  mcp: have
+  mcp_evidence: v0.3.0 get_prices; mcp.features.prices-esi, prices-fuzzwork, prices-offline
+  web: partial
+  web_evidence: src/data/prices.ts ESI average/adjusted only; no source/system choice
+- id: PRC-002
+  name: Price stats panel
+  description: Ship/fittings/drones/cargo/character totals; include drones/cargo/character toggles
+  pyfa_src: gui/builtinStatsViews/priceViewFull.py; settings MarketPriceSettings
+  f: missing
+  f_evidence: '-'
+  mcp: have
+  mcp_evidence: v0.3.0 price_fit; mcp.features.price-fit
+  web: partial
+  web_evidence: 'PriceBox.tsx (e2e tools/e2e.mjs: ''fit price from ESI'') [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench
+    inventory/mcp-web-gaps.md)]'
+- id: PRC-003
+  name: Price column per item
+  description: price column
+  pyfa_src: gui/builtinViewColumns/price.py
+  f: missing
+  f_evidence: '-'
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.features.price-passthrough + price-fit-engine: per-line unit_isk and source from the engine price block (MCP CI on 197223f); eve-fit-mcp v0.4.0
+    d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: no per-row price
+- id: PRC-004
+  name: Optimize fit price
+  description: Replace items by cheaper equivalents (Fit menu)
+  pyfa_src: gui/mainFrame.py optimizeFitPrice; gui/copySelectDialog.py (multibuy OPTIMIZE_PRICES)
+  f: missing
+  f_evidence: '-'
+  mcp: missing
+  mcp_evidence: optimize_fit optimizes stats, not price
+  web: missing
+  web_evidence: '-'
+- id: PRC-005
+  name: Price options context menu
+  description: priceOptions (what to include)
+  pyfa_src: gui/builtinContextMenus/priceOptions.py
+  f: missing
+  f_evidence: '-'
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: FMT-EFT-001
+  name: EFT import/export
+  description: EFT text incl. offline, charges, drones/fighters x N, implants, boosters, cargo, mode, mutated
+  pyfa_src: service/port/eft.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: have
+  mcp_evidence: parse_fit/export_fit
+  web: have
+  web_evidence: src/fit/formats.ts parseEft/exportEft
+  formats: have
+  formats_evidence: formats-suite eft export/edge 100% (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-EFT-002
+  name: EFT config (.cfg) import
+  description: EFT cfg file import
+  pyfa_src: service/port/eft.py importEftCfg
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: missing
+  mcp_evidence: not in parse_fit
+  web: missing
+  web_evidence: '-'
+  formats: have
+  formats_evidence: formats-suite edge eftcfg (Rifter.cfg, NotAShip.cfg, empty) (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-EFT-003
+  name: EFT export options
+  description: Implants/mutations/cargo/loaded charges toggles (copySelectDialog)
+  pyfa_src: gui/copySelectDialog.py; port/eft.py options
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: partial
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: '-'
+  formats: partial
+  formats_evidence: eft_min (minimal) export only; no export option set (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-DNA-001
+  name: DNA import/export (incl. alt, link)
+  description: ship DNA string, dna alt, fitting link
+  pyfa_src: service/port/dna.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: have
+  mcp_evidence: parse_fit/export_fit DNA
+  web: have
+  web_evidence: parseDna/exportDna
+  formats: have
+  formats_evidence: formats-suite dna, dna_formatted, dna_alt_*, chat links (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-ESI-001
+  name: ESI JSON import/export
+  description: ESI fitting JSON (exportCharges/Implants/Boosters settings)
+  pyfa_src: service/port/esi.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: n/a
+  mcp_evidence: 'by design: MCP does not talk to ESI; its lenient JSON is its own format (eve4 review 2026-10-03)'
+  web: have
+  web_evidence: exportEsi/parseEsi
+  formats: have
+  formats_evidence: formats-suite esi, esi_min (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-XML-001
+  name: XML import/export (EVE client)
+  description: Fittings XML, multiple fits, backup
+  pyfa_src: service/port/xml.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: missing
+  mcp_evidence: '-'
+  web: have
+  web_evidence: 40e6044 EVE XML export / re-import (web.e2e.xml-export, xml-reimport, web.unit.formats-wasm-xml-roundtrip)
+  formats: have
+  formats_evidence: formats-suite xml export/import (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-MB-001
+  name: Multibuy export
+  description: Multibuy text
+  pyfa_src: service/port/multibuy.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: have
+  mcp_evidence: export_fit multibuy
+  web: have
+  web_evidence: exportMultibuy
+  formats: have
+  formats_evidence: formats-suite multibuy, multibuy_min (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-SS-001
+  name: Ship stats (exportFitStats) text
+  description: Stats summary export
+  pyfa_src: service/port/shipstats.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: partial
+  mcp_evidence: compute_fit summary (src/summary.ts) differs
+  web: have
+  web_evidence: 40e6044 ship stats export (web.e2e.shipstats-export)
+  formats: have
+  formats_evidence: formats-suite shipstats (stats from the engine) (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-EFS-001
+  name: EFS export
+  description: Eve Fitting Stats JSON
+  pyfa_src: service/port/efs.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+  formats: missing
+  formats_evidence: UNSUPPORTED_FORMAT efs
+- id: FMT-MUTA-001
+  name: Mutated module text export/import
+  description: Copy mutated module text
+  pyfa_src: service/port/muta.py; gui/builtinContextMenus/moduleMutatedExport.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: partial
+  mcp_evidence: inside EFT
+  web: have
+  web_evidence: 40e6044 mutated EFT/XML import and export (web.unit.builtin-eft-mutation, web.e2e.xml-reimport, eft-export-mutated)
+  formats: have
+  formats_evidence: formats-suite edge mutated (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-HTML-001
+  name: HTML export of all fits
+  description: Export fits to HTML (prefs path, options)
+  pyfa_src: gui/utils/exportHtml.py; mainMenu 'Export All Fittings to HTML'; HTMLExport prefs
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+  formats: missing
+  formats_evidence: '-'
+- id: FMT-AUTO-001
+  name: Auto-detect import, multi-fit buffers, files/folders
+  description: importAuto, importFitFromBuffer, importFitsFromFile (threaded)
+  pyfa_src: service/port/port.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: partial
+  mcp_evidence: parse_fit auto
+  web: partial
+  web_evidence: multi-EFT paste; no file/folder
+  formats: have
+  formats_evidence: formats-suite edge autodetect, multi, forced, auto_* (files/folders are host-side) (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: FMT-CLIP-001
+  name: Clipboard to/from
+  description: Fit menu To/From Clipboard
+  pyfa_src: gui/mainMenuBar.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: 'ImportExport.tsx clipboard [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+  formats: n/a
+  formats_evidence: host clipboard
+- id: FMT-ADD-001
+  name: Additions export/import
+  description: Export all/selection of drones/cargo/implants etc., import additions
+  pyfa_src: gui/builtinContextMenus/additionsExportAll.py, additionsExportSelection.py, additionsImport.py
+  f: n/a
+  f_evidence: 'formats are not an engine feature since the crate split (docs/20: eve-fit-formats outside eve-dogma''s engine); see the formats column'
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+  formats: have
+  formats_evidence: formats-suite edge additions_* (drones, fighters, implants, boosters, cargo, mixed) (eve-fit-formats crate in eve-dogma; crate unit tests to come from F)
+- id: ESI-001
+  name: SSO login, multiple characters
+  description: ssoLogin, Manage ESI Characters, token refresh, custom app/server settings
+  pyfa_src: gui/ssoLogin.py; service/esiAccess.py; Esi prefs
+  f: n/a
+  f_evidence: 'ruling 2026-10-03: ESI login/character fetch is a web-frontend job (owner eve4, later); engine input = character.skills/security (request.rs) — have'
+  mcp: n/a
+  mcp_evidence: 'web frontend first; MCP may later accept the same skills input (already does: skills param)'
+  web: missing
+  web_evidence: missing — web frontend, later (eve4)
+  owner: eve-fit-web (eve4), later; engine owns the character/skill input format
+- id: ESI-002
+  name: Browse/import ESI fittings
+  description: List in-game fittings, import
+  pyfa_src: gui/esiFittings.py
+  f: n/a
+  f_evidence: 'ruling 2026-10-03: ESI login/character fetch is a web-frontend job (owner eve4, later); engine input = character.skills/security (request.rs) — have'
+  mcp: n/a
+  mcp_evidence: 'web frontend first; MCP may later accept the same skills input (already does: skills param)'
+  web: missing
+  web_evidence: missing — web frontend, later (eve4)
+  owner: eve-fit-web (eve4), later; engine owns the character/skill input format
+- id: ESI-003
+  name: Export fit to ESI / delete ESI fittings
+  description: Upload fit, delete fitting
+  pyfa_src: gui/esiFittings.py; service/esi.py
+  f: n/a
+  f_evidence: 'ruling 2026-10-03: ESI login/character fetch is a web-frontend job (owner eve4, later); engine input = character.skills/security (request.rs) — have'
+  mcp: n/a
+  mcp_evidence: 'web frontend first; MCP may later accept the same skills input (already does: skills param)'
+  web: missing
+  web_evidence: missing — web frontend, later (eve4)
+  owner: eve-fit-web (eve4), later; engine owns the character/skill input format
+- id: DB-001
+  name: Saved fits database
+  description: Persist fits (sqlite saveddata), rename, delete, copy
+  pyfa_src: eos/db/saveddata; service/fit.py
+  f: missing
+  f_evidence: stateless (MPF C5)
+  mcp: missing
+  mcp_evidence: stateless
+  web: partial
+  web_evidence: 'localStorage fit library (FitBrowser.tsx) [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: DB-002
+  name: Fit browser tree (by ship group/race, search)
+  description: shipBrowser categories, race filter, fit search
+  pyfa_src: gui/shipBrowser.py; builtinShipBrowser/*
+  f: n/a
+  f_evidence: UI
+  mcp: n/a
+  mcp_evidence: '-'
+  web: have
+  web_evidence: FitBrowser grouped by ship group
+- id: DB-003
+  name: Backup all fits / restore
+  description: Backup all to XML
+  pyfa_src: service/port/port.py backupFits
+  f: missing
+  f_evidence: -; Pyfa-backed bench pending-1.11 cases ext-rpc:backup_* 2 (0/2) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: JSON library backup/restore, no e2e; no XML (a08d943 §11)
+- id: DB-004
+  name: Fit links (projected/command fits by reference)
+  description: Projected/command fits reference saved fits; updates propagate
+  pyfa_src: eos/saveddata/fit.py projectedFits/commandFits
+  f: partial
+  f_evidence: inline booster_fits/projected fits (MPF F2)
+  mcp: partial
+  mcp_evidence: inline
+  web: have
+  web_evidence: 40e6044 projected / booster fits by library reference (web.unit.request-missing-projected-fit, request-nested-fits)
+- id: DB-005
+  name: Fit notes
+  description: Notes pane per fit
+  pyfa_src: gui/builtinAdditionPanes/notesView.py
+  f: n/a
+  f_evidence: n/a
+  mcp: missing
+  mcp_evidence: src/fit.ts 'notes' are name-resolution notes, not fit notes
+  web: partial
+  web_evidence: notes field, EFT comment export (a08d943 §2)
+- id: DB-006
+  name: Tabs / multiple open fits
+  description: Open fits in tabs; open in new tab
+  pyfa_src: gui/mainFrame.py; fitOpenNewTab
+  f: n/a
+  f_evidence: UI
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: single active fit + browser
+- id: DB-007
+  name: Undo/redo
+  description: fitCommands undo stack
+  pyfa_src: gui/fitCommands/*
+  f: n/a
+  f_evidence: UI
+  mcp: n/a
+  mcp_evidence: '-'
+  web: have
+  web_evidence: App.tsx undo/redo
+- id: DB-008
+  name: Saved damage patterns / target profiles / implant sets / characters
+  description: User-editable profile libraries
+  pyfa_src: service/damagePattern.py, targetProfile.py, implantSet.py, character.py
+  f: missing
+  f_evidence: inline only
+  mcp: partial
+  mcp_evidence: list_presets read-only
+  web: have
+  web_evidence: Profiles.tsx custom + localStorage
+- id: DB-009
+  name: Database prefs (saveddata path, cleanup)
+  description: Database pref view
+  pyfa_src: gui/builtinPreferenceViews/pyfaDatabasePreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: n/a
+  web_evidence: '-'
+- id: PRF-DMG-001
+  name: Built-in damage patterns
+  description: Uniform, EM/Th/Kin/Ex, NPC factions, ammo patterns
+  pyfa_src: eos/saveddata/damagePattern.py BUILTINS
+  f: missing
+  f_evidence: numbers only (MPF C3); Pyfa-backed bench pending-1.11 cases ext:dpb_* 6 (0/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: have
+  mcp_evidence: list_presets damage
+  web: partial
+  web_evidence: 'presets [2026-10-03 15:40: have -> partial; src/data/presets.ts has 15 hand-made patterns, not Pyfa''s 118 builtins (eos/saveddata/damagePattern.py), and their values differ (NPC Guristas
+    0/18/82/0 vs Pyfa [NPC][Asteroid]Guristas 0/1828/7413/0 = 0/19.8/80.2/0); named builtins (ext dpb_*) fail in the browser as in native F (f missing); web.e2e.sde-npc-damage-profile checks only that EHP
+    changes; eve-fit-web run 37104154159 (F wasm 20aa425; bench results-1.11/web-fdbb014.md)]'
+- id: PRF-DMG-002
+  name: Damage pattern editor / change
+  description: patternEditor, damagePatternChange
+  pyfa_src: gui/patternEditor.py; gui/builtinContextMenus/damagePatternChange.py
+  f: n/a
+  f_evidence: '-'
+  mcp: partial
+  mcp_evidence: pass custom numbers
+  web: partial
+  web_evidence: 'Profiles custom [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: PRF-TGT-001
+  name: Built-in target profiles
+  description: NPC/ship-class target profiles incl. infinite sig
+  pyfa_src: eos/saveddata/targetProfile.py getBuiltinList
+  f: missing
+  f_evidence: numbers only (MPF C4); Pyfa-backed bench pending-1.11 cases ext:tpb_* 6 (0/6) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: have
+  mcp_evidence: list_presets target
+  web: partial
+  web_evidence: 'presets [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 16:00: stays partial;
+    web-ext tpb_* 2/6 (F missing); eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: PRF-TGT-002
+  name: Target profile editor (resists, sig, speed, radius)
+  description: targetProfileEditor
+  pyfa_src: gui/targetProfileEditor.py
+  f: n/a
+  f_evidence: '-'
+  mcp: partial
+  mcp_evidence: custom numbers
+  web: partial
+  web_evidence: 'Profiles custom [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: MKT-001
+  name: Market browser tree
+  description: Market groups, meta buttons (T1/T2/faction/…), empty group modes
+  pyfa_src: gui/marketBrowser.py; builtinMarketBrowser/*
+  f: missing
+  f_evidence: search/type only (MPF E2); Pyfa-backed bench pending-1.11 cases ext-rpc:mkt_* 4 (0/4) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: have
+  mcp_evidence: v0.3.0 browse_market; mcp.features.market-roots, mcp.features.market-meta-filter
+  web: partial
+  web_evidence: Market.tsx tree from market groups; no e2e (a08d943 §1)
+- id: MKT-002
+  name: Search with jargon/aliases
+  description: jargon (mwd, lse, ab)
+  pyfa_src: service/jargon/*
+  f: missing
+  f_evidence: name match only (MPF E1); Pyfa-backed bench pending-1.11 cases ext-rpc:srch_* 7 (0/7) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: have
+  mcp_evidence: search_types jargon/fuzzy
+  web: partial
+  web_evidence: EN/ZH substring search; no jargon (src/ grep jargon|alias 0)
+- id: MKT-003
+  name: 'Item stats: description/traits/attributes/effects/properties'
+  description: itemDescription, itemTraits, itemAttributes, itemEffects, itemProperties
+  pyfa_src: gui/builtinItemStatsViews/*
+  f: partial
+  f_evidence: type RPC returns attributes/effects
+  mcp: have
+  mcp_evidence: get_type/get_ship
+  web: have
+  web_evidence: Show info
+- id: MKT-004
+  name: Item compare view
+  description: Compare attributes across variations
+  pyfa_src: gui/builtinItemStatsViews/itemCompare.py
+  f: missing
+  f_evidence: -; Pyfa-backed bench pending-1.11 cases ext-rpc:cmp_* 4 (0/4) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: partial
+  mcp_evidence: compare_fits (fits, not items)
+  web: missing
+  web_evidence: '-'
+- id: MKT-005
+  name: Localized item names
+  description: Pyfa locales
+  pyfa_src: locale/; service/market.py
+  f: partial
+  f_evidence: EN+ZH search (MPF E3)
+  mcp: partial
+  mcp_evidence: EN/ZH
+  web: have
+  web_evidence: 40e6044 zh-CN UI and item names (web.e2e.zh-ui, zh-weapon-names, web.unit.i18n-coverage)
+- id: MKT-006
+  name: Market jump / ship jump
+  description: itemMarketJump, shipJump
+  pyfa_src: gui/builtinContextMenus/itemMarketJump.py, shipJump.py
+  f: n/a
+  f_evidence: UI
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: not found
+- id: UI-PANE-001
+  name: Addition panes
+  description: Drones, fighters, cargo, implants, boosters, projected, command, notes
+  pyfa_src: gui/builtinAdditionPanes/*
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: 'Fitting.tsx panes [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: UI-PANE-002
+  name: Cargo add/fill ammo
+  description: cargoAdd, cargoAddAmmo, cargoFill
+  pyfa_src: gui/builtinContextMenus/cargo*.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: cargo edit; no add-all-ammo
+- id: UI-PANE-003
+  name: Item amount change/fill/remove
+  description: itemAmountChange, itemFill, itemRemove
+  pyfa_src: gui/builtinContextMenus/item*.py
+  f: n/a
+  f_evidence: '-'
+  mcp: partial
+  mcp_evidence: what_if
+  web: partial
+  web_evidence: 'amount edit [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: UI-STAT-001
+  name: Stats panels with Minimal/Full/hidden modes
+  description: StatView prefs per panel
+  pyfa_src: service/settings.py StatViewSettings
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: fixed layout
+- id: UI-COL-001
+  name: Fitting view columns
+  description: abilities, ammo, capUse, dampScanRes, droneEhp, heat, maxRange, misc, price, projectionRange, sideEffects, state, targetResists…
+  pyfa_src: gui/builtinViewColumns/*
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: subset of columns
+- id: UI-PREF-001
+  name: Preferences
+  description: General, ContextMenu, Engine (global reload, spool default, RAH, strict skill levels), StatView, Market, Network/proxy, HTML export, ESI, Update, Logging, Database
+  pyfa_src: gui/builtinPreferenceViews/*
+  f: partial
+  f_evidence: engine options per request
+  mcp: partial
+  mcp_evidence: options passthrough
+  web: partial
+  web_evidence: EngineSettings.tsx reload/spool/RAH
+- id: UI-CTX-001
+  name: Context menu catalog (51 actions)
+  description: See builtinContextMenus; most mapped to other items
+  pyfa_src: gui/builtinContextMenus/*
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: subset
+- id: UI-MISC-001
+  name: Fleet/command pane, command link add
+  description: commandLinkAdd
+  pyfa_src: gui/builtinContextMenus/commandLinkAdd.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: 'fleet booster fits [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: SVC-001
+  name: Update check
+  description: Check GitHub releases (prerelease setting)
+  pyfa_src: service/update.py; gui/updateDialog.py
+  f: n/a
+  f_evidence: n/a for engine
+  mcp: n/a
+  mcp_evidence: engine_info versions
+  web: n/a
+  web_evidence: web deploys
+- id: SVC-002
+  name: Network/proxy settings
+  description: Proxy modes
+  pyfa_src: service/network.py; Network prefs
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: n/a
+  web_evidence: browser
+- id: SVC-003
+  name: Logging / dev tools
+  description: Logging prefs, widget inspect
+  pyfa_src: gui/builtinPreferenceViews/pyfaLoggingPreferences.py; gui/devTools.py
+  f: partial
+  f_evidence: stderr
+  mcp: partial
+  mcp_evidence: metrics resource
+  web: n/a
+  web_evidence: '-'
+- id: SVC-004
+  name: Data update (new SDE)
+  description: Pyfa ships with SDE dumps per release
+  pyfa_src: eos/db/gamedata; scripts/
+  f: partial
+  f_evidence: dataset compiled in at build (eve-sde-pipeline)
+  mcp: partial
+  mcp_evidence: 'eve://dataset/meta [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+  web: partial
+  web_evidence: 'dataset.ts [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: SVC-005
+  name: Effect/attribute conversions
+  description: service/conversions (renamed items)
+  pyfa_src: service/conversions/*
+  f: missing
+  f_evidence: no rename map for imports; Pyfa-backed bench pending-1.11 cases ext-rpc:names_* 3 (0/3) on eve-dogma 2da8150 (stays missing until F passes)
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: GRF-OPT-001
+  name: Damage graph options
+  description: 'Attacker/Target lists (fits or target profiles); inputs: distance, time, target speed/sig (abs and %), attacker speed/angle, target angle; checkboxes: apply projected (webs/TPs of source),
+    ignore resists, drone mobile mode, (graphDmgApplyProjected/DroneMode/IgnoreResists), drone control range limit'
+  pyfa_src: graphs/data/fitDamageStats/graph.py; gui/builtinContextMenus/graphDmg*.py, graphDroneControlRange.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: 'no graph tool (a08d943 §9) [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs dmg_* 69/69; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f
+    (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Graphs.tsx: no attacker/target lists, no per-graph extra inputs (a08d943 §9 gaps) [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs
+    are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-002
+  name: Capacitor graph options
+  description: Starting cap amount, use capacitor simulator checkbox (useCapsim)
+  pyfa_src: graphs/data/fitCapacitor/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs cap_* 13/13; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Graphs.tsx capacitor; options not exposed [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web
+    CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-003
+  name: Mobility graph target inputs
+  description: Target mass / inertia factor for bump speed and distance
+  pyfa_src: graphs/data/fitMobility/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs mob_bump* 2/2; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'speed/distance only [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159
+    (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-004
+  name: Remote reps graph options
+  description: Reload ancillary RRs (ancReload), spool
+  pyfa_src: graphs/data/fitRemoteReps/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs rr_* 11/11; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'engine rr graph on g4 [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159
+    (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-005
+  name: ECM/burst graph options
+  description: applyDamps, applyDrones
+  pyfa_src: graphs/data/fitEcmBurstScanresDamps/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs ecm_* + err_ecm* 12/12; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: '40e6044 ECM burst graph present (web.e2e.graph-ecm-burst); option inputs not tested [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs
+    are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-006
+  name: EWAR graph target resistance option
+  description: Target resistance checkbox
+  pyfa_src: graphs/data/fitEwarStats/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs ewar_resist* 2/2; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: '- [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2,
+    F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-007
+  name: Shield regen graph options
+  description: Starting shield amount, effective HP toggle (isEffective)
+  pyfa_src: graphs/data/fitShieldRegen/graph.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs shield_* 5/5; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'shield_pct/regen [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159 (fdbb014,
+    bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: GRF-OPT-008
+  name: Lock range / ammo picker graph menus
+  description: graphLockRange, graphFitAmmoPicker, graphAmmoOptimalApplyProjected/IgnoreResists
+  pyfa_src: gui/builtinContextMenus/graph*.py
+  f: have
+  f_evidence: ED graphs-round2 84f7c2e 178/178 through eve-fit serve-stdio graph RPC (merged into the mainline)
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; compute_graph takes the graph params/settings; mcp-graphs app_* 14/14; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: '- [2026-10-03 16:00: stays partial; web-graphs cases pass in the browser engine; the graph option inputs are not exposed in Graphs.tsx; eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2,
+    F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: UI-STAT-RES
+  name: Resources panel
+  description: CPU, PG, calibration, drone bandwidth/bay, fighter bay, fighter squadrons active, drones active, turret/launcher hardpoints, cargo
+  pyfa_src: gui/builtinStatsViews/resourcesViewFull.py
+  f: have
+  f_evidence: stats.rs resources/hardpoints/cargo
+  mcp: have
+  mcp_evidence: compute_fit summary (a08d943 §6)
+  web: have
+  web_evidence: Stats.tsx Resources
+- id: UI-STAT-RST
+  name: Resistances panel
+  description: Resist % per layer and type, HP per layer, EHP, raw/effective toggle, damage pattern selector, resist multiplier
+  pyfa_src: gui/builtinStatsViews/resistancesViewFull.py
+  f: have
+  f_evidence: stats.rs resonance/hp/ehp
+  mcp: have
+  mcp_evidence: 'compute_fit detail full [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03
+    14:40: partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 34/34 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats.tsx Defense
+- id: UI-STAT-RCH
+  name: Recharge panel
+  description: 'Passive shield recharge, active shield boost, armor/hull repair: reinforced vs sustained'
+  pyfa_src: gui/builtinStatsViews/rechargeViewFull.py
+  f: have
+  f_evidence: stats.rs tank raw/sustained
+  mcp: have
+  mcp_evidence: 'compute_fit [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 11/11 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats.tsx
+- id: UI-STAT-FP
+  name: Firepower panel
+  description: Weapon/drone/total DPS and volley, spool tooltip (min/current/max), toggle to mining yield
+  pyfa_src: gui/builtinStatsViews/firepowerViewFull.py
+  f: partial
+  f_evidence: mining now output (ENG-OFF-006 have); min/max spool pair still missing (ENG-OFF-005)
+  mcp: partial
+  mcp_evidence: same
+  web: partial
+  web_evidence: same
+- id: UI-STAT-CAP
+  name: Capacitor panel
+  description: Total GJ, lasts / stable %, recharge time, delta, extra stats (use/regen)
+  pyfa_src: gui/builtinStatsViews/capacitorViewFull.py
+  f: have
+  f_evidence: stats.rs capacitor (stable_percent, depletes_in_s, delta_gj_s)
+  mcp: have
+  mcp_evidence: 'compute_fit [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40:
+    partial -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 12/12 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: Stats.tsx Capacitor
+- id: UI-STAT-TGT
+  name: Targeting & misc panel
+  description: Targets, range, scan res, sensor str/type, drone range, speed, align, signature, warp speed, max warp distance, warp core strength, probe size, cargo + all special holds, lock times per class,
+    jam chance
+  pyfa_src: gui/builtinStatsViews/targetingMiscViewMinimal.py
+  f: partial
+  f_evidence: special holds / lock-time table partial (ENG-TGT-002/006)
+  mcp: partial
+  mcp_evidence: same
+  web: partial
+  web_evidence: same
+- id: UI-STAT-OUT
+  name: Outgoing (Remote reps) panel
+  description: Shield/armor/hull/cap restored per s
+  pyfa_src: gui/builtinStatsViews/outgoingViewFull.py, outgoingViewMinimal.py
+  f: have
+  f_evidence: ED ext outgoing 25/25
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.remote-repair(-spool) + mcp-ext rr_* 10/10; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'Remote assistance section depends on backend [2026-10-03 16:00: stays partial; web-ext rr_* 10/10 in the browser engine; Remote assistance section rendering with F unverified; eve-fit-web
+    CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: UI-STAT-MIN
+  name: Mining yield panel
+  description: Mining m3/s total, modules/drones
+  pyfa_src: gui/builtinStatsViews/miningyieldViewFull.py
+  f: have
+  f_evidence: ED ext mining 11/11
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.mining + mcp-ext mining_* 10/10; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'backend-dependent [2026-10-03 16:00: stays partial; web-ext mining_* 10/10 in the browser engine; UI rendering of F''s mining section unverified; eve-fit-web CI run 37104154159 (fdbb014,
+    bench c2229b2, F wasm 20aa425 in Chrome; bench results-1.11/web-fdbb014.md)]'
+- id: UI-STAT-PRC
+  name: Price panel
+  description: Ship, fittings, drones, cargo, character, total
+  pyfa_src: gui/builtinStatsViews/priceViewFull.py, priceViewMinimal.py
+  f: missing
+  f_evidence: PRC-002
+  mcp: have
+  mcp_evidence: v0.3.0 price_fit; mcp.features.price-fit
+  web: partial
+  web_evidence: 'PriceBox.tsx [2026-10-03 13:50: have -> partial, only weak tests in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: UI-STAT-BMB
+  name: Bombing panel
+  description: Bombs to kill per bomb type, covert-ops skill level
+  pyfa_src: gui/builtinStatsViews/bombingViewFull.py
+  f: have
+  f_evidence: ED ext bombing 15/15
+  mcp: have
+  mcp_evidence: '- [2026-10-03 15:50: missing -> have; mcp.stats.bombing + mcp-ext bomb_* 11/11; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: missing
+  web_evidence: '-'
+- id: UI-PREF-GEN
+  name: General preferences
+  description: global character / damage pattern, character implants default, color by slot, rack separation/labels, open in new page, reopen fits on startup, ammo change all, additions tab quantity, mutated
+    names, language, theme
+  pyfa_src: gui/builtinPreferenceViews/pyfaGeneralPreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: language switch; others not present
+- id: UI-PREF-ENG
+  name: Engine preferences
+  description: Global default spool %, strict skill level requirements, global force reload, RAH
+  pyfa_src: gui/builtinPreferenceViews/pyfaEnginePreferences.py
+  f: partial
+  f_evidence: options.default_spool, factor_reload, rah; strict skill mode not separate (MISSING_SKILL always reported)
+  mcp: partial
+  mcp_evidence: 'options passthrough [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+  web: partial
+  web_evidence: EngineSettings.tsx; no e2e (a08d943)
+- id: UI-PREF-MKT
+  name: Market & price preferences
+  description: Default price source/system, totals include drones/cargo/implants, meta button modes, search delay, market shortcuts
+  pyfa_src: gui/builtinPreferenceViews/pyfaMarketPreferences.py
+  f: missing
+  f_evidence: '-'
+  mcp: missing
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: UI-PREF-CTX
+  name: Context menu preferences
+  description: Enable/disable individual context menus
+  pyfa_src: gui/builtinPreferenceViews/pyfaContextMenuPreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: n/a
+  web_evidence: no configurable menus
+- id: UI-PREF-STV
+  name: Stat view preferences
+  description: Per-panel hidden/minimal/full
+  pyfa_src: gui/builtinPreferenceViews/pyfaStatViewPreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: '-'
+- id: UI-PREF-DB
+  name: Database preferences
+  description: Paths, delete all damage/target profiles, delete prices
+  pyfa_src: gui/builtinPreferenceViews/pyfaDatabasePreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: partial
+  web_evidence: localStorage; clear via browser
+- id: UI-PREF-ESI
+  name: ESI preferences
+  description: SSO server, auto-login, token expiry, export charges/implants/boosters
+  pyfa_src: gui/builtinPreferenceViews/pyfaEsiPreferences.py; service/settings.py EsiSettings
+  f: n/a
+  f_evidence: engine owns only the character/skill input format
+  mcp: n/a
+  mcp_evidence: '-'
+  web: missing
+  web_evidence: web frontend, later (eve4)
+  owner: eve-fit-web (eve4), later; engine owns the character/skill input format
+- id: UI-PREF-NET
+  name: Network/Update/Logging/HTML prefs
+  description: Proxy, update channel, debug logs, HTML export path/minimal
+  pyfa_src: gui/builtinPreferenceViews/pyfaNetworkPreferences.py, pyfaUpdatePreferences.py, pyfaLoggingPreferences.py, pyfaHTMLExportPreferences.py
+  f: n/a
+  f_evidence: '-'
+  mcp: n/a
+  mcp_evidence: '-'
+  web: n/a
+  web_evidence: browser handles network
+- id: ENG-MISC-001
+  name: Smartbombs and bombs
+  description: Smartbomb DPS, bomb launchers (incl. fighter bombs)
+  pyfa_src: module.py getVolleyParameters
+  f: have
+  f_evidence: stats.rs smartbomb (l.283/421); fighterAbilityLaunchBomb
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)] [2026-10-03 14:40: partial
+    -> have, mcp-* suites (bench cases through compute_fit, bench tools/mcp_batch.py) 1/1 pass on eve-fit-mcp 8c6b93d + eve-dogma 2da8150]'
+  web: have
+  web_evidence: engine
+- id: ENG-MISC-002
+  name: Utility modules without stats
+  description: Salvagers, tractor beams, hacking/data analyzers, cynos, cloaks, point defense, lightning weapon — Pyfa effects with no stat output
+  pyfa_src: eos/effects.py (salvaging, tractorBeamCan, doHacking, pointDefense, lightningWeapon)
+  f: partial
+  f_evidence: 'probe tools/probe_pyfa_effects.py: not named in F src; no stats expected except pointDefense/lightningWeapon damage'
+  mcp: partial
+  mcp_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+  web: partial
+  web_evidence: 'engine [2026-10-03 13:50: have -> partial, no test in this column (rule: have needs a non-weak test; proposals in eve-dogma-bench inventory/mcp-web-gaps.md)]'
+- id: ENG-MISC-003
+  name: Titan/doomsday AoE bubbles and effect generators
+  description: moduleTitanEffectGenerator, doomsdayAOEBubble
+  pyfa_src: eos/effects.py
+  f: partial
+  f_evidence: not named in F src (probe); B19 exct_avatar passes for stats
+  mcp: partial
+  mcp_evidence: engine
+  web: partial
+  web_evidence: engine
+- id: ENG-MISC-004
+  name: Breacher pod damage control interaction
+  description: moduleBonusBreacherPodDamageControl
+  pyfa_src: eos/effects.py
+  f: have
+  f_evidence: 'eve-dogma d990818: Breach Control sets ship breacherPodDamageResistance (options.include_attributes); bench pending-1.11 ext:brdc_* 4/4 (2da8150: 1/4) [2026-10-03 14:55: missing -> have]'
+  mcp: have
+  mcp_evidence: 'engine [2026-10-03 14:40: mcp-* suites 0/4 on eve-fit-mcp 8c6b93d; F fails too] [2026-10-03 15:20: eve-fit-mcp v0.3.1: mcp-ext brdc_* 4/4 with engine d990818, 1/4 with the pinned 2da8150;
+    stays partial until the MCP pins an engine >= d990818] [2026-10-03 15:50: partial -> have; mcp-ext brdc_* 4/4; eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md)]'
+  web: partial
+  web_evidence: 'engine [2026-10-03 16:00: stays partial; web-ext brdc_* 3/4 (brdc_rifter_online: old expectation at c2229b2); eve-fit-web CI run 37104154159 (fdbb014, bench c2229b2, F wasm 20aa425 in Chrome;
+    bench results-1.11/web-fdbb014.md)]'
+- id: ENG-MISC-005
+  name: Industrial / compression / ore holds
+  description: Rorqual/Porpoise compression, industrial core, mining holds
+  pyfa_src: effects; targetingMisc holds
+  f: partial
+  f_evidence: effects apply; hold capacities not output
+  mcp: partial
+  mcp_evidence: engine
+  web: partial
+  web_evidence: '-'
+- id: UI-CMP-001
+  name: Fit comparison (配装对比)
+  extra: true
+  description: 'Compare several fits side by side: metric table with the best value marked and deltas against the first fit. Beyond Pyfa (Pyfa has no fit comparison view).'
+  pyfa_src: '- (not in Pyfa)'
+  f: n/a
+  f_evidence: front-end feature over per-fit engine stats
+  mcp: have
+  mcp_evidence: 'v0.3.0 compare_fits (mcp.integration.compare-fits: delta table, metric rows)'
+  web: have
+  web_evidence: 40e6044 compare table of 3 fits with best values marked (web.e2e.compare-fits; web.unit.compare-best-delta, compare-ties-missing)
+- id: ENG-BATCH-001
+  name: Batch compute (批量计算)
+  extra: true
+  description: 'Many fits in one call, or a base fit plus variant patches, Cartesian products and parameter sweeps; per-variant label, output `fields` selection, deltas vs the base, sort / filter / top-N,
+    per-item errors; every result identical to computing that fit alone. Entry points: Rust lib, RPC/CLI, WASM, MCP compute_batch. Beyond Pyfa.'
+  pyfa_src: '- (not in Pyfa)'
+  f: have
+  f_evidence: 'd990818: only the JSONL `batch` stream (many independent fits, one result line each); no base/variants/product/sweep, deltas, sort, filter or fields; eve-dogma-bench batch/ (docs/23 shape,
+    identity vs one-by-one calc) 0/58 [2026-10-03 15:50: partial -> have; eve-dogma 8bde0ba on bench pending-1.11 05ae5a1: batch 93/93 (all mapped multi/variants/product/sweep/gap cases) (bench results-1.11/F-8bde0ba/)]'
+  mcp: partial
+  mcp_evidence: 'compute_batch (v0.4.0) [2026-10-03 15:50: missing -> partial; mcp-batch 52/92 on bench 1fd7e37 (engine 197223f directly 62/92; MCP-only gaps: extra engine/notes/request_hash keys in full
+    results, per-fit errors rejected up front, BATCH_TOO_LARGE without count/limit, no --prices file), 8/93 after the provenance rulings; mcp.features.compute-batch / mcp.unit.batch-* partial; eve-fit-mcp
+    v0.4.0 d3786eb + pinned engine 197223f (bench results-1.11/mcp-v0.4.0.md); 2026-10-03 15:52: stays partial; eve-fit-mcp v0.4.1 447420f + engine 8bde0ba: mcp-batch 71/93 on bench 26e3833 (F 93/93); MCP-only:
+    10 --prices FILE, 3 BATCH_TOO_LARGE without count/limit, 7 full results with extra engine/notes/request_hash, multi_error_in_place rejected up front, multi_ext_mix compute_fit rejects builtin profiles
+    (bench results-1.11/mcp-v0.4.1.md)]'
+  web: missing
+  web_evidence: no batch / variant view (e1afe8d)
+- id: ENG-PRICE-001
+  name: Price overrides and price source
+  extra: true
+  description: Request `price_overrides` by type / market group (incl. children) / group / category, fixed value (0 for self-made or stock) or multiplier; precedence request override (type > market group
+    > group > category) > injected prices > embedded snapshot; output total + per-item lines with `source` per price and the missing-price list; batch variants may carry their own overrides (docs/22). Beyond
+    Pyfa.
+  pyfa_src: '- (not in Pyfa; Pyfa prices come from one market source)'
+  f: have
+  f_evidence: 'd990818: no price input or output in calc (only the optimizer''s `price.prices` table, docs/21); eve-dogma-bench batch/price_* (14 cases, docs/23 §5-§6, bench reference resolver) 0/14 [2026-10-03
+    15:50: partial -> have; eve-dogma 8bde0ba on bench pending-1.11 05ae5a1: batch price_* 14/14, calcprice_* 7/7; d22 price_inject 32/32 (+1 pending, not scored) (bench results-1.11/F-8bde0ba/)]'
+  mcp: have
+  mcp_evidence: 'price_fit / get_prices (477726d src/prices.ts): per-item lines and one source (ESI or Fuzzwork) for the whole fit; no overrides, no per-price source [2026-10-03 15:50: stays partial; v0.4.0
+    passes docs/23 price inputs through (mcp.features.price-passthrough, price-fit-engine pass in MCP CI on 197223f) but mcp-batch price_* 0/14 (provenance); eve-fit-mcp v0.4.0 d3786eb + pinned engine 197223f
+    (bench results-1.11/mcp-v0.4.0.md); 2026-10-03 15:52: partial -> have; eve-fit-mcp v0.4.1 447420f + pinned engine 8bde0ba on bench pending-1.11 01e6724: mcp-batch price_* 14/14; MCP CI price-passthrough,
+    price-fit-engine, provenance pass; --prices FILE cases (engine global option, no MCP equivalent) left to eve (bench results-1.11/mcp-v0.4.1.md)]'
+  web: partial
+  web_evidence: 'PriceBox (src/ui/PriceBox.tsx, e1afe8d): ESI average prices; no overrides ("my prices" queued)'
+extras_rule: 'An item with `extra: true` is a feature beyond Pyfa (Pyfa does not have it). It gets a normal id and the same status/test rules (have needs a full test), but it is excluded from the parity
+  totals (the 200 Pyfa items) and counted separately by tools/render_inventory.py and eve-dogma-bench tools/check_inventory.py. Add future extras the same way.'
+test_rule: have requires at least one full test of that column (eve-dogma-bench inventory/tests.yaml, checked by tools/check_inventory.py). Tests marked partial or weak do not cover have; such an item is
+  partial.
