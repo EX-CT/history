@@ -1,0 +1,11 @@
+# stats-ext keys added after round1-base.sha256 (one dotted path per line; [] = each array element)
+mining
+attributes.fighters
+outgoing
+drones.items
+fighters
+bombing
+modules[].heat
+violations[].skill_type_id
+violations[].level
+provenance
