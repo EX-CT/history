@@ -1,0 +1,28 @@
+# Default engine of eve-fit-mcp (CI builds it from here; README install instructions use the same commit).
+# Mainline = Rust engine F in EX-CT/eve-dogma (Cargo workspace; migrated from eve-dogma-lab variant-f-features 4b8f5f9 with
+# byte-identical output). Native build of crate eve-cli, binary `eve-fit`, LGPL-3.0-or-later. Bench 1.9.0: 331/331 cases;
+# includes the graph layer (CONTRACT-GRAPHS 0.2). The SDE dataset is compiled in at build time (EVE_DOGMA_DATASET must
+# point at the same dataset-<build>.json.gz the MCP index uses).
+# Other engines stay selectable with EVE_DOGMA_BIN: the pre-migration `eve-dogma-f` (eve-dogma-lab), A = eve-dogma-rs
+# `eve-dogma` (frozen), C = eve-dogma-go, ...
+# 1dc951b: eft_parse uses Pyfa's default module states (the MCP's interim EFT workaround is gone; regression test in
+# src/test/integration.test.ts).
+# 2da8150 (eve-dogma main, bench 1.11: core 339/339, ext 202/202, graphs 178/178): stats-ext outputs `mining`,
+# `outgoing` (remote repair / cap transfer, current + spool min/max), `bombing`, `modules[].heat`,
+# `drones.items[]`/`fighters.items[]` hp/ehp, `targeting.probe_size`, full Pyfa validity codes (CHARGE_*,
+# MISSING_SKILL with skill_type_id/level, MAX_TYPE_FITTED, ...) and `options.validate:false`.
+# 197223f (eve-dogma main, CI green): docs/23 batch API (RPC `batch`) + engine prices (`price_overrides`, `prices`,
+# `price` block); effects 2378/2378 (1ebaa1f); dataset r5 tables (d55fadb). Calc output unchanged without price inputs.
+# MCP compute_batch / price passthrough / price_fit engine path are checked for real on it (CI fails on their TODO).
+# 8bde0ba (eve-dogma main, CI green): docs/22 §2.3 `provenance` on every calc / batch result (sde_build, sde_hash,
+# price_source, snapshot_time, …), embedded eve-market-prices snapshot jita44-20261003T063856Z (price layer L4; price_fit
+# falls back to it unless use_snapshot=false), JCS content_hash, global --sde/--prices, version / sde_override RPC.
+VARIANT_F_REPO=EX-CT/eve-dogma
+VARIANT_F_SHA=8bde0ba83c19c31267c88ae1b572b2baab2f3b0b
+VARIANT_F_PACKAGE=eve-cli
+# Bench cases replayed through the MCP by tools/mcp-dogma-bench.py in CI (compute_fit detail:"full" vs expected):
+# EX-CT/eve-dogma-bench pending-1.11 (core cases/, ext/, effects/ suites; inventory/mcp-web-gaps.md) and the cap-suite
+# branch (cap/ capacitor suite, CONTRACT-CAP).
+DOGMA_BENCH_REPO=EX-CT/eve-dogma-bench
+DOGMA_BENCH_SHA=1a8be053df601b3f0ff6b4860d4fb3002ba5b8de
+DOGMA_BENCH_CAP_SHA=d80cc38093416bda0f2f271a5f3b439c45648f1b
