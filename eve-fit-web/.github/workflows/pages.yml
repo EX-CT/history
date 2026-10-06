@@ -1,0 +1,223 @@
+name: pages
+# Builds the web UI with the latest EX-CT/eve-sde-pipeline dataset release and the in-browser engines
+# (variant D TypeScript bundle, variant F Rust->WASM, stats + graphs), smoke-tests it in headless Chrome, deploys to GitHub Pages.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dataset_tag:
+        description: "eve-sde-pipeline release tag (default: latest)"
+        required: false
+        default: ""
+      default_engine:
+        description: "default engine backend (wasm-worker | ts-worker | wasm-j-worker | http); empty = repo variable DEFAULT_ENGINE or ts-worker"
+        required: false
+        default: ""
+  schedule:
+    - cron: "40 */6 * * *"   # pick up new SDE releases / engine updates
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      # default engine backend of the site: dispatch input > repo variable DEFAULT_ENGINE > ts-worker
+      DEFAULT_ENGINE: ${{ github.event.inputs.default_engine || vars.DEFAULT_ENGINE || 'ts-worker' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pinned engine commits (engines.lock)
+        run: grep -E '^[A-Z0-9_]+=[^[:space:]#]+$' engines.lock | tee -a "$GITHUB_ENV"
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - run: npm ci
+      - name: Dataset from the SDE pipeline release
+        run: |
+          TAG="${{ github.event.inputs.dataset_tag }}"
+          [ -z "$TAG" ] && TAG=$(gh release view -R EX-CT/eve-sde-pipeline --json tagName --jq .tagName)
+          mkdir -p public/data dl
+          gh release download "$TAG" -R EX-CT/eve-sde-pipeline -D dl -p 'dataset-*.json.gz' -p manifest.json -p LICENSE.EVE
+          cp dl/dataset-*.json.gz public/data/dataset.json.gz; cp dl/manifest.json public/data/manifest.json; cp dl/LICENSE.EVE public/data/
+          # SDE-derived presets (implant sets, NPC damage / target profiles; CCP data + MIT, no Pyfa data), from r5 on
+          if gh release download "$TAG" -R EX-CT/eve-sde-pipeline -D dl -p presets.json; then
+            node tools/slim-presets.mjs dl/presets.json public/data/presets-web.json | tee -a "$GITHUB_STEP_SUMMARY"
+          else echo "no presets.json in $TAG: implant sets / NPC profiles disabled" >> "$GITHUB_STEP_SUMMARY"; fi
+          # Pyfa's built-in damage patterns / target profiles: Pyfa data (GPL-3.0) in the pipeline's separate copyleft asset;
+          # deployed as its own file next to the site with its notice + attribution (not in this MIT repo), fetched by the
+          # browser only when the user turns the Pyfa presets on
+          if gh release download "$TAG" -R EX-CT/eve-sde-pipeline -D dl -p presets-pyfa-LGPL-GPL.json; then
+            node tools/slim-presets-pyfa.mjs dl/presets-pyfa-LGPL-GPL.json public/data/presets-pyfa-LGPL-GPL.json | tee -a "$GITHUB_STEP_SUMMARY"
+          else echo "no presets-pyfa-LGPL-GPL.json in $TAG: Pyfa presets unavailable" >> "$GITHUB_STEP_SUMMARY"; fi
+          echo "DATASET_TAG=$TAG" >> "$GITHUB_ENV"
+          echo "dataset: $TAG ($(ls dl/dataset-*))" >> "$GITHUB_STEP_SUMMARY"
+      - name: Latest market price snapshot (EX-CT/eve-market-prices release; served with the site for "update prices")
+        # release assets are not CORS-readable from the browser, so the site serves its own copy (refreshed by the schedule)
+        run: |
+          PTAG=$(gh release view -R EX-CT/eve-market-prices --json tagName --jq .tagName)
+          mkdir -p public/prices dlp
+          gh release download "$PTAG" -R EX-CT/eve-market-prices -D dlp -p 'prices-*.json.gz' -p SHA256SUMS
+          (cd dlp && sha256sum -c --ignore-missing SHA256SUMS)
+          cp dlp/prices-*.json.gz public/prices/latest.json.gz
+          echo "PRICES_SNAPSHOT=$PTAG" >> "$GITHUB_ENV"
+          echo "price snapshot: $PTAG" >> "$GITHUB_STEP_SUMMARY"
+      - name: Engine D (TypeScript, browser bundle)
+        run: |
+          git clone -q --depth 1 -b variant-d https://github.com/EX-CT/eve-dogma-lab lab-d
+          (cd lab-d/variant-d && npm ci --no-audit --no-fund && npm run build:web)
+          mkdir -p public/engines/d
+          cp lab-d/variant-d/dist-web/eve-dogma-ts.mjs public/engines/d/
+          cp lab-d/variant-d/LICENSE public/engines/d/LICENSE 2>/dev/null || cp lab-d/LICENSE public/engines/d/LICENSE 2>/dev/null || true
+          echo "ENGINE_D=$(git -C lab-d rev-parse --short HEAD)" >> "$GITHUB_ENV"
+      - name: Engine F + formats (mainline EX-CT/eve-dogma; crates eve-wasm -> WASM stats + graphs and eve-fit-formats-wasm -> fit formats, dataset compiled in; engines.lock ENGINE_F_SRC)
+        # hard requirement (F is the default backend and the formats module carries all import/export): a failed build fails the deploy
+        run: |
+          src=${ENGINE_F_SRC%%@*}; rest=${ENGINE_F_SRC#*@}; sha=${rest%%:*}; dir=${rest#*:}
+          git init -q lab-f && git -C lab-f fetch -q --depth 1 "https://github.com/$src" "$sha" && git -C lab-f checkout -q FETCH_HEAD
+          rustup target add wasm32-unknown-unknown
+          export EVE_DOGMA_DATASET="$GITHUB_WORKSPACE/public/data/dataset.json.gz"
+          # engine (eve-wasm: calc + graph RPC) and the formats layer (eve-fit-formats-wasm: all fit import/export) from one pin
+          (cd "lab-f/$dir" && cargo build --profile release-small --target wasm32-unknown-unknown -p eve-wasm -p eve-fit-formats-wasm)
+          mkdir -p public/engines/f
+          cp "lab-f/$dir/target/wasm32-unknown-unknown/release-small/eve_wasm.wasm" "lab-f/$dir/target/wasm32-unknown-unknown/release-small/eve_fit_formats_wasm.wasm" public/engines/f/
+          for w in eve_wasm.wasm eve_fit_formats_wasm.wasm; do test -s "public/engines/f/$w" || { echo "F build produced no $w" | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; }; done
+          cp "lab-f/$dir/LICENSE" public/engines/f/LICENSE 2>/dev/null || true
+          d=${dir#.}; { echo "ENGINE_F=$(git -C lab-f rev-parse --short HEAD)"; echo "ENGINE_F_REPO=$src"; echo "ENGINE_F_DIR=${d#/}"; } >> "$GITHUB_ENV"
+          # native serve-stdio build (eve-cli, binary eve-fit) for the http-backend e2e (tools/engine-bridge.mjs); not deployed
+          ( (cd "lab-f/$dir" && cargo build --release -p eve-cli) && cp "lab-f/$dir/target/release/eve-fit" "$RUNNER_TEMP/eve-fit" ) || echo "eve-cli build failed: http e2e skipped" >> "$GITHUB_STEP_SUMMARY"
+      - name: Unit tests (vitest; formats layer against the eve-fit-formats module just built)
+        run: npm test
+        env: { REQUIRE_FORMATS_WASM: "1" }
+      - name: Engine J (round-1 winner; C++20 -> WASM via Emscripten, engines.lock ENGINE_J_SRC)
+        continue-on-error: true
+        run: |
+          src=${ENGINE_J_SRC%%@*}; rest=${ENGINE_J_SRC#*@}; sha=${rest%%:*}; dir=${rest#*:}
+          git init -q lab-j && git -C lab-j fetch -q --depth 1 "https://github.com/$src" "$sha" && git -C lab-j checkout -q FETCH_HEAD
+          command -v ninja >/dev/null || sudo apt-get install -y -q ninja-build
+          git clone -q --depth 1 https://github.com/emscripten-core/emsdk "$RUNNER_TEMP/emsdk"
+          (cd "$RUNNER_TEMP/emsdk" && ./emsdk install "$EMSDK_VERSION" >/dev/null && ./emsdk activate "$EMSDK_VERSION" >/dev/null)
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh" >/dev/null
+          (cd "lab-j/$dir" && emcmake cmake -S . -B build-wasm -G Ninja -DCMAKE_BUILD_TYPE=Release && ninja -C build-wasm)
+          mkdir -p public/engines/j
+          cp "lab-j/$dir/build-wasm/evej.mjs" "lab-j/$dir/build-wasm/evej.wasm" public/engines/j/
+          cp "lab-j/$dir/LICENSE" public/engines/j/LICENSE; cp "lab-j/$dir/LICENSE.GPL-3.0" public/engines/j/ 2>/dev/null || true
+          { echo "ENGINE_J=$(git -C lab-j rev-parse --short HEAD)"; echo "ENGINE_J_REPO=$src"; echo "ENGINE_J_DIR=${dir#.}"; } >> "$GITHUB_ENV"
+      - name: Build info
+        run: |
+          # F (default backend, graphs, bench) and the formats module are hard requirements, whatever the default backend
+          for w in eve_wasm.wasm eve_fit_formats_wasm.wasm; do test -s "public/engines/f/$w" || { echo "engine F module $w is missing: not deploying" | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; }; done
+          # never deploy a default backend whose engine was not built (optional engines are continue-on-error)
+          case "$DEFAULT_ENGINE" in
+            wasm-j-worker)  need=public/engines/j/evej.wasm ;;
+            wasm-worker)    need=public/engines/f/eve_wasm.wasm ;;
+            *)              need= ;;
+          esac
+          # every import/export goes through the formats module: never deploy without it
+          if [ ! -f public/engines/f/eve_fit_formats_wasm.wasm ]; then echo "formats module eve_fit_formats_wasm.wasm was not built" | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; fi
+          if [ -n "$need" ] && [ ! -f "$need" ]; then echo "default backend $DEFAULT_ENGINE: $need was not built" | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; fi
+          if [ "$DEFAULT_ENGINE" = wasm-j-worker ] && [ ! -f public/engines/f/eve_wasm.wasm ]; then echo "default backend wasm-j-worker needs F for graphs (GRAPH_FALLBACK), which was not built" | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; fi
+          echo "VITE_DEFAULT_ENGINE=$DEFAULT_ENGINE" >> "$GITHUB_ENV"
+          printf '{"dataset_tag":"%s","engine_d":"%s","engine_f":"%s","engine_f_repo":"%s","engine_f_dir":"%s","engine_j":"%s","engine_j_repo":"%s","engine_j_dir":"%s","web":"%s","built_at":"%s","default_engine":"%s","prices_snapshot":"%s","run":"%s"}\n' \
+            "$DATASET_TAG" "${ENGINE_D:-}" "${ENGINE_F:-}" "${ENGINE_F_REPO:-}" "${ENGINE_F_DIR:-}" "${ENGINE_J:-}" "${ENGINE_J_REPO:-}" "${ENGINE_J_DIR:-}" "${GITHUB_SHA::7}" "$(date -u +%FT%TZ)" "$DEFAULT_ENGINE" "${PRICES_SNAPSHOT:-}" \
+            "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" > public/build-info.json
+          cat public/build-info.json
+      - run: npm run build
+      - name: Smoke test (headless Chrome computes the demo fit)
+        run: |
+          set -o pipefail
+          npx vite preview --host 127.0.0.1 --port 4173 --strictPort &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:4173/eve-fit-web/ && break; sleep 1; done
+          node tools/smoke.mjs http://127.0.0.1:4173/eve-fit-web/ ts-worker | tee -a "$GITHUB_STEP_SUMMARY"
+          node tools/smoke.mjs http://127.0.0.1:4173/eve-fit-web/ wasm-worker | tee -a "$GITHUB_STEP_SUMMARY"
+          node tools/e2e.mjs http://127.0.0.1:4173/eve-fit-web/ ts-worker | tee -a "$GITHUB_STEP_SUMMARY"
+          # F (wasm-worker) e2e always gates the deploy
+          node tools/e2e.mjs http://127.0.0.1:4173/eve-fit-web/ wasm-worker | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -f public/engines/j/evej.wasm ]; then
+            if [ "$DEFAULT_ENGINE" = wasm-j-worker ]; then node tools/e2e.mjs http://127.0.0.1:4173/eve-fit-web/ wasm-j-worker | tee -a "$GITHUB_STEP_SUMMARY"
+            else node tools/e2e.mjs http://127.0.0.1:4173/eve-fit-web/ wasm-j-worker | tee -a "$GITHUB_STEP_SUMMARY" || echo "J backend e2e failed" >> "$GITHUB_STEP_SUMMARY"; fi
+          fi
+          if [ -x "$RUNNER_TEMP/eve-fit" ]; then
+            node tools/engine-bridge.mjs --stdio "$RUNNER_TEMP/eve-fit serve-stdio" --port 8787 &
+            for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8787/healthz && break; sleep 1; done
+            node tools/e2e.mjs "http://127.0.0.1:4173/eve-fit-web/?http=http://127.0.0.1:8787" http | tee -a "$GITHUB_STEP_SUMMARY" || echo "http backend e2e failed" >> "$GITHUB_STEP_SUMMARY"
+          fi
+        env: { CHROME: /usr/bin/google-chrome }
+      - name: Graphs 0.2 case suite in the browser build (wasm-worker = F, eve-dogma-bench @ engines.lock GRAPHS_BENCH_SHA)
+        run: |
+          git init -q bench && git -C bench fetch -q --depth 1 https://github.com/EX-CT/eve-dogma-bench "$GRAPHS_BENCH_SHA" && git -C bench checkout -q FETCH_HEAD
+          npx vite preview --host 127.0.0.1 --port 4174 --strictPort &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:4174/eve-fit-web/ && break; sleep 1; done
+          python3 bench/graphs/run_graphs.py --name web-f-browser --rpc-cmd "node $GITHUB_WORKSPACE/tools/browser-rpc.mjs http://127.0.0.1:4174/eve-fit-web/ wasm-worker" | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 -c "import json,sys; c=json.load(open('bench/results/graphs-web-f-browser/scorecard.json')); print(f\"browser graphs suite: {c['cases_fully_correct']}/{c['cases']} cases, {c['values_correct']}/{c['values_total']} values\"); sys.exit(c['cases_fully_correct'] != c['cases'])"
+        # always runs and always gates (F is a hard requirement)
+        shell: bash -eo pipefail {0}
+        env: { CHROME: /usr/bin/google-chrome }
+      - name: Dogma bench 1.9.0 (331 cases) in the browser build (wasm-worker = F gates the deploy, wasm-j-worker = J optional; eve-dogma-bench @ engines.lock DOGMA_BENCH_SHA)
+        run: |
+          git init -q benchstats && git -C benchstats fetch -q --depth 1 https://github.com/EX-CT/eve-dogma-bench "$DOGMA_BENCH_SHA" && git -C benchstats checkout -q FETCH_HEAD
+          npx vite preview --host 127.0.0.1 --port 4175 --strictPort &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:4175/eve-fit-web/ && break; sleep 1; done
+          test -f public/engines/f/eve_wasm.wasm
+          python3 tools/browser-dogma-bench.py benchstats http://127.0.0.1:4175/eve-fit-web/ wasm-worker | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -f public/engines/j/evej.wasm ]; then python3 tools/browser-dogma-bench.py benchstats http://127.0.0.1:4175/eve-fit-web/ wasm-j-worker | tee -a "$GITHUB_STEP_SUMMARY" || echo "J browser bench failed (optional engine)" >> "$GITHUB_STEP_SUMMARY"; fi
+        shell: bash -eo pipefail {0}
+        env: { CHROME: /usr/bin/google-chrome }
+      - name: Bench pending-1.11 full suite set in the browser build (wasm-worker = F; tools/run_all_suites.sh + check_no_regress.py vs baselines/f.json gate the deploy; eve-dogma-bench @ engines.lock BENCH_SUITES_SHA)
+        # core, ext (+ unit), ext_rpc, batch, effects, graphs, cap, mutated, formats: every suite of the bench's run_all_suites.sh,
+        # with tools/browser-engine.mjs as the engine binary (one headless Chrome via browser-rpc --http), scored by the bench's
+        # own runners; check_no_regress.py fails on any case that passes in baselines/f.json but not here
+        run: |
+          git clone -q --filter=blob:none https://github.com/EX-CT/eve-dogma-bench benchsuites && git -C benchsuites checkout -q "$BENCH_SUITES_SHA"
+          # batch/data (synthetic price files) is gitignored in the bench; its generator is deterministic (tracked files unchanged)
+          # the bench's price expectations read the r5 dataset (= the site's dataset, DATASET_TAG)
+          export EVE_DOGMA_DATASET_R5="$GITHUB_WORKSPACE/public/data/dataset.json.gz"
+          (cd benchsuites && python3 batch/tools/gen_gap_cases.py)
+          npx vite preview --host 127.0.0.1 --port 4177 --strictPort &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:4177/eve-fit-web/ && break; sleep 1; done
+          node tools/browser-rpc.mjs http://127.0.0.1:4177/eve-fit-web/ wasm-worker --http 8899 &
+          for i in $(seq 1 60); do curl -s -o /dev/null -X POST --data '' http://127.0.0.1:8899/rpc && break; sleep 1; done
+          out="$RUNNER_TEMP/bench-suites-wasm-worker"
+          BROWSER_RPC=http://127.0.0.1:8899 bash benchsuites/tools/run_all_suites.sh "$GITHUB_WORKSPACE/tools/browser-engine.mjs" "$out" browser-wasm-worker
+          echo '### Bench pending-1.11 suites in the browser (wasm-worker = F)' >> "$GITHUB_STEP_SUMMARY"
+          # baselines/f.json is native F. The browser build differs only where it must: `version.target` is
+          # wasm32-unknown-unknown, so sde version_cli_fields / version_rpc_fields (target == native) are taken out of the
+          # baseline for this gate (listed in the step summary); every other case of every suite is gated as is.
+          python3 - benchsuites/baselines/f.json "$out/baseline-web.json" <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, sys
+          b = json.load(open(sys.argv[1])); s = b["suites"].get("sde")
+          WASM_TARGET = ["version_cli_fields", "version_rpc_fields"]
+          if s:
+              drop = [i for i in WASM_TARGET if i in s["passed_ids"]]
+              s["passed_ids"] = [i for i in s["passed_ids"] if i not in drop]; s["passed"] -= len(drop)
+              print(f"browser-inherent (version.target = wasm32-unknown-unknown), not gated: sde {', '.join(drop) or 'none'}")
+          json.dump(b, open(sys.argv[2], "w"), indent=1)
+          PY
+          python3 benchsuites/tools/check_no_regress.py --baseline "$out/baseline-web.json" --run-dir "$out" 2>&1 | tee "$out/no-regress.txt" | tee -a "$GITHUB_STEP_SUMMARY"
+        shell: bash -eo pipefail {0}
+        env: { CHROME: /usr/bin/google-chrome }
+      - name: Upload bench suite results (per suite)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-suites-wasm-worker
+          path: |
+            ${{ runner.temp }}/bench-suites-wasm-worker
+            !${{ runner.temp }}/bench-suites-wasm-worker/suites/*/.git
+          if-no-files-found: warn
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

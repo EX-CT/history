@@ -1,0 +1,14 @@
+/workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/deps/serde-1dd72a335323cc87.d: /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/build/serde-ac0b2a32d3f9c85f/out/private.rs
+
+/workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/deps/libserde-1dd72a335323cc87.rlib: /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/build/serde-ac0b2a32d3f9c85f/out/private.rs
+
+/workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/deps/libserde-1dd72a335323cc87.rmeta: /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/build/serde-ac0b2a32d3f9c85f/out/private.rs
+
+/home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/build/serde-ac0b2a32d3f9c85f/out/private.rs:
+
+# env-dep:OUT_DIR=/workspace/exct-eve/eve-fit-web/engines/g1-wasm/target/wasm32-wasip1/release/build/serde-ac0b2a32d3f9c85f/out

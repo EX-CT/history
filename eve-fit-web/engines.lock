@@ -1,0 +1,24 @@
+# Pinned engine sources for the Pages build. One value per line (KEY=value, no spaces). To bump an engine, edit its
+# line and push (the pages workflow reads this file; nothing else needs to change).
+#
+# Mainline engine F (Rust -> WASM, backend wasm-worker = site default via repo var DEFAULT_ENGINE): stats AND graphs in
+# one worker; bench 1.9.0 331/331, graphs 0.2 178/178. Lives in EX-CT/eve-dogma (Cargo workspace, migrated from
+# eve-dogma-lab variant-f-features 4b8f5f9 with byte-identical output); the web build uses crate eve-wasm (C ABI
+# alloc/dealloc/calc/rpc), the formats layer crate eve-fit-formats-wasm (alloc/dealloc/rpc: format_import / format_export,
+# all fit import/export of the site; the engine takes structured fits only since 597b7fc), the http e2e the eve-cli
+# binary `eve-fit`. Engine and formats module are built from this one pin. 20aa425 (main after 2da8150) adds the contract
+# 1.10 stats-ext outputs: mining, outgoing (remote reps / cap transfer), bombing, drones/fighters items[] (EHP),
+# modules[].heat (burnout), the 2da8150 validation codes (capital modules on subcaps, MISSING_SKILL per skill), RPC optimize.
+# Format: <owner/repo>@<full sha>:<directory of the Cargo workspace>.
+ENGINE_F_SRC=EX-CT/eve-dogma@8bde0ba83c19c31267c88ae1b572b2baab2f3b0b:.
+# CONTRACT-GRAPHS 0.2 case suite (eve-dogma-bench, branch graphs-round2) run in headless Chrome against wasm-worker (F)
+GRAPHS_BENCH_SHA=8c40921911aed9a7d7f032a2f9d4c43986ca0232
+# Optional speed reference J (round-1 winner; C++20 -> WASM with Emscripten, backend wasm-j-worker; graphs via F). Format: <owner/repo>@<full sha>:<directory>.
+# When EX-CT/eve-dogma is ready, the move is this one line, e.g. ENGINE_J_SRC=EX-CT/eve-dogma@<sha>:.
+ENGINE_J_SRC=EX-CT/eve-dogma-lab@3ab992d7ed451436725e0597e19307c11863ab40:variant-j
+EMSDK_VERSION=6.0.11
+# Stats corpus run in headless Chrome against F (gates the deploy) and J (optional): bench 1.9.0 (331 cases, tag v1.9.0)
+DOGMA_BENCH_SHA=d2edf989a7c3ba5afbe54ca6fe85a5a285af8640
+# Full eve-dogma-bench suite set (branch pending-1.11: core, ext + ext/unit, ext_rpc, batch, effects, graphs, cap, mutated,
+# formats; tools/run_all_suites.sh) run in headless Chrome against F; gate = tools/check_no_regress.py vs baselines/f.json.
+BENCH_SUITES_SHA=7192f6677973b6ccecf496c06817f39e003a2f55
