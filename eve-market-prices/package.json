@@ -1,0 +1,31 @@
+{
+  "name": "eve-market-prices",
+  "version": "0.2.1",
+  "description": "Standalone EVE Online market price updater: pluggable sources (ESI Jita 4-4 sell orders, Fuzzwork aggregates), a band-weighted sell price rule, deterministic self-contained price snapshots for offline engines",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./node": "./dist/src/node.js",
+    "./schema/snapshot.v1.schema.json": "./schema/snapshot.v1.schema.json"
+  },
+  "bin": { "eve-market-prices": "dist/src/cli.js" },
+  "files": ["dist", "schema", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "npm run build && node --test --test-concurrency=1 dist/test/*.test.js",
+    "smoke": "npm run build && node dist/test/live-smoke.js",
+    "prepare": "tsc -p ."
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/EX-CT/eve-market-prices.git" },
+  "keywords": ["eve-online", "market", "prices", "esi", "jita", "fuzzwork"],
+  "author": "EX-CT",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "ajv": "^8.17.1",
+    "typescript": "~5.9.2"
+  }
+}

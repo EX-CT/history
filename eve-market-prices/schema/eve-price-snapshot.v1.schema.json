@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EX-CT/eve-market-prices/schema/eve-price-snapshot.v1.schema.json",
+  "title": "eve-price-snapshot v1",
+  "description": "Price snapshot read by EVE fitting engines. Normative definition: EX-CT/eve-fit-docs docs/22-embedded-sde-and-prices.md section 4. The cross-field invariants of 4.5 (p0 <= price <= band_max, units <= units_considered, orders <= orders_considered <= orders_total) and content_hash (4.6) cannot be expressed here; parseSnapshot and engines check them.",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "snapshot_id",
+    "market",
+    "market_time",
+    "generated_at",
+    "source",
+    "rule",
+    "currency",
+    "sde_build",
+    "type_count",
+    "types",
+    "missing",
+    "updater",
+    "content_hash"
+  ],
+  "properties": {
+    "schema": {
+      "const": "eve-price-snapshot"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+-\\d{8}T\\d{6}Z$"
+    },
+    "market": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "market_time": {
+      "$ref": "#/$defs/time"
+    },
+    "generated_at": {
+      "$ref": "#/$defs/time"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "kind",
+        "endpoint",
+        "region_id",
+        "location_id",
+        "fetched_from",
+        "fetched_to"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region_id": {
+          "type": "integer"
+        },
+        "location_id": {
+          "type": "integer"
+        },
+        "fetched_from": {
+          "$ref": "#/$defs/time"
+        },
+        "fetched_to": {
+          "$ref": "#/$defs/time"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "order_side",
+        "location_id",
+        "min_units",
+        "band",
+        "weighting",
+        "exact"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "order_side": {
+          "const": "sell"
+        },
+        "location_id": {
+          "type": "integer"
+        },
+        "min_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "band": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weighting": {
+          "const": "units"
+        },
+        "exact": {
+          "type": "boolean"
+        }
+      }
+    },
+    "currency": {
+      "const": "ISK"
+    },
+    "sde_build": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "type_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "types": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[1-9][0-9]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "price",
+          "p0",
+          "band_max",
+          "units",
+          "orders",
+          "units_considered",
+          "orders_considered",
+          "orders_total"
+        ],
+        "properties": {
+          "price": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "p0": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "band_max": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "units": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "orders": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "units_considered": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "orders_considered": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "orders_total": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "uniqueItems": true
+    },
+    "updater": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "coverage": {
+      "description": "Optional additive field (eve-market-prices): the type universe that was priced.",
+      "type": "object",
+      "properties": {
+        "dataset": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dataset_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "types_requested": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "time": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    }
+  }
+}
