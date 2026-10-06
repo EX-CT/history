@@ -1,0 +1,148 @@
+# eve-dogma-rs
+
+Stateless, deterministic **EVE Online fitting engine** in Rust (part of the EX-CT open fitting tool,
+design docs: [EX-CT/eve-fit-docs](https://github.com/EX-CT/eve-fit-docs)).
+
+* **Input:** one JSON `FitRequest` (ship, modules + charges + states, drones, fighters, implants, boosters,
+  skills, projected effects, fleet buffs, environment, damage pattern, target profile, overrides, options),
+  see `schema/fit-request.schema.json` in eve-fit-docs.
+* **Output:** one JSON `FitStats` (resources, slots, offense, defense, tank, capacitor simulation,
+  navigation, targeting, drones, validation violations, optional attribute dumps). The same request
+  always produces byte-identical output.
+* **Data:** a compact dataset built from CCP's official SDE by
+  [EX-CT/eve-sde-pipeline](https://github.com/EX-CT/eve-sde-pipeline) (`dataset-<build>.json.gz`, release assets).
+  Modifiers come from the SDE `modifierInfo`; effects CCP ships without it are covered by
+  small data patches in the pipeline and a few documented engine specials.
+
+## Install
+
+Prebuilt CLI binaries are attached to every `v*` release of this repository (built by
+`.github/workflows/release.yml`): `eve-dogma-<tag>-<platform>.tar.gz` for `linux-x86_64`, `linux-aarch64`,
+`macos-x86_64`, `macos-arm64`, and `eve-dogma-<tag>-windows-x86_64.zip`. Each archive holds the `eve-dogma`
+binary, this README and the licenses; `SHA256SUMS` covers all archives. Linux builds need glibc 2.34+
+(Ubuntu 22.04, Debian 12, RHEL 9 or newer); there are no other runtime dependencies. Maintainers: a manual run
+of the `release` workflow (default `dry_run`) builds and packages all five targets as run artifacts without
+touching any release; pushing a `v*` tag builds them again and uploads them.
+
+```bash
+# 1. binary (pick your platform; with the GitHub CLI, or download the same files from the release page)
+TAG=$(gh release view -R EX-CT/eve-dogma-rs --json tagName -q .tagName)
+gh release download "$TAG" -R EX-CT/eve-dogma-rs --pattern "eve-dogma-$TAG-linux-x86_64.tar.gz" --pattern SHA256SUMS
+sha256sum --ignore-missing -c SHA256SUMS
+tar xzf "eve-dogma-$TAG-linux-x86_64.tar.gz"
+install -m 755 "eve-dogma-$TAG-linux-x86_64/eve-dogma" ~/.local/bin/    # or anywhere on PATH
+
+# 2. dataset: latest release of EX-CT/eve-sde-pipeline (dataset-<build>[-r<rev>].json.gz + manifest.json)
+mkdir -p ~/.local/share/eve-dogma && cd ~/.local/share/eve-dogma
+gh release download -R EX-CT/eve-sde-pipeline --pattern 'dataset-*.json.gz' --pattern manifest.json --clobber
+python3 -c "import json,hashlib;m=json.load(open('manifest.json'));assert hashlib.sha256(open(m['file'],'rb').read()).hexdigest()==m['sha256_gz'];print('ok',m['file'])"
+ln -sf "$(ls dataset-*.json.gz | sort | tail -1)" dataset.json.gz
+export EVE_DOGMA_DATASET=~/.local/share/eve-dogma/dataset.json.gz   # add to your shell profile
+
+# 3. check
+eve-dogma meta          # dataset sha256 / SDE build / counts
+```
+
+On macOS use `shasum -a 256 -c SHA256SUMS` (unsigned binary: `xattr -d com.apple.quarantine eve-dogma` if
+Gatekeeper blocks it). On Windows, unzip the archive, check it with `Get-FileHash`, and set
+`$env:EVE_DOGMA_DATASET` to the downloaded dataset. Without `gh`, take the files from
+<https://github.com/EX-CT/eve-sde-pipeline/releases/latest>.
+
+Dataset lookup order: `--dataset PATH`, then `$EVE_DOGMA_DATASET`, then `./dataset.json.gz`. The first run on
+a dataset parses it (about 100 ms) and writes a bincode cache to `$EVE_DOGMA_CACHE_DIR` (default
+`<tmp>/eve-dogma-cache`; point it at a persistent directory such as `~/.cache/eve-dogma` if your tmp is cleared
+at boot). Later runs load the cache in about 10 ms. The cache is keyed by the dataset contents and the
+executable, so upgrading either one rebuilds it once; `EVE_DOGMA_NO_CACHE=1` disables it.
+
+To build from source instead: `cargo install --git https://github.com/EX-CT/eve-dogma-rs --locked` (Rust stable).
+
+## Quick start
+
+```bash
+gh release download -R EX-CT/eve-sde-pipeline --pattern 'dataset-*.json.gz'
+mv dataset-*.json.gz dataset.json.gz            # or set EVE_DOGMA_DATASET
+cargo build --release
+./target/release/eve-dogma eft tests/fits/exct_rifter.eft --calc --skills 5   # EFT -> stats
+./target/release/eve-dogma eft tests/fits/exct_rifter.eft > req.json          # EFT -> FitRequest
+./target/release/eve-dogma calc req.json                                      # FitRequest -> FitStats
+./target/release/eve-dogma search "Hammerhead"                                # en + zh names
+./target/release/eve-dogma serve-stdio      # JSONL RPC: calc | eft_parse | eft_export | search | type | meta
+./target/release/eve-dogma bench req.json -n 2000
+```
+
+Dataset revisions: any `sde-3569502` revision (r1–r4) gives identical results. Effects flagged `"stacking_exempt": true`
+(r4: incursion effect 4728) are never stacking-penalised. When the dataset carries OffensiveDefensiveReduction as
+stacking-exempt modifiers, they are applied generically instead of the engine-side handler, so nothing is applied
+twice. The burst-projector patch (0101) stays engine-side.
+
+Cold start: the parsed dataset is cached as bincode in `$EVE_DOGMA_CACHE_DIR` (default `<tmp>/eve-dogma-cache`),
+keyed by a 128-bit content hash of the dataset file and the executable's size/mtime (the reported
+`meta.dataset_sha256` is the real SHA-256, computed on the first parse). The 6 most recent entries are kept. Each type
+is stored as one packed record and decoded on its first lookup, so a cached cold start decodes only the few hundred
+types a fit touches (about 17 M instructions for a whole `calc` process). A whole cached `calc` process takes about
+10 ms; an uncached one takes about 100 ms. The output is byte-identical. Disable with `EVE_DOGMA_NO_CACHE=1`.
+
+Library: `eve_dogma::calc(&Dataset, &FitRequest) -> serde_json::Value` (pure; no I/O, clocks or globals).
+
+## What is modelled
+
+Data-driven dogma (all CCP operators incl. PostPercent/PostAssign, per-operator stacking penalty buckets
+with exempt categories, min/max attribute caps, skill/ship/module/charge/implant/booster/mode/subsystem
+modifiers), AB/MWD/MJD, T3D modes (default mode like the client), T3C subsystems (slots/hardpoints),
+structures (pilot skills/implants ignored, power state, security modifiers), mutated modules/drones,
+spool-up weapons, missiles (pilot `missileDamageMultiplier`), drones, fighters (Pyfa default abilities),
+smartbombs/vorton, local reps incl. AAR paste, passive shield regen, Reactive Armor Hardener adaptation,
+capacitor simulation (Pyfa-compatible event simulation incl. injectors, nosferatu income, staggering),
+local command bursts, explicit fleet buffs and fleet booster fits (strongest buff wins), projected
+webs/TPs/damps/sebos/ECM/drones/whole fits with range falloff, scripts and resistances, incoming remote
+shield/armor/hull reps (Pyfa diminishing returns) and neuts/nos/cap transfers in the cap sim, wormhole environments, validation (CPU/PG/calibration/bandwidth, slots, hardpoints, canFitShip*, rig size,
+max group fitted/online/active, charge compatibility, skill requirements), EFT import/export incl. mutations.
+
+## Accuracy: Pyfa oracle
+
+`oracle/pyfa_oracle.py` runs Pyfa's eos engine headless as a **black box** (GPL-3.0 test tool, never linked).
+`oracle/compare.py` builds each case (EFT in `tests/fits/` or JSON case in `tests/cases/`), runs both engines
+and compares 48 fit metrics plus per-weapon optimal/falloff/tracking and missile range/explosion radius/velocity. `WRITE_EXPECTED=1` freezes Pyfa's numbers into `tests/oracle/pyfa_expected.json`,
+which `cargo test` checks (no Python needed in CI).
+
+Current: **249/249 cases, 13 812 values match Pyfa** (rel. 1e-4) — 101 dogma-engine community/regression fits,
+24 hand-written fits (frigates, cruisers, BS, HAC, T3C, T3D, marauders in bastion, logi,
+carriers/supercarrier fighters, command ships, mining), 124 JSON cases (skills 0/2/3/4, damage patterns, RAH
+profiles, reload, projected webs/TP/damps/ECM/scripts/web+neut drones, projected whole fits, remote reps,
+neuts/nos/cap transfers, fleet booster fits, wormhole environments C1–C6, implant sets, combat boosters).
+The same corpus is the shared bench `EX-CT/eve-dogma-bench`. 5 metrics are recorded as explained divergences
+(Pyfa data older than SDE, invalid fits, structure power state) — see `KNOWN` in `oracle/compare.py`.
+
+## Performance (same box, 1 core, all-V skills, including capacitor simulation)
+
+| fit | eve-dogma | Pyfa (warm) | speed-up |
+|---|---|---|---|
+| Rifter | 1.15 ms | 10.8 ms | 9.4× |
+| Vexor | 2.32 ms | 31.2 ms | 13.4× |
+| Tengu | 1.23 ms | 15.3 ms | 12.5× |
+| Nidhoggur | 1.48 ms | 14.8 ms | 10.0× |
+| Hyperion | 1.35 ms | 17.1 ms | 12.7× |
+
+Dataset load: ~150 ms (once per process). Pyfa first calculation: ~390 ms.
+
+## WebAssembly (WASI)
+
+The same engine builds for `wasm32-wasip1`. The native-only mimalloc allocator is left out on wasm32, and the dataset
+cache is skipped (each process parses the dataset). The output is byte-identical to the native build: CI's `wasm` job
+checks this, and all 326 bench cases match locally.
+
+```sh
+rustup target add wasm32-wasip1
+cargo build --release --target wasm32-wasip1          # target/wasm32-wasip1/release/eve-dogma.wasm (~1.4 MB)
+node wasm/run.mjs dataset.json.gz calc < request.json # Node's built-in WASI, no extra tools
+wasmtime run --dir /path/to/data::/d target/wasm32-wasip1/release/eve-dogma.wasm --dataset /d/dataset.json.gz calc < request.json
+```
+
+All CLI commands (`calc`, `batch`, `serve-stdio`, `eft`, `search`, `type`, `meta`) work. In a browser the module runs
+through any WASI preview1 shim, with the dataset provided as a file in the shim's virtual filesystem.
+
+## License
+
+LGPL-3.0-or-later (`LICENSE`, plus `LICENSE.GPL-3.0` which it incorporates). The RAH adaptation and the
+capacitor simulator follow the algorithms of Pyfa's `eos` (LGPL-2.0-or-later). EVE Online data © CCP hf.,
+used under the CCP developer license; this project is not affiliated with CCP.
