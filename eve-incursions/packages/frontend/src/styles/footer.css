@@ -1,0 +1,11 @@
+.footer {
+  margin-top: var(--sp-7);
+  padding-block: var(--sp-5);
+  border-top: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.footer p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}

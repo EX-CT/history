@@ -1,0 +1,65 @@
+
+services:
+  server:
+    image: node:22-alpine
+    working_dir: /eve-incursions/packages/server
+    restart: unless-stopped
+    networks:
+      - caddy
+      - internal
+    volumes:
+      - ./:/eve-incursions
+    environment:
+      - MYSQL_HOST
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DB
+
+  ws:
+    image: node:22-alpine
+    working_dir: /eve-incursions/packages/ws
+    restart: unless-stopped
+    networks:
+      - internal
+      - caddy
+    volumes:
+      - ./:/eve-incursions
+
+  frontend:
+    image: node:22-alpine
+    working_dir: /eve-incursions/packages/frontend
+    restart: unless-stopped
+    networks:
+      - caddy
+      - internal
+    volumes:
+      - ./:/eve-incursions
+
+  mysql:
+    image: mariadb:10.11
+    restart: unless-stopped
+    volumes:
+      - eve-incursions-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_ROOT_HOST: "%"
+    networks:
+      - internal
+    ports:
+    - 3313:3306
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - internal
+
+
+volumes:
+  eve-incursions-mysql-data:
+
+networks:
+  caddy:
+    external: true
+  internal:

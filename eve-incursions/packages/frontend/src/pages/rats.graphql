@@ -1,0 +1,67 @@
+query ratGroups{
+    ratGroups {
+        id
+        name
+        rats {
+            name
+            graphicId
+            hp {
+                total
+                shield
+                structure
+                armor
+            }
+            ehp {
+                total
+                shield
+                structure
+                armor
+            }
+            attackType
+            attackAlpha
+            attackMultiplier
+            attackDuration
+            attackTypeId
+            attackTypes {
+                kinetic
+                thermal
+                em
+                explosive
+            }
+            shieldResistances {
+                kinetic
+                thermal
+                em
+                explosive
+            }
+            armorResistances {
+                kinetic
+                thermal
+                em
+                explosive
+            }
+            structureResistances {
+                kinetic
+                thermal
+                em
+                explosive
+            }
+            attackRange
+            orbitRange
+            orbitSpeed
+            chaseSpeed
+            signatureRadius
+            scanResolution
+            ewar {
+                id
+                name
+                values {
+                    name
+                    value
+                    unit
+                }
+            }
+
+        }
+    }
+}

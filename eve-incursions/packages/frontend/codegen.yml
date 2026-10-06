@@ -1,0 +1,10 @@
+overwrite: true
+schema: "http://server:4001"
+documents:
+  - "src/**/*.graphql"
+generates:
+  src/lib/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-graphql-request"

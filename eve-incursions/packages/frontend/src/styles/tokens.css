@@ -1,0 +1,97 @@
+/* Design tokens — single source of truth for theming.
+   Light is the default; [data-theme="dark"] overrides the same variables, so
+   dark mode can never "miss" a component the way the old override list did. */
+:root {
+  color-scheme: light;
+
+  /* surfaces & text */
+  --bg: #ffffff;
+  --bg-subtle: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --surface-3: #e9edf2;
+  --border: #e3e7ee;
+  --border-strong: #cfd5df;
+
+  --text: #14171c;
+  --text-muted: #5b6573;
+  --text-faint: #8a93a3;
+
+  /* brand / accent (EVE cyan) */
+  --accent: #0e93c4;
+  --accent-strong: #0b7aa3;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgba(14, 147, 196, 0.12);
+
+  /* security status */
+  --sec-high: #1c8c3b;
+  --sec-low: #b07d09;
+  --sec-null: #c23b2b;
+
+  /* incursion state */
+  --state-established: #0e93c4;
+  --state-mobilizing: #b07d09;
+  --state-withdrawing: #a945c4;
+  --state-ended: #c23b2b;
+
+  /* effects */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --shadow-md: 0 2px 6px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.08);
+  --ring: 0 0 0 3px var(--accent-soft);
+
+  /* radii */
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  /* spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* layout */
+  --header-h: 58px;
+  --maxw: 1200px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f1115;
+  --bg-subtle: #13161b;
+  --surface: #171a20;
+  --surface-2: #1d212a;
+  --surface-3: #242a34;
+  --border: #272d38;
+  --border-strong: #353c49;
+
+  --text: #e6e9ef;
+  --text-muted: #98a2b2;
+  --text-faint: #6a7382;
+
+  --accent: #2bb3df;
+  --accent-strong: #54c6ec;
+  --accent-contrast: #04222e;
+  --accent-soft: rgba(43, 179, 223, 0.16);
+
+  --sec-high: #44d365;
+  --sec-low: #e3b341;
+  --sec-null: #f0654a;
+
+  --state-established: #36b6e0;
+  --state-mobilizing: #e3b341;
+  --state-withdrawing: #d07fe8;
+  --state-ended: #f0654a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 22px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,65 @@
+.toggle {
+  display: inline-flex;
+  padding: 0;
+  border-radius: var(--r-pill);
+}
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 52px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--surface-3);
+  border: 1px solid var(--border-strong);
+  transition: background 0.2s;
+}
+
+.sun,
+.moon {
+  position: relative;
+  z-index: 1;
+  flex: none;
+}
+.sun {
+  color: #e8a93b;
+  margin-right: auto;
+}
+.moon {
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.knob {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transform: translateY(-50%);
+  transition: left 0.2s ease;
+}
+
+:global([data-theme="dark"]) .track {
+  background: #1b2733;
+  border-color: #2c3b49;
+}
+:global([data-theme="dark"]) .knob {
+  left: calc(100% - 25px);
+  background: #f4d35e;
+}
+:global([data-theme="dark"]) .moon {
+  color: #f4d35e;
+}
+:global([data-theme="dark"]) .sun {
+  color: var(--text-faint);
+}

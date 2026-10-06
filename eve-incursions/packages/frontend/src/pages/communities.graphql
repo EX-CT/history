@@ -1,0 +1,13 @@
+query activeCommunities{
+    activeCommunities {
+        name
+        tag
+        channel
+        language
+        tank
+        timezone
+        hq
+        as
+        vg
+    }
+}

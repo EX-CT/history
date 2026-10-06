@@ -1,0 +1,42 @@
+.prose {
+  max-width: 70ch;
+}
+.prose h1 {
+  margin-bottom: var(--sp-4);
+}
+.prose p {
+  color: var(--text-muted);
+  margin-bottom: var(--sp-4);
+  line-height: 1.65;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(7rem, max-content) 1fr;
+  gap: 0;
+  margin-top: var(--sp-5);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.contact dt {
+  padding: var(--sp-3) var(--sp-4);
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.contact dd {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.contact dt:last-of-type,
+.contact dd:last-of-type {
+  border-bottom: none;
+}
+.note {
+  color: var(--text-faint);
+  font-size: 0.9em;
+}

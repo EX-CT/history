@@ -1,0 +1,67 @@
+
+services:
+  init:
+    image: node:22-alpine
+    working_dir: /eve-incursions
+    volumes:
+      - ./:/eve-incursions
+    command: npm i
+
+  server:
+    command: sh -c "npm run prod"
+    restart: unless-stopped
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    labels:
+      caddy: eve-incursions.de
+      caddy.reverse_proxy: /api* {{upstreams 4001}}
+      caddy.@cachedFiles.path: "*.jpg *.jpeg *.png *.gif *.ico *.svg"
+      caddy.header: '@cachedFiles Cache-Control "public, max-age=604800, must-revalidate"'
+
+  frontend:
+    command: sh -c "npm run build && npm start"
+    restart: unless-stopped
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    labels:
+      caddy: eve-incursions.de
+      caddy.reverse_proxy: /* {{upstreams 3000}}
+      caddy.@cachedFiles.path: "*.jpg *.jpeg *.png *.gif *.ico *.svg"
+      caddy.header: '@cachedFiles Cache-Control "public, max-age=604800, must-revalidate"'
+
+  ws:
+    command: sh -c "npm run prod"
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    labels:
+      caddy: eve-incursions.de
+      caddy.reverse_proxy: /ws {{upstreams 4003}}
+
+  mysql:
+    restart: unless-stopped
+
+  mysql_backup:
+    image: databack/mysql-backup
+    restart: always
+    volumes:
+      - ../backups:/db
+    networks:
+      - internal
+    environment:
+      - DB_DUMP_TARGET=s3://eve-incursions-mysql-backups/backups
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_PASSWORD}
+      - DB_DUMP_FREQ=1440
+      - DB_DUMP_BEGIN=0
+      - DB_SERVER=${MYSQL_HOST}
+      - DB_NAMES=${MYSQL_DB}
+      - DB_DUMP_KEEP_PERMISSIONS=false
+      - AWS_ENDPOINT_URL=https://storage.googleapis.com
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+
+networks:
+  internal:

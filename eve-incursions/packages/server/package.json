@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -w src --ext ts --exec ts-node --swc src/index.ts",
+    "single": "ts-node --swc src/index.ts",
+    "scheduler": "ts-node --swc src/scheduler.ts",
+    "spawns:update": "ts-node --swc src/run.ts updateSpawns",
+    "sov:update": "ts-node --swc src/run.ts updateSovereignty",
+    "rats:update": "ts-node --swc src/run.ts updateRats",
+    "hsspawn:calculate": "ts-node --swc src/run.ts calculateHSSpawn",
+    "systems:update": "ts-node --swc src/run.ts updateSystems",
+    "test": "vitest run",
+    "prod": "concurrently -k npm:single npm:scheduler"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^5.5.0",
+    "concurrently": "^9.2.0",
+    "graphql": "^16.6.0",
+    "graphql-scalars": "^1.24.0",
+    "ioredis": "^5.3.1",
+    "mysql2": "^3.11.0",
+    "node-schedule": "^2.1.0",
+    "reflect-metadata": "^0.2.2",
+    "type-graphql": "^2.0.0-beta.1",
+    "typeorm": "^0.3.12",
+    "wait-port": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node-schedule": "^2.1.0",
+    "vitest": "^3.2.0",
+    "@swc/core": "^1.7.0",
+    "@swc/helpers": "^0.5.0",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^6.0.0"
+  }
+}

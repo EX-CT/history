@@ -1,0 +1,163 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type Community {
+    active: Boolean!
+    as: Boolean!
+    channel: String!
+    hq: Boolean!
+    id: ID!
+    language: String!
+    name: String!
+    tag: String!
+    tank: String!
+    timezone: String!
+    vg: Boolean!
+}
+
+type Constellation {
+    id: ID!
+    name: String!
+    region: Region!
+    spawns: [Spawn!]!
+    systems: [System!]!
+}
+
+type DamageTypes {
+    em: Float!
+    explosive: Float!
+    kinetic: Float!
+    thermal: Float!
+}
+
+type Ewar {
+    id: Float!
+    name: String!
+    values: [EwarValues!]!
+}
+
+type EwarValues {
+    name: String!
+    unit: String
+    value: Float!
+}
+
+type HP {
+    armor: Float!
+    shield: Float!
+    structure: Float!
+    total: Float!
+}
+
+type InfluenceLogEntry {
+    date: DateTime!
+    id: ID!
+    influence: Float!
+    spawn: [Spawn!]!
+}
+
+type LastHsSpawn {
+    date: DateTime
+}
+
+type PaginatedSpawnLogResponse {
+    hasMore: Boolean!
+    items: [SpawnLog!]!
+    total: Int!
+}
+
+type Query {
+    activeCommunities: [Community!]!
+    activeSpawns: [Spawn!]!
+    lastHighSecSpawn: LastHsSpawn!
+    ratGroups: [RatGroup!]!
+    spawnLogs(page: Int = 1): PaginatedSpawnLogResponse!
+    spawns: [Spawn!]!
+}
+
+type Rat {
+    armorResistances: DamageTypes!
+    attackAlpha: Float
+    attackDuration: Float
+    attackMultiplier: Float
+    attackRange: Float
+    attackType: String
+    attackTypeId: Float
+    attackTypes: DamageTypes!
+    chaseSpeed: Float!
+    ehp: HP!
+    ewar: [Ewar!]!
+    graphicId: Float!
+    groupId: Float!
+    hp: HP!
+    id: Float!
+    name: String!
+    orbitRange: Float!
+    orbitSpeed: Float!
+    scanResolution: Float!
+    shieldResistances: DamageTypes!
+    signatureRadius: Float!
+    structureResistances: DamageTypes!
+}
+
+type RatGroup {
+    id: ID!
+    name: String!
+    rats: [Rat!]!
+}
+
+type Region {
+    id: ID!
+    name: String!
+}
+
+type Spawn {
+    active: Boolean!
+    boss: Boolean!
+    constellation: Constellation!
+    endedAt: DateTime
+    establishedAt: DateTime!
+    id: ID!
+    influence: Float!
+    influenceLogArray: [Float!]!
+    influenceLogs: [InfluenceLogEntry!]!
+    lastStateChangeDate: DateTime!
+    logs: [SpawnLog!]!
+    stagingSystem: System!
+    state: String!
+}
+
+type SpawnLog {
+    date: DateTime!
+    id: ID!
+    spawn: Spawn!
+    state: String!
+}
+
+type Station {
+    hasRepairService: Boolean!
+    id: ID!
+    name: String!
+}
+
+type System {
+    constellation: Constellation!
+    hasRepairStation: Boolean!
+    id: ID!
+    isIsland: Boolean!
+    name: String!
+    security: Float!
+    securityArea: String!
+    size: Float!
+    sovereigntyHolderID: Float!
+    sovereigntyHolderName: String!
+    stations: [Station!]!
+    type: String!
+}
+
+
+"The javascript `Date` as string. Type represents date and time as the ISO Date string."
+scalar DateTime

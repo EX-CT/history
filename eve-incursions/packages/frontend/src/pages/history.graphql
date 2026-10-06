@@ -1,0 +1,22 @@
+query spawnLogs($page: Int){
+    spawnLogs(page: $page) {
+        items {
+            state
+            date
+            spawn {
+                constellation {
+                    name
+                    region {
+                        name
+                    }
+                }
+                stagingSystem {
+                    name
+                    sovereigntyHolderID
+                    sovereigntyHolderName
+                }
+            }
+        }
+        total
+    }
+}

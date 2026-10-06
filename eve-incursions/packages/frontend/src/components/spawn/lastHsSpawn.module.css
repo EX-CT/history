@@ -1,0 +1,36 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-5);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.calm {
+  color: var(--state-established);
+  border-color: color-mix(in srgb, var(--state-established) 35%, var(--border));
+  background: color-mix(in srgb, var(--state-established) 8%, var(--surface));
+}
+.soon {
+  color: var(--sec-low);
+  border-color: color-mix(in srgb, var(--sec-low) 35%, var(--border));
+  background: color-mix(in srgb, var(--sec-low) 8%, var(--surface));
+}
+.due {
+  color: var(--sec-null);
+  border-color: color-mix(in srgb, var(--sec-null) 40%, var(--border));
+  background: color-mix(in srgb, var(--sec-null) 9%, var(--surface));
+}

@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+}
+.sov {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  flex: none;
+}
+.title {
+  font-size: 1.25rem;
+  margin-right: auto;
+  min-width: 0;
+}
+.title a {
+  color: var(--text);
+}
+.title a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+.statePill {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, auto) 1fr;
+  gap: 2px var(--sp-4);
+  padding: 0 var(--sp-4) var(--sp-3);
+}
+.fact {
+  display: contents;
+}
+.fact dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 5px 0;
+}
+.fact dd {
+  font-size: 0.92rem;
+  padding: 5px 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.influenceFact dd {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.progress {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.bar {
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  transition: width 0.3s ease;
+}
+.influenceVal {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  min-width: 2.6em;
+}
+
+.chart {
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+}

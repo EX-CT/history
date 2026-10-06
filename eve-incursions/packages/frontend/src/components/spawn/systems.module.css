@@ -1,0 +1,132 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  color: var(--text-faint);
+  cursor: help;
+  text-decoration: none;
+  font-size: 0.85em;
+}
+
+.toggleCol {
+  width: 38px;
+}
+.toggleCell {
+  width: 38px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+}
+
+.band td {
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  padding: var(--sp-1) var(--sp-3);
+}
+
+.row:hover td {
+  background: var(--surface-2);
+}
+.row a {
+  color: var(--text);
+  font-weight: 550;
+}
+.row a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--text-faint);
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+.toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.chev {
+  transition: transform 0.2s ease;
+}
+.toggleOpen .chev {
+  transform: rotate(90deg);
+}
+.toggleOpen {
+  color: var(--accent);
+}
+
+/* expandable stations row: animate via grid-rows 0fr -> 1fr */
+.stationsRow td {
+  padding: 0;
+  border-bottom: none;
+}
+.rowOpen td {
+  border-bottom-color: transparent;
+}
+.stationsWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease;
+}
+.stationsOpen {
+  grid-template-rows: 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.stationsInner {
+  overflow: hidden;
+}
+.stations {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--sp-2) var(--sp-3) var(--sp-3) calc(38px + var(--sp-3));
+  background: var(--surface-2);
+}
+.station {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.wrench {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}

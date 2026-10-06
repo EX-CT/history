@@ -1,0 +1,35 @@
+
+services:
+  init:
+    image: node:22-alpine
+    working_dir: /eve-incursions
+    volumes:
+      - ./:/eve-incursions
+    command: npm i
+
+  server:
+    command: sh -c "npm run prod"
+    restart: unless-stopped
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    labels:
+      caddy: beta.eve-incursions.de
+      caddy.reverse_proxy: /api/* {{upstreams 4001}}
+      caddy.@cachedFiles.path: "*.jpg *.jpeg *.png *.gif *.ico *.svg"
+      caddy.header: '@cachedFiles Cache-Control "public, max-age=604800, must-revalidate"'
+
+  frontend:
+    command: sh -c "npm run build && npm start"
+    restart: unless-stopped
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    labels:
+      caddy: beta.eve-incursions.de
+      caddy.reverse_proxy: /* {{upstreams 3000}}
+      caddy.@cachedFiles.path: "*.jpg *.jpeg *.png *.gif *.ico *.svg"
+      caddy.header: '@cachedFiles Cache-Control "public, max-age=604800, must-revalidate"'
+
+  mysql:
+    restart: unless-stopped

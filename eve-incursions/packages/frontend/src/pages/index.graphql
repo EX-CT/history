@@ -1,0 +1,41 @@
+query activeSpawns{
+    activeSpawns {
+        state
+        id
+        influence
+        boss
+        establishedAt
+        endedAt
+        influenceLogArray
+        lastStateChangeDate
+        stagingSystem {
+            sovereigntyHolderID
+            sovereigntyHolderName
+            name
+            security
+            securityArea
+        }
+        constellation {
+            name
+            region {
+                name
+            }
+            systems {
+                name
+                size
+                security
+                type
+                securityArea
+                name
+                stations {
+                    hasRepairService
+                    name
+                }
+            }
+        }
+    }
+
+    lastHighSecSpawn {
+        date
+    }
+}
