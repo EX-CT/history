@@ -1,0 +1,15 @@
+{
+ "esf_items_4": {
+  "max_velocity": "two prop mods active at once (invalid fit); Pyfa re-reads mass per handler"
+ },
+ "esf_items_7": {
+  "cap_capacity": "structure module on a ship (invalid fit): Pyfa applies it, SDE domain says no"
+ },
+ "esf_projection_18": {
+  "align_time_s": "data drift: Pyfa eve.db (client 3532181) Paladin agility 0.858 vs SDE 3569502 0.0858"
+ },
+ "esf_structure_bonus_1": {
+  "ehp.armor": "same as hp.armor",
+  "hp.armor": "SDE: unpowered structure zeroes plating bonus (ESF agrees); Pyfa hand-written handler ignores power state"
+ }
+}

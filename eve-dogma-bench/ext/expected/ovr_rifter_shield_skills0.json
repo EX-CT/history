@@ -1,0 +1,10 @@
+{
+ "case": "ovr_rifter_shield_skills0",
+ "derivation": "Skills 0, no modules: hp.shield = overridden shieldCapacity 1000.",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "hp.shield": 1000.0
+ }
+}

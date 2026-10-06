@@ -1,0 +1,147 @@
+name: nightly
+
+# Nightly regression run of the bench against eve-dogma-rs main (variant A):
+#   bench 1.8.0 (frozen 3da9671), bench 1.9.0 (pinned v1.9.0 = d2edf98), graphs (branch graphs-round2, if it exists),
+#   plus a Pyfa-free fuzz self-consistency check (tools/ci_invariants.py). Pyfa isn't installed here; the oracle side is
+#   the committed expected/ values.
+# On failure: opens an issue titled "Nightly bench failure", or comments on the open one with that title (deduped by title).
+# Scheduled runs only fire from the default branch.
+
+on:
+  schedule:
+    - cron: '0 18 * * *'   # 18:00 UTC = 02:00 CST
+  workflow_dispatch:
+    inputs:
+      engine_ref:
+        description: 'eve-dogma-rs ref to build'
+        default: 'main'
+      sde_tag:
+        description: 'EX-CT/eve-sde-pipeline release with dataset-<build>.json.gz (the bench pins sde-3569502)'
+        default: 'sde-3569502'
+      fuzz_seed:
+        description: 'fuzz seed (default: run number)'
+        default: ''
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ENGINE_REF: ${{ inputs.engine_ref || 'main' }}
+      SDE_TAG: ${{ inputs.sde_tag || 'sde-3569502' }}
+      FUZZ_SEED: ${{ inputs.fuzz_seed || github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: EX-CT/eve-dogma-rs
+          ref: ${{ env.ENGINE_REF }}
+          path: _engine
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: _engine
+      - name: Dataset (${{ env.SDE_TAG }})
+        run: |
+          gh release download "$SDE_TAG" -R EX-CT/eve-sde-pipeline --pattern 'dataset-*.json.gz' -D _data
+          ls -l _data
+          echo "EVE_DOGMA_DATASET=$(ls $PWD/_data/dataset-*.json.gz | head -1)" >> "$GITHUB_ENV"
+      - name: Build eve-dogma-rs ${{ env.ENGINE_REF }}
+        working-directory: _engine
+        run: |
+          cargo build --release --locked
+          echo "ENGINE=$PWD/target/release/eve-dogma" >> "$GITHUB_ENV"
+          echo "### eve-dogma-rs \`$ENGINE_REF\` @ $(git rev-parse --short HEAD)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Stage bench trees (1.8.0, 1.9.0, graphs)
+        run: |
+          # bench 1.9.0 = tag v1.9.0 (d2edf98; main is 1.10.0 since v1.10.0); 1.8.0 is the frozen round-1 pin 3da9671.
+          for spec in bench-1.8.0=3da9671da11379de6ae17d3c3285505e95267f29 bench-1.9.0=d2edf989a7c3ba5afbe54ca6fe85a5a285af8640 graphs-round2=origin/graphs-round2; do
+            b=${spec%%=*}; ref=${spec#*=}
+            if git rev-parse -q --verify "$ref^{commit}" > /dev/null; then
+              mkdir -p "_trees/$b" && git archive "$ref" | tar -x -C "_trees/$b"
+              echo "$b @ $(git rev-parse --short "$ref")"
+            else
+              echo "::notice::$b ($ref) not found, skipped"
+            fi
+          done
+      - name: Bench 1.8.0
+        id: b18
+        if: always()
+        run: |
+          cd _trees/bench-1.8.0
+          python3 run.py --name nightly --cmd "$ENGINE calc" --batch-cmd "$ENGINE batch"
+          python3 "$GITHUB_WORKSPACE/tools/ci_gate.py" "bench $(cat VERSION)" results/nightly/scorecard.json
+      - name: Bench 1.9.0
+        id: b19
+        if: always()
+        run: |
+          if [ ! -d _trees/bench-1.9.0 ]; then echo "- bench 1.9.0: not present, skipped" >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          cd _trees/bench-1.9.0
+          python3 run.py --name nightly --cmd "$ENGINE calc" --batch-cmd "$ENGINE batch"
+          python3 "$GITHUB_WORKSPACE/tools/ci_gate.py" "bench $(cat VERSION)" results/nightly/scorecard.json
+      - name: Graphs
+        id: graphs
+        if: always()
+        run: |
+          if [ ! -d _trees/graphs-round2/graphs ]; then echo "- graphs: not present, skipped" >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          cd _trees/graphs-round2
+          python3 "$GITHUB_WORKSPACE/tools/ci_graph_corpus.py" graphs
+          if [ -d graphs/draft-0.3/cases ]; then python3 "$GITHUB_WORKSPACE/tools/ci_graph_corpus.py" graphs/draft-0.3; fi
+          python3 graphs/run_graphs.py --self-test > /dev/null
+          python3 "$GITHUB_WORKSPACE/tools/ci_gate.py" "graphs corpus self-test" results/graphs-self-test/scorecard.json
+          # Score the engine when it implements the graphs contract (eve-dogma-rs main has no `graph-batch` yet)
+          if "$ENGINE" graph-batch < /dev/null > /dev/null 2>&1; then
+            python3 graphs/run_graphs.py --name nightly --batch-cmd "$ENGINE graph-batch"
+            python3 "$GITHUB_WORKSPACE/tools/ci_gate.py" "graphs (engine)" results/graphs-nightly/scorecard.json
+          else
+            echo "- graphs (engine): eve-dogma-rs has no \`graph-batch\` command, so only the corpus checks ran" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Fuzz self-consistency (no Pyfa)
+        id: fuzz
+        if: always()
+        run: python3 tools/ci_invariants.py --batch-cmd "$ENGINE batch" --cmd "$ENGINE calc" --n 400 --seed "$FUZZ_SEED"
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-results
+          path: |
+            results/nightly/
+            _trees/*/results/
+            ci-invariants.json
+          if-no-files-found: ignore
+      - name: Open or update the failure issue
+        if: failure() && (github.event_name == 'schedule' || github.ref == 'refs/heads/main')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Nightly bench failure';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const steps = ['b18', 'b19', 'graphs', 'fuzz'];
+            const body = [`Nightly run failed: ${run}`, '', `eve-dogma-rs ref: \`${process.env.ENGINE_REF}\`, dataset: \`${process.env.SDE_TAG}\`, fuzz seed: ${process.env.FUZZ_SEED}`,
+              '', 'See the run summary and the `nightly-results` artifact (scorecards, failures.json, ci-invariants.json).'].join('\n');
+            const issues = await github.paginate(github.rest.issues.listForRepo, {owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100});
+            const hit = issues.find(i => i.title === title && !i.pull_request);
+            if (hit) {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: hit.number, body});
+              core.info(`commented on #${hit.number}`);
+            } else {
+              const r = await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title, body});
+              core.info(`opened #${r.data.number}`);
+            }

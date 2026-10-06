@@ -1,0 +1,128 @@
+{
+ "e_fz_cloak_wcs_penalty_group_ninazu": {
+  "error": null,
+  "mismatches": {
+   "scan_resolution": {
+    "got": 35.182522,
+    "want": 33.93
+   }
+  }
+ },
+ "e_fz_drone_speed_orbweaver_dagon": {
+  "error": null,
+  "mismatches": {
+   "drone_dps": {
+    "got": 38.8125,
+    "want": 48.515625
+   }
+  }
+ },
+ "e_fz_drone_speed_torafugu_odysseus": {
+  "error": null,
+  "mismatches": {
+   "drone_dps": {
+    "got": 58.21875,
+    "want": 72.7734375
+   }
+  }
+ },
+ "e_fz_offline_cloak_hulk": {
+  "error": null,
+  "mismatches": {
+   "scan_resolution": {
+    "got": 825.0,
+    "want": 536.25
+   }
+  }
+ },
+ "e_fz_offline_expanded_cargohold_rifter": {
+  "error": null,
+  "mismatches": {
+   "max_velocity": {
+    "got": 456.25,
+    "want": 374.125
+   }
+  }
+ },
+ "exct_hel": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 75.0,
+    "want": -25.0
+   }
+  }
+ },
+ "exct_nidhoggur": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ },
+ "fighters_mwd_nidhoggur": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ },
+ "skills0_hel": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ },
+ "skills0_nidhoggur": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ },
+ "skills2_hel": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 90.0,
+    "want": -10.0
+   }
+  }
+ },
+ "skills2_nidhoggur": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ },
+ "skills4_hel": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 80.0,
+    "want": -20.0
+   }
+  }
+ },
+ "skills4_nidhoggur": {
+  "error": null,
+  "mismatches": {
+   "warp_scramble_status": {
+    "got": 100.0,
+    "want": 0.0
+   }
+  }
+ }
+}

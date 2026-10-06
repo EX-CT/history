@@ -1,0 +1,18 @@
+{
+ "crashes": [],
+ "f_ref": "4b8f5f9",
+ "failing": [],
+ "module_state_1_4_5": {
+  "output": "state_rifter_all_online: ok\nstate_rifter_overheated_mix: ok\nstate_rifter_requested_active: ok\nmodule-state check: 3/3\n",
+  "rc": 0,
+  "summary": "module-state check: 3/3"
+ },
+ "passed": 339,
+ "rc": 0,
+ "suite": "pending-1.10-head",
+ "suite_ref": "pending-1.10 head 6b10d26 (11:38 CST), full corpus 339 cases (= ed8deaa's 334 + 5 from the 1.9.0 merge)",
+ "timeouts": [],
+ "total": 339,
+ "values": "22513/22513",
+ "wall_s": 1.0
+}

@@ -1,0 +1,108 @@
+{
+ "crashes": [],
+ "f_ref": "6e2ebf1",
+ "failing": [
+  {
+   "category": "hard",
+   "error": null,
+   "fails": {
+    "delta_gj_s": {
+     "got": -74.85873,
+     "want": -106.62343604108311
+    },
+    "depletes_in_s": {
+     "got": 101.25,
+     "want": 60.0
+    },
+    "use_gj_s": {
+     "got": 104.025397,
+     "want": 135.79010270774978
+    }
+   },
+   "id": "hard_three_void_bombs"
+  },
+  {
+   "category": "hard",
+   "error": null,
+   "fails": {
+    "delta_gj_s": {
+     "got": -74.85873,
+     "want": -85.4469654528478
+    },
+    "depletes_in_s": {
+     "got": 101.25,
+     "want": 84.375
+    },
+    "use_gj_s": {
+     "got": 104.025397,
+     "want": 114.61363211951448
+    }
+   },
+   "id": "hard_void_bomb_bs"
+  },
+  {
+   "category": "incoming",
+   "error": null,
+   "fails": {
+    "delta_gj_s": {
+     "got": -39.073989,
+     "want": -49.662224029396725
+    },
+    "depletes_in_s": {
+     "got": 45.0,
+     "want": 0.0
+    },
+    "use_gj_s": {
+     "got": 53.634921,
+     "want": 64.2231559290383
+    }
+   },
+   "id": "in_void_bomb"
+  }
+ ],
+ "passed": 147,
+ "per_metric": {
+  "capacity": [
+   150,
+   150
+  ],
+  "delta_gj_s": [
+   147,
+   150
+  ],
+  "depletes_in_s": [
+   109,
+   112
+  ],
+  "injected_gj_s": [
+   150,
+   150
+  ],
+  "peak_recharge_gj_s": [
+   150,
+   150
+  ],
+  "recharge_time_s": [
+   150,
+   150
+  ],
+  "stable": [
+   150,
+   150
+  ],
+  "stable_percent": [
+   38,
+   38
+  ],
+  "use_gj_s": [
+   147,
+   150
+  ]
+ },
+ "rc": 0,
+ "suite": "cap-suite",
+ "suite_ref": "cap-suite d80cc38, 150 cases",
+ "timeouts": [],
+ "total": 150,
+ "wall_s": 0.1
+}

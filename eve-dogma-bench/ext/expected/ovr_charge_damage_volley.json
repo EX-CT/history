@@ -1,0 +1,10 @@
+{
+ "case": "ovr_charge_damage_volley",
+ "derivation": "Skills 0 (no Gunnery / Minmatar Frigate bonuses): volley = charge damage (overridden to 100 EM, 0 else) x 200mm AutoCannon I damageMultiplier 2.8875 = 288.75.",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "weapon_volley": 288.75
+ }
+}

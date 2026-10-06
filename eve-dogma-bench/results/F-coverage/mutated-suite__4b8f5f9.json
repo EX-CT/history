@@ -1,0 +1,17 @@
+{
+ "crashes": [],
+ "eft_export": "93/93",
+ "eft_export_failed": [],
+ "eft_import": "99/99",
+ "eft_import_failed": [],
+ "f_ref": "4b8f5f9",
+ "failing": [],
+ "passed": 93,
+ "rc": 0,
+ "suite": "mutated-suite",
+ "suite_ref": "mutated-suite 2ac7c00, 93 stats cases + EFT export/import",
+ "timeouts": [],
+ "total": 93,
+ "values": "6184/6184",
+ "wall_s": 0.7
+}

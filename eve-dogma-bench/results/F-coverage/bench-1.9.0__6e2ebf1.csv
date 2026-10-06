@@ -1,0 +1,2 @@
+suite,f_ref,case_id,kind,detail
+bench-1.9.0,6e2ebf1,breacher_kestrel,mismatch,"{""error"": null, ""mismatches"": {""weapon_pure_dps"": {""got"": 0.0, ""want"": 250.0}, ""weapon_pure_volley"": {""got"": 0.0, ""want"": 250.0}}}"

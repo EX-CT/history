@@ -1,0 +1,10 @@
+{
+ "case": "ovr_module_shield_extender_x2",
+ "derivation": "Skills 0: Rifter base shieldCapacity 450.0 + 2 extenders x overridden capacityBonus 1000 (modAdd, not stacking-penalised; the override applies to every module of that type) = 2450.0.",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "hp.shield": 2450.0
+ }
+}

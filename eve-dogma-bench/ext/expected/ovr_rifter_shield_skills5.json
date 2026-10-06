@@ -1,0 +1,10 @@
+{
+ "case": "ovr_rifter_shield_skills5",
+ "derivation": "Shield Management +5%/level on shieldCapacity: 1000 * 1.25 = 1250.",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "hp.shield": 1250.0
+ }
+}

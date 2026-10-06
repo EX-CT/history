@@ -1,0 +1,10 @@
+{
+ "case": "ovr_rifter_velocity_skills5",
+ "derivation": "All skills V: Navigation +5%/level on ship maxVelocity -> 400 * 1.25 = 500 (no other velocity modifier on an empty Rifter).",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "max_velocity": 500.0
+ }
+}

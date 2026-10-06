@@ -1,0 +1,65 @@
+## F 4b8f5f9 271 failing
+ 150  modules[].moduleRepairRate  e.g. eff_3771_armorHPBonusAddPassive
+ 139  modules[].isBlackOpsJumpConduitPassenger  e.g. eff_3771_armorHPBonusAddPassive
+ 139  modules[].isBlackOpsJumpPortalPassenger  e.g. eff_3771_armorHPBonusAddPassive
+  91  ship.conduitJumpPassengerCount  e.g. eff_12098_jumpPortalPassengerBonusModAddSkill
+  38  fighters[].* (no attributes.fighters dump)  e.g. eff_12592_shipBonusCarrierA5SupportFighterBonusEffect
+   5  ship.gateScrambleStatus  e.g. eff_12246_shipBonusRoleAngelDreadMoveWhileSieged
+   5  ship.miningScannerUpgrade  e.g. eff_12556_eliteBonusCommandDestroyerMining1
+   5  drones[].miningDroneAmountPercent  e.g. eff_17_mining
+   4  modules[].hp  e.g. eff_11060_shipBonusDroneWebStrengthAndHitpointsGBC3
+   4  drones[].shieldCapacity  e.g. eff_13026_shipBonusDroneTrackingGF2
+   2  modules[].consumptionQuantity  e.g. eff_3267_shipConsumptionQuantityBonusIndustrialReconfigurationORECapi
+   2  modules[].jumpConduitPassengerRequiredAttributeID  e.g. eff_3674_jumpPortalGenerationBO
+   2  ship.baseWarpSpeed  e.g. eff_3867_subsystemBonusGallentePropulsion2Agility
+   2  ship.warpSpeedMultiplier  e.g. eff_3867_subsystemBonusGallentePropulsion2Agility
+   1  modules[].cpu  e.g. eff_12127_shipRoleBonusUpwellHaulersMediumMissileFittingBonus
+   1  cpu_used  e.g. eff_12127_shipRoleBonusUpwellHaulersMediumMissileFittingBonus
+   1  ship.breacherPodDamageResistance  e.g. eff_12916_moduleBonusBreacherPodDamageControl
+   1  drones[].damageMultiplier  e.g. eff_6581_moduleBonusTriageModule
+   1  drones[].kineticDamage  e.g. eff_6581_moduleBonusTriageModule
+   1  ship.armorHP  e.g. eff_7029_structureArmorHPBonus
+   1  ship.hiddenArmorHPMultiplier  e.g. eff_7029_structureArmorHPBonus
+   1  ehp.armor  e.g. eff_7029_structureArmorHPBonus
+   1  hp.armor  e.g. eff_7029_structureArmorHPBonus
+   1  ship.scanResolution  e.g. eff_7098_structureConversionRigBasicBonuses
+   1  scan_resolution  e.g. eff_7098_structureConversionRigBasicBonuses
+   1  modules[].charge.kineticDamage  e.g. eff_889_missileLauncherSpeedMultiplier
+unverified37 fail: eff_12916_moduleBonusBreacherPodDamageControl eff_6482_doomsdayAOEBubble eff_6732_moduleBonusWarfareLinkArmor eff_6733_moduleBonusWarfareLinkShield eff_6734_moduleBonusWarfareLinkSkirmish eff_6735_moduleBonusWarfareLinkInfo eff_6736_moduleBonusWarfareLinkMining
+unverified37 pass: eff_101_useMissiles eff_10_targetAttack eff_1738_doHacking eff_2255_tractorBeamCan eff_2726_miningClouds eff_2757_salvaging eff_34_projectileFired eff_48_powerBooster eff_55_targetHostiles eff_6422_remoteSensorDampFalloff eff_6425_remoteTargetPaintFalloff eff_6426_remoteWebifierFalloff eff_6427_remoteSensorBoostFalloff eff_6443_pointDefense eff_6447_lightningWeapon eff_6690_remoteWebifierEntity eff_6692_remoteTargetPaintEntity eff_6693_remoteSensorDampEntity eff_6753_moduleTitanEffectGenerator eff_67_miningLaser eff_6995_targetDisintegratorAttack eff_7050_aoe_beacon_bioluminescence_cloud eff_7051_aoe_beacon_caustic_cloud eff_7058_aoe_beacon_filament_cloud eff_7059_weather_caustic_toxin eff_7060_weather_darkness eff_7061_weather_electric_storm eff_7062_weather_infernal eff_7063_weather_xenon_gas eff_7064_weather_basic
+## eve-dogma-rs d6043a7 283 failing
+ 150  modules[].moduleRepairRate  e.g. eff_3771_armorHPBonusAddPassive
+ 139  modules[].isBlackOpsJumpConduitPassenger  e.g. eff_3771_armorHPBonusAddPassive
+ 139  modules[].isBlackOpsJumpPortalPassenger  e.g. eff_3771_armorHPBonusAddPassive
+  91  ship.conduitJumpPassengerCount  e.g. eff_12098_jumpPortalPassengerBonusModAddSkill
+  38  fighters[].* (no attributes.fighters dump)  e.g. eff_12592_shipBonusCarrierA5SupportFighterBonusEffect
+   7  ship.agility  e.g. eff_11953_systemUpwellAoeVelocity
+   7  align_time_s  e.g. eff_11953_systemUpwellAoeVelocity
+   5  ship.gateScrambleStatus  e.g. eff_12246_shipBonusRoleAngelDreadMoveWhileSieged
+   5  ship.miningScannerUpgrade  e.g. eff_12556_eliteBonusCommandDestroyerMining1
+   5  drones[].miningDroneAmountPercent  e.g. eff_17_mining
+   4  modules[].hp  e.g. eff_11060_shipBonusDroneWebStrengthAndHitpointsGBC3
+   4  drones[].shieldCapacity  e.g. eff_13026_shipBonusDroneTrackingGF2
+   4  warp_scramble_status  e.g. eff_2008_cynosuralDurationBonus
+   3  ship.maxVelocity  e.g. eff_6801_modeMWDandABBoostPostDiv
+   2  modules[].consumptionQuantity  e.g. eff_3267_shipConsumptionQuantityBonusIndustrialReconfigurationORECapi
+   2  modules[].jumpConduitPassengerRequiredAttributeID  e.g. eff_3674_jumpPortalGenerationBO
+   2  ship.baseWarpSpeed  e.g. eff_3867_subsystemBonusGallentePropulsion2Agility
+   2  ship.warpSpeedMultiplier  e.g. eff_3867_subsystemBonusGallentePropulsion2Agility
+   1  drone_dps  e.g. eff_13021_hybridDroneDamageMultiplierBonus
+   1  modules[].accessDifficultyBonus  e.g. eff_2794_salvagingAccessDifficultyBonusEffectPassive
+   1  ship.warpScrambleStatus  e.g. eff_6567_moduleBonusNetworkedSensorArray
+   1  drones[].damageMultiplier  e.g. eff_6581_moduleBonusTriageModule
+   1  drones[].kineticDamage  e.g. eff_6581_moduleBonusTriageModule
+   1  max_velocity  e.g. eff_6801_modeMWDandABBoostPostDiv
+   1  ship.armorHP  e.g. eff_7029_structureArmorHPBonus
+   1  ship.hiddenArmorHPMultiplier  e.g. eff_7029_structureArmorHPBonus
+   1  ehp.armor  e.g. eff_7029_structureArmorHPBonus
+   1  hp.armor  e.g. eff_7029_structureArmorHPBonus
+   1  ship.scanResolution  e.g. eff_7098_structureConversionRigBasicBonuses
+   1  scan_resolution  e.g. eff_7098_structureConversionRigBasicBonuses
+   1  stank.armor  e.g. eff_7166_ShipModuleRemoteArmorMutadaptiveRepairer
+   1  tank.armor  e.g. eff_7166_ShipModuleRemoteArmorMutadaptiveRepairer
+   1  modules[].charge.kineticDamage  e.g. eff_889_missileLauncherSpeedMultiplier
+unverified37 fail: eff_6482_doomsdayAOEBubble eff_6732_moduleBonusWarfareLinkArmor eff_6733_moduleBonusWarfareLinkShield eff_6734_moduleBonusWarfareLinkSkirmish eff_6735_moduleBonusWarfareLinkInfo eff_6736_moduleBonusWarfareLinkMining
+unverified37 pass: eff_101_useMissiles eff_10_targetAttack eff_12916_moduleBonusBreacherPodDamageControl eff_1738_doHacking eff_2255_tractorBeamCan eff_2726_miningClouds eff_2757_salvaging eff_34_projectileFired eff_48_powerBooster eff_55_targetHostiles eff_6422_remoteSensorDampFalloff eff_6425_remoteTargetPaintFalloff eff_6426_remoteWebifierFalloff eff_6427_remoteSensorBoostFalloff eff_6443_pointDefense eff_6447_lightningWeapon eff_6690_remoteWebifierEntity eff_6692_remoteTargetPaintEntity eff_6693_remoteSensorDampEntity eff_6753_moduleTitanEffectGenerator eff_67_miningLaser eff_6995_targetDisintegratorAttack eff_7050_aoe_beacon_bioluminescence_cloud eff_7051_aoe_beacon_caustic_cloud eff_7058_aoe_beacon_filament_cloud eff_7059_weather_caustic_toxin eff_7060_weather_darkness eff_7061_weather_electric_storm eff_7062_weather_infernal eff_7063_weather_xenon_gas eff_7064_weather_basic

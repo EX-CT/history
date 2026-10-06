@@ -1,0 +1,41 @@
+{
+ "crashes": [],
+ "f_ref": "af1c04b",
+ "failing": [],
+ "fuzz200": {
+  "crashes": [],
+  "failing": [
+   {
+    "id": "lf10_123_28659",
+    "mismatches": {
+     "align_time_s": {
+      "got": 10.293025,
+      "pyfa": 102.93024619984746
+     }
+    }
+   },
+   {
+    "id": "lf10_197_28659",
+    "mismatches": {
+     "align_time_s": {
+      "got": 14.291128,
+      "pyfa": 142.91128350518008
+     }
+    }
+   }
+  ],
+  "passed": 198,
+  "source": "fz-e/work/fits (gen_legal.py fits 200 10) vs stored Pyfa oracle fz-e/work/out/oracle.jsonl; bench-1.9.0 metrics",
+  "timeouts": [],
+  "total": 200,
+  "values": 12057
+ },
+ "passed": 8,
+ "rc": 0,
+ "suite": "pending-1.10",
+ "suite_ref": "pending-1.10 3193689 e_fz_* (8 cases, scored with bench-1.9.0 run.py/metrics) + 200 legal fuzz fits",
+ "timeouts": [],
+ "total": 8,
+ "values": "458/458",
+ "wall_s": 0.1
+}

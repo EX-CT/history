@@ -1,0 +1,50 @@
+{
+ "crashes": [],
+ "f_ref": "4b8f5f9",
+ "failing": [],
+ "passed": 150,
+ "per_metric": {
+  "capacity": [
+   150,
+   150
+  ],
+  "delta_gj_s": [
+   150,
+   150
+  ],
+  "depletes_in_s": [
+   112,
+   112
+  ],
+  "injected_gj_s": [
+   150,
+   150
+  ],
+  "peak_recharge_gj_s": [
+   150,
+   150
+  ],
+  "recharge_time_s": [
+   150,
+   150
+  ],
+  "stable": [
+   150,
+   150
+  ],
+  "stable_percent": [
+   38,
+   38
+  ],
+  "use_gj_s": [
+   150,
+   150
+  ]
+ },
+ "rc": 0,
+ "suite": "cap-suite",
+ "suite_ref": "cap-suite d80cc38, 150 cases",
+ "timeouts": [],
+ "total": 150,
+ "wall_s": 0.1
+}

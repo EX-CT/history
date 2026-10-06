@@ -1,0 +1,5521 @@
+{
+ "meta": {
+  "started": "2026-10-03 10:23:51 CST",
+  "bench_version": "1.8.0+3da9671",
+  "bench_pin": {
+   "ref": "3da9671",
+   "sha": "3da9671da11379de6ae17d3c3285505e95267f29",
+   "version": "1.8.0",
+   "cases": 326,
+   "dir": "/workspace/exct-eve/eval-work/eve-dogma-bench/work/eval/bench-3da9671da113"
+  },
+  "evaluate_py_commit": "32295d55a675cf3ada7f71c480deae5b63bf1fcb",
+  "nproc": 8,
+  "command": "python3 tools/evaluate.py --as-of 2026-10-03T10:15:00+08:00 --runs 3 --fresh-clones",
+  "dry_run": false,
+  "as_of": "2026-10-03T10:15:00+08:00",
+  "host_loadavg_start": [
+   0.23,
+   0.32,
+   0.93
+  ],
+  "finished": "2026-10-03 10:46:56 CST",
+  "wall_s": 1384.2,
+  "host_loadavg_end": [
+   2.05,
+   1.93,
+   1.62
+  ]
+ },
+ "weights": {
+  "total": {
+   "speed": 0.4,
+   "maint": 0.35,
+   "feat": 0.15,
+   "port": 0.1
+  },
+  "speed": {
+   "latency": 0.5,
+   "throughput": 0.3,
+   "cold": 0.2
+  },
+  "maint": {
+   "tests": 0.25,
+   "data": 0.2,
+   "size": 0.2,
+   "docs": 0.15,
+   "deps": 0.1,
+   "build": 0.1
+  }
+ },
+ "variants": [
+  {
+   "letter": "A",
+   "label": "eve-dogma-rs (Rust ref)",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-rs",
+    "branch": "main",
+    "sha": "659737bfb47e63c51e19098c0cd6feeaed0d53b8",
+    "commit_time": "2026-10-03T09:31:02+08:00",
+    "branch_head_at_fetch": "659737bfb47e63c51e19098c0cd6feeaed0d53b8",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cargo build --release",
+    "cmd": "./target/release/eve-dogma --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./target/release/eve-dogma --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./target/release/eve-dogma --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 72.4,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 3.4,
+     "loadavg_before": [
+      1.02,
+      0.55,
+      0.97
+     ],
+     "loadavg_after": [
+      1.18,
+      0.59,
+      0.98
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.1413579779699956,
+     "fits_per_s": 4360.484833765121,
+     "batch_responses": 1630,
+     "cold_ms": 7.929116494779009,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 3.3,
+     "loadavg_before": [
+      1.18,
+      0.59,
+      0.98
+     ],
+     "loadavg_after": [
+      1.24,
+      0.61,
+      0.98
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.13418699600589173,
+     "fits_per_s": 4972.541974100868,
+     "batch_responses": 1630,
+     "cold_ms": 7.983839001099113,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 3.5,
+     "loadavg_before": [
+      1.24,
+      0.61,
+      0.98
+     ],
+     "loadavg_after": [
+      1.24,
+      0.61,
+      0.98
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.1593417535164582,
+     "fits_per_s": 4847.408689521628,
+     "batch_responses": 1630,
+     "cold_ms": 8.389358503336553,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.12038528861294187,
+    "median_ms": 0.12038528861294187,
+    "min_ms": 0.12035529104120055,
+    "max_ms": 0.12039311767017952,
+    "spread": 0.00031421305223256586,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 2066,
+    "startup_ms": 16.01,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 2066,
+      "load1": 1.24,
+      "t1_ms": 16.0,
+      "tN_s": 0.2645,
+      "ms": 0.12035529104120055,
+      "upper_ms": 0.128041970471325,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 2066,
+      "load1": 1.24,
+      "t1_ms": 15.95,
+      "tN_s": 0.2646,
+      "ms": 0.12039126925278663,
+      "upper_ms": 0.12805445740216467,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 2066,
+      "load1": 1.24,
+      "t1_ms": 15.9,
+      "tN_s": 0.2645,
+      "ms": 0.12038528861294187,
+      "upper_ms": 0.12802507937446303,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 2066,
+      "load1": 1.3,
+      "t1_ms": 15.93,
+      "tN_s": 0.2645,
+      "ms": 0.12039311767017952,
+      "upper_ms": 0.12804418925100366,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 2066,
+      "load1": 1.3,
+      "t1_ms": 16.21,
+      "tN_s": 0.2648,
+      "ms": 0.12037487796137952,
+      "upper_ms": 0.1281631931232961,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.02,
+    1.18,
+    1.24,
+    1.18,
+    1.24,
+    1.24
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.12038528861294187,
+   "latency_runpy_ms_info": 0.1413579779699956,
+   "fits_per_s": 4847.408689521628,
+   "cold_ms": 7.983839001099113,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "tooling": {
+      "Python": 543
+     },
+     "core": {
+      "Rust": 5456,
+      "JavaScript": 22
+     },
+     "test": {
+      "Rust": 157
+     }
+    },
+    "core_loc": 5478,
+    "test_count_static": 10,
+    "hardcoded_effects": 98,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "chargeBonusWarfareCharge",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting"
+    ],
+    "data_driven_ratio": 0.9695,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "bincode",
+      "flate2",
+      "mimalloc",
+      "rustc-hash",
+      "serde",
+      "serde_json",
+      "sha2",
+      "smallvec"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 8
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 1.0,
+    "level": "code",
+    "evidence": [
+     "Cargo.toml: wasm32",
+     "src/main.rs: wasm32",
+     "wasm/run.mjs: wasm32"
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 10,
+    "failed": 0,
+    "seconds": 41.4,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.9008353336087642,
+     "throughput": 0.6142579152077617,
+     "cold": 0.677198813746944
+    },
+    "maint_parts": {
+     "tests": 0.8078294825929763,
+     "data": 0.5228787452803376,
+     "size": 0.8462743162195072,
+     "docs": 1.0,
+     "deps": 0.3846153846153846,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.7701,
+    "maint": 0.6642,
+    "feat": 1.0,
+    "port": 1.0,
+    "total": 0.7905
+   },
+   "rank": 4
+  },
+  {
+   "letter": "B",
+   "label": "data-oriented Rust",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-b",
+    "sha": "f56dd598e05a552332cbc869b05bb276e3249b8d",
+    "commit_time": "2026-10-03T09:45:21+08:00",
+    "branch_head_at_fetch": "f56dd598e05a552332cbc869b05bb276e3249b8d",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cargo build --release",
+    "cmd": "./target/release/eve-dogma-vb --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./target/release/eve-dogma-vb --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./target/release/eve-dogma-vb --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 79.5,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 1.9,
+     "loadavg_before": [
+      1.66,
+      1.14,
+      1.14
+     ],
+     "loadavg_after": [
+      1.66,
+      1.14,
+      1.14
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.031404028046374134,
+     "fits_per_s": 19268.226791231198,
+     "batch_responses": 1630,
+     "cold_ms": 4.680800506321248,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 1.9,
+     "loadavg_before": [
+      1.66,
+      1.14,
+      1.14
+     ],
+     "loadavg_after": [
+      1.61,
+      1.13,
+      1.14
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.02909544890350802,
+     "fits_per_s": 19053.216899157305,
+     "batch_responses": 1630,
+     "cold_ms": 4.567316500470042,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 1.9,
+     "loadavg_before": [
+      1.61,
+      1.13,
+      1.14
+     ],
+     "loadavg_after": [
+      1.61,
+      1.13,
+      1.14
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.03271926855127176,
+     "fits_per_s": 20167.892882954642,
+     "batch_responses": 1630,
+     "cold_ms": 4.671776499890257,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.09875790851793075,
+    "median_ms": 0.09875790851793075,
+    "min_ms": 0.09810547002993915,
+    "max_ms": 0.09881248725746555,
+    "spread": 0.0071590947817413205,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 4122,
+    "startup_ms": 7.8,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 4122,
+      "load1": 1.61,
+      "t1_ms": 7.82,
+      "tN_s": 0.415,
+      "ms": 0.09881248725746555,
+      "upper_ms": 0.10068658806333565,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 4122,
+      "load1": 1.61,
+      "t1_ms": 7.81,
+      "tN_s": 0.4148,
+      "ms": 0.09876126959720263,
+      "upper_ms": 0.10063291387827361,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 4122,
+      "load1": 1.64,
+      "t1_ms": 8.03,
+      "tN_s": 0.415,
+      "ms": 0.09875790851793075,
+      "upper_ms": 0.10068181538111058,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 4122,
+      "load1": 1.64,
+      "t1_ms": 10.55,
+      "tN_s": 0.4148,
+      "ms": 0.09810547002993915,
+      "upper_ms": 0.10064140926661423,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 4122,
+      "load1": 1.64,
+      "t1_ms": 8.08,
+      "tN_s": 0.4149,
+      "ms": 0.09870673356,
+      "upper_ms": 0.10064339762237709,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.66,
+    1.66,
+    1.61,
+    1.66,
+    1.61,
+    1.61
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.09875790851793075,
+   "latency_runpy_ms_info": 0.031404028046374134,
+   "fits_per_s": 19268.226791231198,
+   "cold_ms": 4.671776499890257,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Rust": 6220
+     },
+     "test": {
+      "Rust": 672
+     },
+     "tooling": {
+      "Python": 57,
+      "Shell": 11
+     }
+    },
+    "core_loc": 6220,
+    "test_count_static": 51,
+    "hardcoded_effects": 96,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.9701,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)",
+      "<branch root>/LICENSE (LGPL-3)",
+      "<branch root>/LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": null,
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "bincode",
+      "flate2",
+      "memmap2",
+      "mimalloc",
+      "serde",
+      "serde_json"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 6
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.5,
+    "level": "docs-only",
+    "evidence": [
+     "WASM"
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 51,
+    "failed": 0,
+    "seconds": 80.4,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.9438361007855246,
+     "throughput": 0.9139239713959353,
+     "cold": 0.7935636701577056
+    },
+    "maint_parts": {
+     "tests": 0.9424607183420457,
+     "data": 0.530996635502517,
+     "size": 0.7911059594466312,
+     "docs": 1.0,
+     "deps": 0.45454545454545453,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.9048,
+    "maint": 0.6955,
+    "feat": 1.0,
+    "port": 0.5,
+    "total": 0.8053
+   },
+   "rank": 3
+  },
+  {
+   "letter": "C",
+   "label": "Go",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-c",
+    "sha": "d12ff1a767b709991d78973936a34b92bb4f9e77",
+    "commit_time": "2026-10-03T07:27:37+08:00",
+    "branch_head_at_fetch": "d12ff1a767b709991d78973936a34b92bb4f9e77",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "go build -trimpath -o bin/eve-dogma-go ./cmd/eve-dogma-go",
+    "cmd": "./bin/eve-dogma-go --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./bin/eve-dogma-go --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./bin/eve-dogma-go --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 0.8,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 9.7,
+     "loadavg_before": [
+      2.74,
+      1.62,
+      1.31
+     ],
+     "loadavg_after": [
+      2.47,
+      1.6,
+      1.31
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.04904483367300747,
+     "fits_per_s": 12794.4916180077,
+     "batch_responses": 1630,
+     "cold_ms": 27.515397996467073,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 9.7,
+     "loadavg_before": [
+      2.47,
+      1.6,
+      1.31
+     ],
+     "loadavg_after": [
+      2.24,
+      1.58,
+      1.3
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.0463353767655118,
+     "fits_per_s": 13036.70442502856,
+     "batch_responses": 1630,
+     "cold_ms": 27.110347502457444,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 9.6,
+     "loadavg_before": [
+      2.24,
+      1.58,
+      1.3
+     ],
+     "loadavg_after": [
+      2.06,
+      1.56,
+      1.3
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.04236250502227214,
+     "fits_per_s": 11937.019669247818,
+     "batch_responses": 1630,
+     "cold_ms": 27.11592148989439,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.23387085845106473,
+    "median_ms": 0.23387085845106473,
+    "min_ms": 0.20736773427379618,
+    "max_ms": 0.23406216059088636,
+    "spread": 0.1141417382819234,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 1209,
+    "startup_ms": 32.13,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 1209,
+      "load1": 2.06,
+      "t1_ms": 32.1,
+      "tN_s": 0.3148,
+      "ms": 0.23406216059088636,
+      "upper_ms": 0.2604157154649,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 1209,
+      "load1": 2.06,
+      "t1_ms": 32.17,
+      "tN_s": 0.3147,
+      "ms": 0.23389572433736838,
+      "upper_ms": 0.2603081530155506,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 1209,
+      "load1": 2.06,
+      "t1_ms": 64.28,
+      "tN_s": 0.3148,
+      "ms": 0.20736773427379618,
+      "upper_ms": 0.2603653978548306,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 1209,
+      "load1": 2.06,
+      "t1_ms": 64.22,
+      "tN_s": 0.3148,
+      "ms": 0.20739702483375452,
+      "upper_ms": 0.2603413961978739,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 1209,
+      "load1": 1.89,
+      "t1_ms": 32.17,
+      "tN_s": 0.3147,
+      "ms": 0.23387085845106473,
+      "upper_ms": 0.260283770890405,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    2.74,
+    2.47,
+    2.24,
+    2.47,
+    2.24,
+    2.06
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.23387085845106473,
+   "latency_runpy_ms_info": 0.0463353767655118,
+   "fits_per_s": 12794.4916180077,
+   "cold_ms": 27.11592148989439,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Go": 7702
+     },
+     "test": {
+      "Go": 661
+     },
+     "tooling": {
+      "Shell": 22,
+      "Python": 99
+     }
+    },
+    "core_loc": 7702,
+    "test_count_static": 13,
+    "hardcoded_effects": 93,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.971,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)",
+      "<branch root>/LICENSE (LGPL-3)",
+      "<branch root>/LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "README",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [],
+     "dev": [],
+     "build": [],
+     "n_runtime": 0
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.0,
+    "level": "none",
+    "evidence": []
+   },
+   "tests": {
+    "found": true,
+    "cmd": "go test -v ./... 2>&1",
+    "runner": "go",
+    "status": "passed",
+    "rc": 0,
+    "passed": 361,
+    "failed": 0,
+    "seconds": 3.6,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.7566339878556245,
+     "throughput": 0.825014613747759,
+     "cold": 0.41169251512425875
+    },
+    "maint_parts": {
+     "tests": 1.0,
+     "data": 0.543465276062115,
+     "size": 0.6982928298507376,
+     "docs": 1.0,
+     "deps": 1.0,
+     "build": 0.7870156338638594
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.7082,
+    "maint": 0.8271,
+    "feat": 1.0,
+    "port": 0.0,
+    "total": 0.7227
+   },
+   "rank": 6
+  },
+  {
+   "letter": "D",
+   "label": "TypeScript",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-d",
+    "sha": "5218e0d4dfcb30f7c0d08c9034bb149aafb19594",
+    "commit_time": "2026-10-03T08:13:39+08:00",
+    "branch_head_at_fetch": "5218e0d4dfcb30f7c0d08c9034bb149aafb19594",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "npm ci --silent && npm run build --silent && node dist-cli/eve-dogma-ts.cjs cache --dataset /workspace/exct-eve/data/dataset-3569502.json.gz && node dist-cli/eve-dogma-ts.cjs snapshot --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "cmd": "node --snapshot-blob dist-cli/eve-dogma-ts.blob calc --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "batch_cmd": "node --snapshot-blob dist-cli/eve-dogma-ts.blob batch --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "rpc_cmd": "node --snapshot-blob dist-cli/eve-dogma-ts.blob serve-stdio --dataset /workspace/exct-eve/data/dataset-3569502.json.gz"
+   },
+   "build_s": 7.6,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 38.6,
+     "loadavg_before": [
+      1.84,
+      1.53,
+      1.29
+     ],
+     "loadavg_after": [
+      1.51,
+      1.48,
+      1.28
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.5261704448973554,
+     "fits_per_s": 1198.8269412184363,
+     "batch_responses": 1630,
+     "cold_ms": 109.60141850227956,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 38.5,
+     "loadavg_before": [
+      1.51,
+      1.48,
+      1.28
+     ],
+     "loadavg_after": [
+      1.26,
+      1.42,
+      1.27
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.8575880340636916,
+     "fits_per_s": 1168.4818905004838,
+     "batch_responses": 1630,
+     "cold_ms": 109.25928749929881,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 38.5,
+     "loadavg_before": [
+      1.26,
+      1.42,
+      1.27
+     ],
+     "loadavg_after": [
+      1.41,
+      1.43,
+      1.28
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.6031419960014384,
+     "fits_per_s": 1160.4369791663614,
+     "batch_responses": 1630,
+     "cold_ms": 107.76906699902611,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 1.826604396747689,
+    "median_ms": 1.826604396747689,
+    "min_ms": 1.6239283644468883,
+    "max_ms": 2.029743202517058,
+    "spread": 0.22216898130363227,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 248,
+    "startup_ms": 164.56,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 248,
+      "load1": 1.54,
+      "t1_ms": 164.53,
+      "tN_s": 0.6659,
+      "ms": 2.029743202517058,
+      "upper_ms": 2.6849742984444265,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 248,
+      "load1": 1.54,
+      "t1_ms": 114.33,
+      "tN_s": 0.6156,
+      "ms": 2.029386943353242,
+      "upper_ms": 2.4822306653321347,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 248,
+      "load1": 1.54,
+      "t1_ms": 164.52,
+      "tN_s": 0.5656,
+      "ms": 1.6239283644468883,
+      "upper_ms": 2.280759770186588,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 248,
+      "load1": 1.58,
+      "t1_ms": 114.32,
+      "tN_s": 0.5655,
+      "ms": 1.826604396747689,
+      "upper_ms": 2.2801933185203986,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 248,
+      "load1": 1.58,
+      "t1_ms": 114.9,
+      "tN_s": 0.5657,
+      "ms": 1.8250414655545748,
+      "upper_ms": 2.280998822595481,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.84,
+    1.51,
+    1.26,
+    1.51,
+    1.26,
+    1.41
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 1.826604396747689,
+   "latency_runpy_ms_info": 0.6031419960014384,
+   "fits_per_s": 1168.4818905004838,
+   "cold_ms": 109.25928749929881,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "JavaScript": 3574,
+      "TypeScript": 3642
+     },
+     "generated": {
+      "JavaScript": 7180
+     },
+     "tooling": {
+      "Python": 36,
+      "JavaScript": 96
+     },
+     "test": {
+      "TypeScript": 57
+     }
+    },
+    "core_loc": 7216,
+    "test_count_static": 0,
+    "hardcoded_effects": 96,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.9701,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "<branch root>/LICENSE (LGPL-3)",
+      "<branch root>/LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [],
+     "dev": [
+      "@types/node",
+      "typescript"
+     ],
+     "build": [],
+     "n_runtime": 0
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 1.0,
+    "level": "code",
+    "evidence": [
+     "dist-web/eve-dogma-ts.amd.js: DecompressionStream",
+     "dist-web/eve-dogma-ts.js: DecompressionStream",
+     "dist-web/eve-dogma-ts.mjs: DecompressionStream",
+     "package.json: tsconfig.browser",
+     "src/browser.ts: DecompressionStream",
+     "tools/bundle.mjs: tsconfig.browser",
+     "web/index.html: <script type=\"module\""
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "npm test --silent 2>&1",
+    "runner": "npm",
+    "status": "passed",
+    "rc": 0,
+    "passed": null,
+    "failed": null,
+    "seconds": 7.4,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.3102997934051327,
+     "throughput": 0.30531408966334184,
+     "cold": 0.10907551699120033
+    },
+    "maint_parts": {
+     "tests": 0.6,
+     "data": 0.530996635502517,
+     "size": 0.7265998196035646,
+     "docs": 1.0,
+     "deps": 1.0,
+     "build": 0.2981538312194355
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.2686,
+    "maint": 0.6813,
+    "feat": 1.0,
+    "port": 1.0,
+    "total": 0.5959
+   },
+   "rank": 9
+  },
+  {
+   "letter": "E",
+   "label": "Pyfa-faithful Rust",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-e",
+    "sha": "5867d53793bf82eb3b6d513359f3ea0d6aa26378",
+    "commit_time": "2026-10-03T07:34:53+08:00",
+    "branch_head_at_fetch": "5867d53793bf82eb3b6d513359f3ea0d6aa26378",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cargo build --release",
+    "cmd": "./target/release/eve-dogma-e calc --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "batch_cmd": "./target/release/eve-dogma-e batch --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "rpc_cmd": "./target/release/eve-dogma-e serve-stdio --dataset /workspace/exct-eve/data/dataset-3569502.json.gz"
+   },
+   "build_s": 105.1,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 4.2,
+     "loadavg_before": [
+      1.34,
+      1.47,
+      1.32
+     ],
+     "loadavg_after": [
+      1.24,
+      1.44,
+      1.31
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.17813129861697272,
+     "fits_per_s": 4169.232833837673,
+     "batch_responses": 1630,
+     "cold_ms": 9.413202504219953,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 3.8,
+     "loadavg_before": [
+      1.24,
+      1.44,
+      1.31
+     ],
+     "loadavg_after": [
+      1.24,
+      1.44,
+      1.31
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.12733063726818453,
+     "fits_per_s": 4377.142868219341,
+     "batch_responses": 1630,
+     "cold_ms": 8.727955995709635,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 3.7,
+     "loadavg_before": [
+      1.24,
+      1.44,
+      1.31
+     ],
+     "loadavg_after": [
+      1.22,
+      1.44,
+      1.31
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.12199611021373757,
+     "fits_per_s": 4537.983728463178,
+     "batch_responses": 1630,
+     "cold_ms": 8.778825009358115,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.11987476048609579,
+    "median_ms": 0.11987476048609579,
+    "min_ms": 0.11982449591272028,
+    "max_ms": 0.1681372053017952,
+    "spread": 0.40302653530372395,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 2076,
+    "startup_ms": 16.14,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 2076,
+      "load1": 1.22,
+      "t1_ms": 16.08,
+      "tN_s": 0.3147,
+      "ms": 0.1439322134920295,
+      "upper_ms": 0.1516068636777659,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 2076,
+      "load1": 1.22,
+      "t1_ms": 15.92,
+      "tN_s": 0.2647,
+      "ms": 0.11987476048609579,
+      "upper_ms": 0.127487197495189,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 2076,
+      "load1": 1.22,
+      "t1_ms": 16.03,
+      "tN_s": 0.2647,
+      "ms": 0.11984812481474715,
+      "upper_ms": 0.1275114137747191,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 2076,
+      "load1": 1.22,
+      "t1_ms": 16.07,
+      "tN_s": 0.365,
+      "ms": 0.1681372053017952,
+      "upper_ms": 0.17579876011407303,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 2076,
+      "load1": 1.2,
+      "t1_ms": 15.98,
+      "tN_s": 0.2646,
+      "ms": 0.11982449591272028,
+      "upper_ms": 0.12746624133534154,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.34,
+    1.24,
+    1.24,
+    1.24,
+    1.24,
+    1.22
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.11987476048609579,
+   "latency_runpy_ms_info": 0.12733063726818453,
+   "fits_per_s": 4377.142868219341,
+   "cold_ms": 8.778825009358115,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Rust": 4742
+     },
+     "generated": {
+      "Rust": 14380
+     },
+     "tooling": {
+      "Shell": 11,
+      "Python": 840
+     }
+    },
+    "core_loc": 4742,
+    "test_count_static": 1,
+    "hardcoded_effects": 26,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "adaptiveArmorHardener",
+     "agilityBonus",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "energyNosferatuFalloff",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityLaunchBomb",
+     "fighterAbilityMicroWarpDrive",
+     "fofMissileLaunching",
+     "launcherFitted",
+     "lightningWeapon",
+     "shipAdvancedSpaceshipCommandAgilityBonus",
+     "structureCombatRigSecurityModification",
+     "superWeaponAmarr",
+     "superWeaponCaldari",
+     "superWeaponGallente",
+     "superWeaponMinmatar",
+     "turretFitted"
+    ],
+    "data_driven_ratio": 0.9919,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (GPL-3)"
+     ],
+     "file_license": "GPL-3",
+     "gpl_companion_text": false,
+     "declared": [
+      "GPL-3.0-or-later"
+     ],
+     "readme": null,
+     "effective": "GPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "no",
+     "reason": "GPL-3.0-or-later (LICENSE text, no LGPL) is stronger copyleft; cannot be relicensed into LGPL-3.0-or-later"
+    },
+    "deps": {
+     "runtime": [
+      "bincode",
+      "flate2",
+      "mimalloc",
+      "rustc-hash",
+      "serde",
+      "serde_json",
+      "sha2"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 7
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.0,
+    "level": "none",
+    "evidence": []
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 1,
+    "failed": 0,
+    "seconds": 34.4,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.9017581665261806,
+     "throughput": 0.5920984577119676,
+     "cold": 0.6565865029241871
+    },
+    "maint_parts": {
+     "tests": 0.6600761932894752,
+     "data": 1.0,
+     "size": 0.9089347944952805,
+     "docs": 1.0,
+     "deps": 0.4166666666666667,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.7598,
+    "maint": 0.7385,
+    "feat": 1.0,
+    "port": 0.0,
+    "total": 0.7124
+   },
+   "rank": 7
+  },
+  {
+   "letter": "F",
+   "label": "codegen Rust/WASM",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-f",
+    "sha": "bc84e2bcc3db842b4f923bbf408a5f7c242376fe",
+    "commit_time": "2026-10-03T07:34:04+08:00",
+    "branch_head_at_fetch": "bc84e2bcc3db842b4f923bbf408a5f7c242376fe",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "(EVE_DOGMA_DATASET=/workspace/exct-eve/data/dataset-3569502.json.gz RUSTFLAGS=\"-C target-feature=+crt-static\" cargo build --release --target x86_64-unknown-linux-gnu && cp target/x86_64-unknown-linux-gnu/release/eve-dogma-f target/eve-dogma-f-bench) || (EVE_DOGMA_DATASET=/workspace/exct-eve/data/dataset-3569502.json.gz cargo build --release && cp target/release/eve-dogma-f target/eve-dogma-f-bench)",
+    "cmd": "./target/eve-dogma-f-bench calc",
+    "batch_cmd": "./target/eve-dogma-f-bench batch",
+    "rpc_cmd": "./target/eve-dogma-f-bench serve-stdio"
+   },
+   "build_s": 78.8,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 0.9,
+     "loadavg_before": [
+      1.27,
+      1.4,
+      1.31
+     ],
+     "loadavg_after": [
+      1.56,
+      1.46,
+      1.33
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.031799547090092466,
+     "fits_per_s": 22588.753462179506,
+     "batch_responses": 1630,
+     "cold_ms": 1.7918015000759624,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 0.9,
+     "loadavg_before": [
+      1.56,
+      1.46,
+      1.33
+     ],
+     "loadavg_after": [
+      1.56,
+      1.46,
+      1.33
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.034042587177174725,
+     "fits_per_s": 21782.952573055733,
+     "batch_responses": 1630,
+     "cold_ms": 1.8214185038232245,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 0.9,
+     "loadavg_before": [
+      1.56,
+      1.46,
+      1.33
+     ],
+     "loadavg_after": [
+      1.56,
+      1.46,
+      1.33
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.031647094168918644,
+     "fits_per_s": 20378.830964260276,
+     "batch_responses": 1630,
+     "cold_ms": 1.8055494947475381,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.10053138380977072,
+    "median_ms": 0.10053138380977072,
+    "min_ms": 0.09922805608490243,
+    "max_ms": 0.1261914330639385,
+    "spread": 0.2682085529634925,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 4102,
+    "startup_ms": 7.66,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 4102,
+      "load1": 1.56,
+      "t1_ms": 3.71,
+      "tN_s": 0.416,
+      "ms": 0.10053138380977072,
+      "upper_ms": 0.10141245977727058,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 4102,
+      "load1": 1.56,
+      "t1_ms": 7.86,
+      "tN_s": 0.4652,
+      "ms": 0.11152564594439796,
+      "upper_ms": 0.11341530765713406,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 4102,
+      "load1": 1.56,
+      "t1_ms": 3.91,
+      "tN_s": 0.4159,
+      "ms": 0.1004649019781164,
+      "upper_ms": 0.10139309751396719,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 4102,
+      "load1": 1.56,
+      "t1_ms": 7.8,
+      "tN_s": 0.5253,
+      "ms": 0.1261914330639385,
+      "upper_ms": 0.12806168551864294,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 4102,
+      "load1": 1.56,
+      "t1_ms": 7.95,
+      "tN_s": 0.4149,
+      "ms": 0.09922805608490243,
+      "upper_ms": 0.10114216650496743,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.27,
+    1.56,
+    1.56,
+    1.56,
+    1.56,
+    1.56
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.10053138380977072,
+   "latency_runpy_ms_info": 0.031799547090092466,
+   "fits_per_s": 21782.952573055733,
+   "cold_ms": 1.8055494947475381,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Rust": 5204
+     },
+     "tooling": {
+      "JavaScript": 16
+     },
+     "generated": {
+      "Rust": 1755
+     }
+    },
+    "core_loc": 5204,
+    "test_count_static": 0,
+    "hardcoded_effects": 92,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "OffensiveDefensiveReduction",
+     "ammoInfluenceEntityFlyRange",
+     "armorRepair",
+     "cargoScan",
+     "cloakingPrototype",
+     "cloakingScanResolutionMultiplier",
+     "cloakingWarpSafe",
+     "cloneJumpAccepting",
+     "cloneRespawnBay",
+     "cynosuralGeneration",
+     "debuffLance",
+     "disruptionLanceDisallowCloaking",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "electronicAttributeModifyOnline",
+     "emergencyHullEnergizer",
+     "energyNosferatuFalloff",
+     "entosisLink",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityLaunchBomb",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "freighterAgilityBonus2O2",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect",
+     "industrialCoreEffect2",
+     "industrialItemCompression",
+     "interdictionNullifierBonus"
+    ],
+    "data_driven_ratio": 0.9714,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "itoa",
+      "serde",
+      "serde_json",
+      "zmij"
+     ],
+     "dev": [],
+     "build": [
+      "flate2",
+      "serde_json"
+     ],
+     "n_runtime": 4
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 1.0,
+    "level": "code",
+    "evidence": [
+     "Cargo.toml: wasm32",
+     "examples/node-calc.mjs: wasm32",
+     "src/lib.rs: wasm32",
+     "src/main.rs: wasm32",
+     "src/wasm.rs: wasm-bindgen",
+     "src/wasm.rs: wasm32"
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 0,
+    "failed": 0,
+    "seconds": 63.7,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.9399712124287007,
+     "throughput": 0.9405614696443216,
+     "cold": 1.0
+    },
+    "maint_parts": {
+     "tests": 0.6,
+     "data": 0.5477023290053697,
+     "size": 0.8685590562479012,
+     "docs": 1.0,
+     "deps": 0.5555555555555556,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.9522,
+    "maint": 0.6388,
+    "feat": 1.0,
+    "port": 1.0,
+    "total": 0.8544
+   },
+   "rank": 2
+  },
+  {
+   "letter": "G",
+   "label": "Python+NumPy",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-g",
+    "sha": "a07402ec5d52e78100e715d2f2d4d5f10d88e0d1",
+    "commit_time": "2026-10-03T06:51:30+08:00",
+    "branch_head_at_fetch": "a07402ec5d52e78100e715d2f2d4d5f10d88e0d1",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "python3 -c \"import numpy, sys; assert sys.version_info >= (3, 10)\" && ./bin/eve-dogma-g --dataset /workspace/exct-eve/data/dataset-3569502.json.gz meta > /dev/null",
+    "cmd": "./bin/eve-dogma-g --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./bin/eve-dogma-g --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./bin/eve-dogma-g --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 0.3,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 41.3,
+     "loadavg_before": [
+      1.81,
+      1.59,
+      1.39
+     ],
+     "loadavg_after": [
+      1.46,
+      1.53,
+      1.37
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 2.0559465651503506,
+     "fits_per_s": 381.6739643158177,
+     "batch_responses": 1630,
+     "cold_ms": 104.23012049432145,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 41.5,
+     "loadavg_before": [
+      1.46,
+      1.53,
+      1.37
+     ],
+     "loadavg_after": [
+      1.4,
+      1.51,
+      1.37
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 1.9488495330777456,
+     "fits_per_s": 309.4726498976234,
+     "batch_responses": 1630,
+     "cold_ms": 104.5429605001118,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 40.4,
+     "loadavg_before": [
+      1.4,
+      1.51,
+      1.37
+     ],
+     "loadavg_after": [
+      1.26,
+      1.46,
+      1.36
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 2.2570775130195337,
+     "fits_per_s": 386.92449347799715,
+     "batch_responses": 1630,
+     "cold_ms": 103.27388200676069,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 2.2884729269415685,
+    "median_ms": 2.2884729269415685,
+    "min_ms": 2.287771853872949,
+    "max_ms": 2.7464725616436927,
+    "spread": 0.20043964792879357,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 220,
+    "startup_ms": 114.32,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 220,
+      "load1": 1.24,
+      "t1_ms": 114.41,
+      "tN_s": 0.6154,
+      "ms": 2.287771853872949,
+      "upper_ms": 2.7974205136574297,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 220,
+      "load1": 1.24,
+      "t1_ms": 164.56,
+      "tN_s": 0.766,
+      "ms": 2.7464725616436927,
+      "upper_ms": 3.4819776636140887,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 220,
+      "load1": 1.24,
+      "t1_ms": 114.34,
+      "tN_s": 0.6155,
+      "ms": 2.2884729269415685,
+      "upper_ms": 2.79778470457214,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 220,
+      "load1": 1.24,
+      "t1_ms": 114.36,
+      "tN_s": 0.6155,
+      "ms": 2.2884958036154615,
+      "upper_ms": 2.7979042772627016,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 220,
+      "load1": 1.3,
+      "t1_ms": 114.24,
+      "tN_s": 0.6154,
+      "ms": 2.288178557045779,
+      "upper_ms": 2.797048495465953,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.81,
+    1.46,
+    1.4,
+    1.46,
+    1.4,
+    1.26
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 2.2884729269415685,
+   "latency_runpy_ms_info": 2.0559465651503506,
+   "fits_per_s": 381.6739643158177,
+   "cold_ms": 104.23012049432145,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Python": 3845
+     },
+     "test": {
+      "Python": 232
+     }
+    },
+    "core_loc": 3845,
+    "test_count_static": 0,
+    "hardcoded_effects": 93,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.971,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "README",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "numpy"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 1
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.0,
+    "level": "none",
+    "evidence": []
+   },
+   "tests": {
+    "found": true,
+    "cmd": "/usr/bin/python3 tests/run_tests.py 2>&1",
+    "runner": "script",
+    "status": "passed",
+    "rc": 0,
+    "passed": null,
+    "failed": null,
+    "seconds": 6.8,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.2613491532435108,
+     "throughput": 0.06234936458681506,
+     "cold": 0.11930807911189345
+    },
+    "maint_parts": {
+     "tests": 0.6,
+     "data": 0.543465276062115,
+     "size": 1.0,
+     "docs": 1.0,
+     "deps": 0.8333333333333334,
+     "build": 1.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.1732,
+    "maint": 0.792,
+    "feat": 1.0,
+    "port": 0.0,
+    "total": 0.4965
+   },
+   "rank": 10
+  },
+  {
+   "letter": "H",
+   "label": "Rust ECS",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-h",
+    "sha": "b1c785269011daec9e86631a4e8c34316c787f97",
+    "commit_time": "2026-10-03T08:46:42+08:00",
+    "branch_head_at_fetch": "b1c785269011daec9e86631a4e8c34316c787f97",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cargo build --release && ./target/release/eve-dogma-h --dataset /workspace/exct-eve/data/dataset-3569502.json.gz meta > /dev/null",
+    "cmd": "./target/release/eve-dogma-h --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./target/release/eve-dogma-h --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./target/release/eve-dogma-h --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 83.5,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 2.6,
+     "loadavg_before": [
+      1.25,
+      1.44,
+      1.36
+     ],
+     "loadavg_after": [
+      1.23,
+      1.44,
+      1.36
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.26554729659315607,
+     "fits_per_s": 3222.4551810374287,
+     "batch_responses": 1630,
+     "cold_ms": 5.127192001964431,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 2.6,
+     "loadavg_before": [
+      1.23,
+      1.44,
+      1.36
+     ],
+     "loadavg_after": [
+      1.23,
+      1.44,
+      1.36
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.23522852107654801,
+     "fits_per_s": 3240.172251928485,
+     "batch_responses": 1630,
+     "cold_ms": 5.192407996219117,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 2.7,
+     "loadavg_before": [
+      1.23,
+      1.44,
+      1.36
+     ],
+     "loadavg_after": [
+      1.21,
+      1.43,
+      1.36
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.24208510620006266,
+     "fits_per_s": 3334.873151279317,
+     "batch_responses": 1630,
+     "cold_ms": 5.45971800602274,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.23063124136381885,
+    "median_ms": 0.23063124136381885,
+    "min_ms": 0.22608973767717894,
+    "max_ms": 0.3111799920661106,
+    "spread": 0.36894504788578264,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 1766,
+    "startup_ms": 7.93,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 1766,
+      "load1": 1.21,
+      "t1_ms": 7.76,
+      "tN_s": 0.4148,
+      "ms": 0.23063124136381885,
+      "upper_ms": 0.2348931081551375,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 1766,
+      "load1": 1.21,
+      "t1_ms": 15.88,
+      "tN_s": 0.4149,
+      "ms": 0.22608973767717894,
+      "upper_ms": 0.23495513080745314,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 1766,
+      "load1": 1.21,
+      "t1_ms": 15.86,
+      "tN_s": 0.415,
+      "ms": 0.22614430651008008,
+      "upper_ms": 0.2349970294382146,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 1766,
+      "load1": 1.21,
+      "t1_ms": 16.0,
+      "tN_s": 0.5652,
+      "ms": 0.3111799920661106,
+      "upper_ms": 0.32006311381483843,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 1766,
+      "load1": 1.21,
+      "t1_ms": 15.98,
+      "tN_s": 0.4652,
+      "ms": 0.2545110192647858,
+      "upper_ms": 0.2634168522119852,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.25,
+    1.23,
+    1.23,
+    1.23,
+    1.23,
+    1.21
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.23063124136381885,
+   "latency_runpy_ms_info": 0.24208510620006266,
+   "fits_per_s": 3240.172251928485,
+   "cold_ms": 5.192407996219117,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Rust": 5139
+     },
+     "test": {
+      "Rust": 190
+     },
+     "tooling": {
+      "JavaScript": 96
+     }
+    },
+    "core_loc": 5139,
+    "test_count_static": 12,
+    "hardcoded_effects": 94,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect",
+     "launcherFitted"
+    ],
+    "data_driven_ratio": 0.9707,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)",
+      "<branch root>/COPYING (GPL-3)",
+      "<branch root>/LICENSE (LGPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "bincode",
+      "flate2",
+      "hecs",
+      "memmap2",
+      "mimalloc",
+      "rustc-hash",
+      "serde",
+      "serde_json",
+      "sha2",
+      "xxhash-rust"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 10
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 1.0,
+    "level": "code",
+    "evidence": [
+     "Cargo.toml: wasm32",
+     "src/data.rs: wasm32",
+     "src/main.rs: wasm32",
+     "wasm/src/lib.rs: wasm32",
+     "web/test-node.mjs: wasm32"
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 35,
+    "failed": 0,
+    "seconds": 93.8,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.7596629744586543,
+     "throughput": 0.526787145939775,
+     "cold": 0.7706202939999756
+    },
+    "maint_parts": {
+     "tests": 0.9105894136787387,
+     "data": 0.5392691614685069,
+     "size": 0.8740177264522769,
+     "docs": 1.0,
+     "deps": 0.3333333333333333,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.692,
+    "maint": 0.6936,
+    "feat": 1.0,
+    "port": 1.0,
+    "total": 0.7696
+   },
+   "rank": 5
+  },
+  {
+   "letter": "I",
+   "label": "Rust salsa",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-i",
+    "sha": "ad9f73e3f868d9ea1f78614d38f84cb81536b072",
+    "commit_time": "2026-10-03T09:18:14+08:00",
+    "branch_head_at_fetch": "ad9f73e3f868d9ea1f78614d38f84cb81536b072",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cargo build --release",
+    "cmd": "./target/release/eve-dogma-i calc --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "batch_cmd": "./target/release/eve-dogma-i batch --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "rpc_cmd": "./target/release/eve-dogma-i serve-stdio --dataset /workspace/exct-eve/data/dataset-3569502.json.gz"
+   },
+   "build_s": 104.5,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 7.1,
+     "loadavg_before": [
+      1.64,
+      1.69,
+      1.49
+     ],
+     "loadavg_after": [
+      1.61,
+      1.68,
+      1.49
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.13084174349637168,
+     "fits_per_s": 2108.0110895474204,
+     "batch_responses": 1630,
+     "cold_ms": 17.757237998011988,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 7.0,
+     "loadavg_before": [
+      1.61,
+      1.68,
+      1.49
+     ],
+     "loadavg_after": [
+      1.56,
+      1.67,
+      1.49
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.12856125850267783,
+     "fits_per_s": 2030.8091413585453,
+     "batch_responses": 1630,
+     "cold_ms": 17.548900003021117,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 7.5,
+     "loadavg_before": [
+      1.56,
+      1.67,
+      1.49
+     ],
+     "loadavg_after": [
+      1.48,
+      1.65,
+      1.48
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.15635907218160708,
+     "fits_per_s": 1956.3380137592626,
+     "batch_responses": 1630,
+     "cold_ms": 18.83777450711932,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.124467202273648,
+    "median_ms": 0.124467202273648,
+    "min_ms": 0.12430853668963929,
+    "max_ms": 0.14062102077745792,
+    "spread": 0.1310584940437139,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 3081,
+    "startup_ms": 32.06,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 3081,
+      "load1": 1.48,
+      "t1_ms": 32.15,
+      "tN_s": 0.415,
+      "ms": 0.12430853668963929,
+      "upper_ms": 0.13470277799490182,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 3081,
+      "load1": 1.48,
+      "t1_ms": 32.11,
+      "tN_s": 0.4652,
+      "ms": 0.14062102077745792,
+      "upper_ms": 0.15099627523223852,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 3081,
+      "load1": 1.48,
+      "t1_ms": 32.06,
+      "tN_s": 0.4154,
+      "ms": 0.1244472519522185,
+      "upper_ms": 0.13481408633601255,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 3081,
+      "load1": 1.48,
+      "t1_ms": 32.23,
+      "tN_s": 0.465,
+      "ms": 0.14052311785412533,
+      "upper_ms": 0.15093696462022213,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 3081,
+      "load1": 1.48,
+      "t1_ms": 32.06,
+      "tN_s": 0.4154,
+      "ms": 0.124467202273648,
+      "upper_ms": 0.1348319555353086,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    1.64,
+    1.61,
+    1.56,
+    1.61,
+    1.56,
+    1.48
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.124467202273648,
+   "latency_runpy_ms_info": 0.13084174349637168,
+   "fits_per_s": 2030.8091413585453,
+   "cold_ms": 17.757237998011988,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Rust": 5372
+     },
+     "vendored": {
+      "Rust": 14085
+     }
+    },
+    "core_loc": 5372,
+    "test_count_static": 20,
+    "hardcoded_effects": 97,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "boosterMissileExplosionCloudPenaltyFixed",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting"
+    ],
+    "data_driven_ratio": 0.9698,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": null,
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "flate2",
+      "mimalloc",
+      "rustc-hash",
+      "salsa",
+      "serde",
+      "serde_json",
+      "smallvec"
+     ],
+     "dev": [],
+     "build": [],
+     "vendored": [
+      "salsa"
+     ],
+     "n_runtime": 7
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.0,
+    "level": "none",
+    "evidence": []
+   },
+   "tests": {
+    "found": true,
+    "cmd": "cargo test --release 2>&1",
+    "runner": "cargo",
+    "status": "passed",
+    "rc": 0,
+    "passed": 0,
+    "failed": 0,
+    "seconds": 34.6,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.8935945788720786,
+     "throughput": 0.4253376515109465,
+     "cold": 0.503616991264197
+    },
+    "maint_parts": {
+     "tests": 0.8638737104795863,
+     "data": 0.5269187230820775,
+     "size": 0.8547603401407721,
+     "docs": 1.0,
+     "deps": 0.4166666666666667,
+     "build": 0.0
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.6751,
+    "maint": 0.684,
+    "feat": 1.0,
+    "port": 0.0,
+    "total": 0.6594
+   },
+   "rank": 8
+  },
+  {
+   "letter": "J",
+   "label": "C++20",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-j",
+    "sha": "3ab992d7ed451436725e0597e19307c11863ab40",
+    "commit_time": "2026-10-03T09:07:35+08:00",
+    "branch_head_at_fetch": "3ab992d7ed451436725e0597e19307c11863ab40",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release && ninja -C build && ./build/eve-dogma-j build-cache --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "cmd": "./build/eve-dogma-j calc --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "batch_cmd": "./build/eve-dogma-j batch --dataset /workspace/exct-eve/data/dataset-3569502.json.gz",
+    "rpc_cmd": "./build/eve-dogma-j serve-stdio --dataset /workspace/exct-eve/data/dataset-3569502.json.gz"
+   },
+   "build_s": 7.3,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 1.1,
+     "loadavg_before": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "loadavg_after": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.02700035469741831,
+     "fits_per_s": 18920.841339534378,
+     "batch_responses": 1630,
+     "cold_ms": 2.3215629989863373,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 1.0,
+     "loadavg_before": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "loadavg_after": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.023647304606821785,
+     "fits_per_s": 29310.500153399586,
+     "batch_responses": 1630,
+     "cold_ms": 2.2060500050429255,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 1.0,
+     "loadavg_before": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "loadavg_after": [
+      2.77,
+      1.92,
+      1.58
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.02645533668383105,
+     "fits_per_s": 28641.371247821575,
+     "batch_responses": 1630,
+     "cold_ms": 2.223955998488236,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 0.07625074398655816,
+    "median_ms": 0.07625074398655816,
+    "min_ms": 0.0760886201928886,
+    "max_ms": 0.08867013346971848,
+    "spread": 0.1650018428547767,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 4032,
+    "startup_ms": 7.91,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 4032,
+      "load1": 2.77,
+      "t1_ms": 7.85,
+      "tN_s": 0.3149,
+      "ms": 0.07617251897675266,
+      "upper_ms": 0.0781012380944698,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 4032,
+      "load1": 2.62,
+      "t1_ms": 7.79,
+      "tN_s": 0.3652,
+      "ms": 0.08867013346971848,
+      "upper_ms": 0.09058038913930691,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 4032,
+      "load1": 2.62,
+      "t1_ms": 7.98,
+      "tN_s": 0.3147,
+      "ms": 0.0760886201928886,
+      "upper_ms": 0.0780487480153083,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 4032,
+      "load1": 2.62,
+      "t1_ms": 7.84,
+      "tN_s": 0.3152,
+      "ms": 0.07625074398655816,
+      "upper_ms": 0.07817744915608649,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 4032,
+      "load1": 2.62,
+      "t1_ms": 7.82,
+      "tN_s": 0.3648,
+      "ms": 0.08856464102989604,
+      "upper_ms": 0.09048202976315686,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    2.77,
+    2.77,
+    2.77,
+    2.77,
+    2.77,
+    2.77
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 0.07625074398655816,
+   "latency_runpy_ms_info": 0.02645533668383105,
+   "fits_per_s": 28641.371247821575,
+   "cold_ms": 2.223955998488236,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "CMake": 96,
+      "C++": 7155
+     },
+     "test": {
+      "CMake": 8,
+      "C++": 161,
+      "JavaScript": 30
+     },
+     "tooling": {
+      "Python": 449
+     }
+    },
+    "core_loc": 7251,
+    "test_count_static": 0,
+    "hardcoded_effects": 94,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.9707,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "README",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [
+      "libdeflate",
+      "simdjson"
+     ],
+     "dev": [],
+     "build": [],
+     "n_runtime": 2
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 1.0,
+    "level": "code",
+    "evidence": [
+     "CMakeLists.txt: EMSCRIPTEN",
+     "CMakeLists.txt: emcmake",
+     "CMakeLists.txt: wasm32",
+     "src/wasm.cpp: EMSCRIPTEN",
+     "src/wasm.cpp: emscripten",
+     "wasm/index.html: <script type=\"module\"",
+     "wasm/index.html: emcmake"
+    ]
+   },
+   "tests": {
+    "found": true,
+    "cmd": "ctest --test-dir build --output-on-failure 2>&1",
+    "runner": "ctest",
+    "status": "passed",
+    "rc": 0,
+    "passed": 123,
+    "failed": 0,
+    "seconds": 1.8,
+    "tail": ""
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 1.0,
+     "throughput": 1.0,
+     "cold": 0.954741603840033
+    },
+    "maint_parts": {
+     "tests": 1.0,
+     "data": 0.5392691614685069,
+     "size": 0.724498439010137,
+     "docs": 1.0,
+     "deps": 0.7142857142857143,
+     "build": 0.30689919729960324
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.9909,
+    "maint": 0.7549,
+    "feat": 1.0,
+    "port": 1.0,
+    "total": 0.9106
+   },
+   "rank": 1
+  },
+  {
+   "letter": "K",
+   "label": "C#/.NET AOT",
+   "gate": "pass",
+   "git": {
+    "url": "https://github.com/EX-CT/eve-dogma-lab",
+    "branch": "variant-k",
+    "sha": "ce381f11570b921ee3e3e89bdc074b3c2df7f076",
+    "commit_time": "2026-10-03T08:18:50+08:00",
+    "branch_head_at_fetch": "ce381f11570b921ee3e3e89bdc074b3c2df7f076",
+    "is_branch_head": true,
+    "fresh_clone": true
+   },
+   "manifest": {
+    "build": "./build.sh",
+    "cmd": "./bin/eve-dogma-k --dataset /workspace/exct-eve/data/dataset-3569502.json.gz calc",
+    "batch_cmd": "./bin/eve-dogma-k --dataset /workspace/exct-eve/data/dataset-3569502.json.gz batch",
+    "rpc_cmd": "./bin/eve-dogma-k --dataset /workspace/exct-eve/data/dataset-3569502.json.gz serve-stdio"
+   },
+   "build_s": 13.9,
+   "build_kind": "fresh",
+   "runs": [
+    {
+     "run": 1,
+     "wall_s": 22.7,
+     "loadavg_before": [
+      2.82,
+      1.98,
+      1.6
+     ],
+     "loadavg_after": [
+      2.4,
+      1.94,
+      1.6
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 1.198862611209061,
+     "fits_per_s": 969.026380234459,
+     "batch_responses": 1630,
+     "cold_ms": 59.86383349954849,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 2,
+     "wall_s": 22.8,
+     "loadavg_before": [
+      2.4,
+      1.94,
+      1.6
+     ],
+     "loadavg_after": [
+      2.27,
+      1.95,
+      1.61
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 1.2487182645339479,
+     "fits_per_s": 1066.7846679688614,
+     "batch_responses": 1630,
+     "cold_ms": 60.04378099896712,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    },
+    {
+     "run": 3,
+     "wall_s": 22.6,
+     "loadavg_before": [
+      2.27,
+      1.95,
+      1.61
+     ],
+     "loadavg_after": [
+      2.14,
+      1.95,
+      1.62
+     ],
+     "cases": 326,
+     "cases_ok": 326,
+     "values_ok": 21051,
+     "values_total": 21051,
+     "errors": 0,
+     "latency_ms": 0.9854423647239255,
+     "fits_per_s": 1017.4363008779367,
+     "batch_responses": 1630,
+     "cold_ms": 59.84635000640992,
+     "deterministic": true,
+     "groups": {
+      "application": {
+       "ok": 3943,
+       "total": 3943
+      },
+      "capacitor": {
+       "ok": 1147,
+       "total": 1147
+      },
+      "defense": {
+       "ok": 5866,
+       "total": 5866
+      },
+      "fitting": {
+       "ok": 2934,
+       "total": 2934
+      },
+      "navigation": {
+       "ok": 1945,
+       "total": 1945
+      },
+      "offense": {
+       "ok": 1304,
+       "total": 1304
+      },
+      "tank": {
+       "ok": 2282,
+       "total": 2282
+      },
+      "targeting": {
+       "ok": 1630,
+       "total": 1630
+      }
+     }
+    }
+   ],
+   "latency": {
+    "latency_ms": 1.1393210505305276,
+    "median_ms": 1.1393210505305276,
+    "min_ms": 1.0124109040506564,
+    "max_ms": 1.2652265732417665,
+    "spread": 0.2219002879595579,
+    "valid": 5,
+    "n_samples": 5,
+    "n_per_sample": 397,
+    "startup_ms": 64.63,
+    "pinned_single_cpu": true,
+    "flags": [],
+    "samples": [
+     {
+      "cpu": 1,
+      "n": 397,
+      "load1": 2.14,
+      "t1_ms": 64.2,
+      "tN_s": 0.5154,
+      "ms": 1.1393210505305276,
+      "upper_ms": 1.2981655214407648,
+      "valid": true
+     },
+     {
+      "cpu": 2,
+      "n": 397,
+      "load1": 2.14,
+      "t1_ms": 114.44,
+      "tN_s": 0.5658,
+      "ms": 1.1397118763154435,
+      "upper_ms": 1.425113571816246,
+      "valid": true
+     },
+     {
+      "cpu": 3,
+      "n": 397,
+      "load1": 2.14,
+      "t1_ms": 64.39,
+      "tN_s": 0.5654,
+      "ms": 1.2652265732417665,
+      "upper_ms": 1.4242289949417282,
+      "valid": true
+     },
+     {
+      "cpu": 4,
+      "n": 397,
+      "load1": 2.05,
+      "t1_ms": 114.37,
+      "tN_s": 0.5153,
+      "ms": 1.0124109040506564,
+      "upper_ms": 1.297949934523419,
+      "valid": true
+     },
+     {
+      "cpu": 5,
+      "n": 397,
+      "load1": 2.05,
+      "t1_ms": 114.65,
+      "tN_s": 0.5157,
+      "ms": 1.0127478535375276,
+      "upper_ms": 1.2989792619745062,
+      "valid": true
+     }
+    ]
+   },
+   "loads": [
+    2.82,
+    2.4,
+    2.27,
+    2.4,
+    2.27,
+    2.14
+   ],
+   "cases": 326,
+   "cases_ok": 326,
+   "values_ok": 21051,
+   "values_total": 21051,
+   "errors": 0,
+   "groups": {
+    "application": {
+     "ok": 3943,
+     "total": 3943
+    },
+    "capacitor": {
+     "ok": 1147,
+     "total": 1147
+    },
+    "defense": {
+     "ok": 5866,
+     "total": 5866
+    },
+    "fitting": {
+     "ok": 2934,
+     "total": 2934
+    },
+    "navigation": {
+     "ok": 1945,
+     "total": 1945
+    },
+    "offense": {
+     "ok": 1304,
+     "total": 1304
+    },
+    "tank": {
+     "ok": 2282,
+     "total": 2282
+    },
+    "targeting": {
+     "ok": 1630,
+     "total": 1630
+    }
+   },
+   "latency_ms": 1.1393210505305276,
+   "latency_runpy_ms_info": 1.198862611209061,
+   "fits_per_s": 1017.4363008779367,
+   "cold_ms": 59.86383349954849,
+   "deterministic": true,
+   "consistent": true,
+   "features": {
+    "eft_export": {
+     "ok": 326,
+     "total": 326
+    },
+    "eft_parse": {
+     "ok": 20,
+     "total": 20
+    },
+    "rpc_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "search_checks": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "type_checks": [
+     true,
+     true,
+     true
+    ],
+    "eft": 1.0,
+    "rpc": 1.0,
+    "search": 1.0,
+    "type": 1.0
+   },
+   "static": {
+    "loc": {
+     "core": {
+      "Shell": 13,
+      "C#": 4041
+     },
+     "tooling": {
+      "Python": 46
+     }
+    },
+    "core_loc": 4054,
+    "test_count_static": 0,
+    "hardcoded_effects": 96,
+    "hardcoded_effect_names_sample": [
+     "ChainLightning",
+     "ECMBurstJammer",
+     "OffensiveDefensiveReduction",
+     "ShipModuleRemoteArmorMutadaptiveRepairer",
+     "adaptiveArmorHardener",
+     "armorRepair",
+     "debuffLance",
+     "doomsdayAOEBubble",
+     "doomsdayAOEDamp",
+     "doomsdayAOEECM",
+     "doomsdayAOEGuide",
+     "doomsdayAOENeut",
+     "doomsdayAOEPaint",
+     "doomsdayAOETrack",
+     "doomsdayAOEWeb",
+     "doomsdayBeamDOT",
+     "doomsdayConeDOT",
+     "doomsdayHOG",
+     "doomsdaySlash",
+     "dotMissileLaunching",
+     "emergencyHullEnergizer",
+     "energyNeutralizerFalloff",
+     "energyNosferatuFalloff",
+     "entityECMFalloff",
+     "entityEnergyNeutralizerFalloff",
+     "entosisLink",
+     "fighterAbilityAfterburner",
+     "fighterAbilityAttackM",
+     "fighterAbilityECM",
+     "fighterAbilityEnergyNeutralizer",
+     "fighterAbilityEvasiveManeuvers",
+     "fighterAbilityMicroJumpDrive",
+     "fighterAbilityMicroWarpDrive",
+     "fighterAbilityMissiles",
+     "fighterAbilityStasisWebifier",
+     "fighterAbilityWarpDisruption",
+     "fofMissileLaunching",
+     "fueledArmorRepair",
+     "fueledShieldBoosting",
+     "hardPointModifierEffect"
+    ],
+    "data_driven_ratio": 0.9701,
+    "docs": {
+     "readme": true,
+     "design": true,
+     "license_file": true
+    },
+    "license": {
+     "files": [
+      "LICENSE (LGPL-3)",
+      "LICENSE.GPL-3.0 (GPL-3)"
+     ],
+     "file_license": "LGPL-3",
+     "gpl_companion_text": true,
+     "declared": [
+      "LGPL-3.0-or-later"
+     ],
+     "readme": "LGPL-3.0-or-later",
+     "effective": "LGPL-3.0-or-later",
+     "qualifier_source": "package metadata",
+     "conflicts": [],
+     "mergeable": "yes",
+     "reason": "LGPL v3 LICENSE text + GPL companion text"
+    },
+    "deps": {
+     "runtime": [],
+     "dev": [],
+     "build": [],
+     "n_runtime": 0
+    },
+    "loc_tool": "builtin"
+   },
+   "portability": {
+    "score": 0.0,
+    "level": "none",
+    "evidence": []
+   },
+   "tests": {
+    "found": false
+   },
+   "scores": {
+    "speed_parts": {
+     "latency": 0.4127989819261155,
+     "throughput": 0.275256711022127,
+     "cold": 0.23972243687396966
+    },
+    "maint_parts": {
+     "tests": 0.0,
+     "data": 0.530996635502517,
+     "size": 0.97701259978046,
+     "docs": 1.0,
+     "deps": 1.0,
+     "build": 0.1670532272327837
+    },
+    "maint_weights_used": {
+     "tests": 0.25,
+     "data": 0.2,
+     "size": 0.2,
+     "docs": 0.15,
+     "deps": 0.1,
+     "build": 0.1
+    },
+    "feat_parts": {
+     "eft": 1.0,
+     "rpc": 1.0,
+     "search": 1.0,
+     "type": 1.0
+    },
+    "speed": 0.3369,
+    "maint": 0.5683,
+    "feat": 1.0,
+    "port": 0.0,
+    "total": 0.4837
+   },
+   "rank": 11
+  }
+ ]
+}

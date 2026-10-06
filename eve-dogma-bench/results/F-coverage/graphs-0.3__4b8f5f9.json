@@ -1,0 +1,39 @@
+{
+ "crashes": [],
+ "f_ref": "4b8f5f9",
+ "failing": [],
+ "interfaces": {
+  "batch": {
+   "distinct_errors": [],
+   "failing": [],
+   "info_charge_ids": {
+    "ok": 138,
+    "total": 161
+   },
+   "passed": 192,
+   "timeouts": [],
+   "total": 192,
+   "values": "2694/2694"
+  },
+  "rpc": {
+   "distinct_errors": [],
+   "failing": [],
+   "info_charge_ids": {
+    "ok": 138,
+    "total": 161
+   },
+   "passed": 192,
+   "timeouts": [],
+   "total": 192,
+   "values": "2694/2694"
+  }
+ },
+ "passed": 192,
+ "rc": 0,
+ "suite": "graphs-0.3",
+ "suite_ref": "graphs-round2 db81b8c = tag graphs-v0.3, contract 0.3, 192 cases (interfaces: rpc method graph; graph-batch)",
+ "timeouts": [],
+ "total": 192,
+ "values": "2694/2694",
+ "wall_s": null
+}

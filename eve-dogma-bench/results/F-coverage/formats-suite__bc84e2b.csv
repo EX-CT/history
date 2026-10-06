@@ -1,0 +1,7 @@
+suite,f_ref,case_id,kind,detail
+formats-suite,bc84e2b,edge_export/name_newline.json@import:xml,mismatch,"{""category"": ""edge_export:import_xml"", ""detail"": {""error"": null, ""expected_error"": null, ""reasons"": [""name""]}}"
+formats-suite,bc84e2b,eft_case_names.eft.txt@auto,mismatch,"{""category"": ""edge:eft"", ""detail"": {""error"": null, ""expected_error"": {""code"": ""IMPORT_ERROR"", ""pyfa"": ""no fit produced (1 null)""}, ""reasons"": [""expected_error""]}}"
+formats-suite,bc84e2b,eft_header_empty_name.eft.txt@auto,mismatch,"{""category"": ""edge:eft"", ""detail"": {""error"": null, ""expected_error"": {""code"": ""IMPORT_ERROR"", ""pyfa"": ""no fit produced (1 null)""}, ""reasons"": [""expected_error""]}}"
+formats-suite,bc84e2b,xml_malformed.xml@auto,mismatch,"{""category"": ""edge:xml"", ""detail"": {""error"": null, ""expected_error"": {""code"": ""IMPORT_ERROR"", ""pyfa"": ""ExpatError: no element found: line 5, column 0""}, ""reasons"": [""expected_error""]}}"
+formats-suite,bc84e2b,xml_no_fittings.xml@auto,mismatch,"{""category"": ""edge:xml"", ""detail"": {""error"": null, ""expected_error"": {""code"": ""IMPORT_ERROR"", ""pyfa"": ""no fit produced (0 null)""}, ""reasons"": [""expected_error""]}}"
+formats-suite,bc84e2b,auto_garbage.txt@xml,mismatch,"{""category"": ""edge:forced"", ""detail"": {""error"": null, ""expected_error"": {""code"": ""IMPORT_ERROR"", ""pyfa"": ""ExpatError: syntax error: line 1, column 0""}, ""reasons"": [""expected_error""]}}"

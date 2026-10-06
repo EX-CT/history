@@ -1,0 +1,28 @@
+{
+ "crashes": [],
+ "f_ref": "af1c04b",
+ "failing": [
+  {
+   "error": null,
+   "id": "breacher_kestrel",
+   "mismatches": {
+    "weapon_pure_dps": {
+     "got": 0.0,
+     "want": 250.0
+    },
+    "weapon_pure_volley": {
+     "got": 0.0,
+     "want": 250.0
+    }
+   }
+  }
+ ],
+ "passed": 330,
+ "rc": 0,
+ "suite": "bench-1.9.0",
+ "suite_ref": "v1.9.0 (d2edf98), 331 cases",
+ "timeouts": [],
+ "total": 331,
+ "values": "22044/22046",
+ "wall_s": 1.0
+}

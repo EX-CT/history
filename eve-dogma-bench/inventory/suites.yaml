@@ -1,0 +1,25 @@
+# Suite registry for tools/check_inventory.py (docs/20 §5.1). A docs/19 test reference is "suite:name".
+# column: which docs/19 status column the suite evidences (f = engine, mcp, web).
+# kind:   files       -> name (glob allowed, must match >=1) is a file stem in <dir> (git_ref: read via `git ls-tree`
+#                        in the bench repo unless --root SUITE=PATH gives a checkout whose <dir> is used)
+#         jsonl       -> name (glob) equals field <key> of some line of <file> (git_ref as for files)
+#         rust-test   -> crate::path::test_fn; needs --root SUITE=PATH (Rust workspace); matches `fn <last>` in a
+#                        .rs file under PATH (crate dir = first segment, '-' or '_', when it exists)
+#         string      -> quoted test title; needs --root SUITE=PATH; matches the literal title in a file under PATH
+#                        whose name matches `glob`
+schema: inventory-suites/1
+suites:
+  bench:     {column: f, kind: files, dir: cases, ext: .json}            # bench core (this branch / main)
+  state:     {column: f, kind: files, dir: pending/state, ext: .json}
+  effects:   {column: f, kind: files, dir: effects/cases, ext: .json}    # 1.10 effect suite (P0-2)
+  ext:       {column: f, kind: files, dir: ext/cases, ext: .json}        # 1.10 stats-ext / heat / fleet.buffs / overrides
+  cap:       {column: f, kind: files, git_ref: origin/cap-suite, dir: cap/cases, ext: .json}
+  mut:       {column: f, kind: files, git_ref: origin/mutated-suite, dir: mutated/cases, ext: .json}
+  fmt:       {column: f, kind: files, git_ref: origin/formats-suite, dir: formats/edge, ext: ""}
+  fmt-export: {column: f, kind: jsonl, git_ref: origin/formats-suite, file: formats/expected/export.jsonl, key: format}
+  fmt-edge:  {column: f, kind: jsonl, git_ref: origin/formats-suite, file: formats/expected/edge.jsonl, key: category}
+  graphs:    {column: f, kind: files, git_ref: origin/graphs-round2, dir: graphs/cases, ext: .json}
+  unit:      {column: f, kind: rust-test}
+  mcp:       {column: mcp, kind: string, glob: "*.test.*"}
+  web-e2e:   {column: web, kind: string, glob: "e2e*.mjs"}
+  web-unit:  {column: web, kind: string, glob: "*.test.*"}

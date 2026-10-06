@@ -1,0 +1,41 @@
+{
+ "crashes": [],
+ "f_ref": "6e2ebf1",
+ "failing": [],
+ "gate": true,
+ "groups": {
+  "edge": {
+   "pass": 93,
+   "total": 93,
+   "unscored": 11
+  },
+  "edge_export": {
+   "pass": 125,
+   "total": 125,
+   "unscored": 0
+  },
+  "export": {
+   "pass": 3257,
+   "total": 3257,
+   "unscored": 3
+  },
+  "import": {
+   "pass": 1304,
+   "total": 1304,
+   "unscored": 0
+  }
+ },
+ "passed": 4779,
+ "rc": 0,
+ "report_only_disagreeing": [
+  "esf_items_7.json@export:shipstats",
+  "esf_structure_bonus_1.json@export:shipstats",
+  "eft_renamed_item.eft.txt@auto"
+ ],
+ "score_pct": 100.0,
+ "suite": "formats-suite",
+ "suite_ref": "formats-suite 7c716e7, FORMATS 0.1, 4779 scored rows",
+ "timeouts": [],
+ "total": 4779,
+ "wall_s": 1.3
+}

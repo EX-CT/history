@@ -1,0 +1,3 @@
+suite,f_ref,case_id,kind,detail
+pending-1.10,6e2ebf1,fuzz200/lf10_123_28659,mismatch,"{""align_time_s"": {""got"": 10.293025, ""pyfa"": 102.93024619984746}}"
+pending-1.10,6e2ebf1,fuzz200/lf10_197_28659,mismatch,"{""align_time_s"": {""got"": 14.291128, ""pyfa"": 142.91128350518008}}"

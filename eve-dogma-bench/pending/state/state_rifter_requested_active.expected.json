@@ -1,0 +1,24 @@
+{
+ "case": "state_rifter_requested_active",
+ "oracle": "pyfa-eos isValidState (oracle/state_oracle.py)",
+ "modules_state": [
+  "online",
+  "online",
+  "online",
+  "active",
+  "active",
+  "active",
+  "active",
+  "active",
+  "active",
+  "active",
+  "online",
+  "online",
+  "online"
+ ],
+ "warnings": [
+  "/modules/0: state 'active' not possible for this module, using online",
+  "/modules/1: state 'active' not possible for this module, using online",
+  "/modules/2: state 'active' not possible for this module, using online"
+ ]
+}

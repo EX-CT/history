@@ -1,0 +1,10 @@
+{
+ "case": "ovr_rifter_velocity_skills0",
+ "derivation": "Empty Rifter, all skills 0: no modifier touches maxVelocity, so max_velocity = the overridden base 400.",
+ "excluded": {},
+ "ext": {},
+ "oracle": "hand-derived (non-Pyfa)",
+ "values": {
+  "max_velocity": 400.0
+ }
+}

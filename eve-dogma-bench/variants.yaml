@@ -1,0 +1,21 @@
+# Variants scored by bench.py. Placeholders: {dataset}, {bench}, {dir} (variant working dir).
+# source: local `path`, or `git` (url + branch [+ subdir]) cloned into work/<name>.
+dataset: /workspace/exct-eve/data/dataset-3569502.json.gz
+variants:
+  - name: A
+    label: "eve-dogma-rs main (Rust, lazy memoised modifier graph)"
+    path: /workspace/exct-eve/eve-dogma-rs
+    build: cargo build --release
+    cmd: ./target/release/eve-dogma --dataset {dataset} calc
+    batch_cmd: ./target/release/eve-dogma --dataset {dataset} batch
+    rpc_cmd: ./target/release/eve-dogma --dataset {dataset} serve-stdio
+  - {name: B, label: "data-oriented Rust", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-b, subdir: variant-b}, manifest: bench.yaml}
+  - {name: C, label: "Go", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-c, subdir: variant-c}, manifest: bench.yaml}
+  - {name: D, label: "TypeScript", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-d, subdir: variant-d}, manifest: bench.yaml}
+  - {name: E, label: "Pyfa-faithful Rust port", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-e, subdir: variant-e}, manifest: bench.yaml}
+  - {name: F, label: "codegen Rust/WASM", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-f, subdir: variant-f}, manifest: bench.yaml}
+  - {name: G, label: "Python + NumPy batch", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-g, subdir: variant-g}, manifest: bench.yaml}
+  - {name: H, label: "Rust ECS", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-h, subdir: variant-h}, manifest: bench.yaml}
+  - {name: I, label: "Rust salsa incremental", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-i, subdir: variant-i}, manifest: bench.yaml}
+  - {name: J, label: "C++20", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-j, subdir: variant-j}, manifest: bench.yaml}
+  - {name: K, label: "Kotlin/JVM or C#", git: {url: "https://github.com/EX-CT/eve-dogma-lab", branch: variant-k, subdir: variant-k}, manifest: bench.yaml}

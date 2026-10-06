@@ -1,0 +1,20 @@
+{
+ "case": "state_rifter_all_online",
+ "oracle": "pyfa-eos isValidState (oracle/state_oracle.py)",
+ "modules_state": [
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online",
+  "online"
+ ],
+ "warnings": []
+}

@@ -1,0 +1,217 @@
+{
+ "crashes": [],
+ "eft_export": "85/93",
+ "eft_export_failed": [
+  "combo_two_boosters_dda_exct_dominix",
+  "drone_bouncer_ii_drones_sentry_dominix",
+  "drone_ogre_ii_exct_rattlesnake",
+  "slot_booster_slot_first_wins_exct_rifter",
+  "slot_booster_slot_first_wins_rev_exct_rifter",
+  "slot_booster_three_slots_exct_rifter",
+  "slot_implant_slot_first_wins_exct_rifter",
+  "slot_implant_slot_first_wins_rev_exct_rifter"
+ ],
+ "eft_import": "96/99",
+ "eft_import_failed": [
+  "state_lse_offline_exct_nightmare",
+  "eftedge_header_base_mismatch",
+  "eftedge_missing_ref"
+ ],
+ "f_ref": "af1c04b",
+ "failing": [
+  {
+   "error": null,
+   "id": "combo_nomad_ab_mwd_exct_damnation",
+   "mismatches": {
+    "w10.explosion_radius": {
+     "got": 93.75,
+     "want": 107.81249999999999
+    },
+    "w11.explosion_radius": {
+     "got": 93.75,
+     "want": 107.81249999999999
+    },
+    "w9.explosion_radius": {
+     "got": 93.75,
+     "want": 107.81249999999999
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "combo_two_boosters_dda_exct_dominix",
+   "mismatches": {
+    "ehp.armor": {
+     "got": 21728.395062,
+     "want": 25562.817719680465
+    },
+    "hp.armor": {
+     "got": 9350.0,
+     "want": 11000.0
+    },
+    "max_velocity": {
+     "got": 98.440625,
+     "want": 115.8125
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "slot_booster_slot_first_wins_exct_rifter",
+   "mismatches": {
+    "ehp.armor": {
+     "got": 2201.257862,
+     "want": 2589.715131335553
+    },
+    "hp.armor": {
+     "got": 1115.625,
+     "want": 1312.5
+    },
+    "max_velocity": {
+     "got": 829.807166,
+     "want": 976.243724711524
+    },
+    "w6.optimal_m": {
+     "got": 825.0,
+     "want": 750.0
+    },
+    "w6.tracking": {
+     "got": 418.359375,
+     "want": 492.1875
+    },
+    "w7.optimal_m": {
+     "got": 825.0,
+     "want": 750.0
+    },
+    "w7.tracking": {
+     "got": 418.359375,
+     "want": 492.1875
+    },
+    "w8.optimal_m": {
+     "got": 825.0,
+     "want": 750.0
+    },
+    "w8.tracking": {
+     "got": 418.359375,
+     "want": 492.1875
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "slot_booster_slot_first_wins_rev_exct_rifter",
+   "mismatches": {
+    "ehp.shield": {
+     "got": 753.694581,
+     "want": 886.6995073891625
+    },
+    "hp.shield": {
+     "got": 478.125,
+     "want": 562.5
+    },
+    "max_velocity": {
+     "got": 829.807166,
+     "want": 976.243724711524
+    },
+    "tank.passive": {
+     "got": 2.55,
+     "want": 3.0
+    },
+    "w6.falloff_m": {
+     "got": 8223.75,
+     "want": 9675.0
+    },
+    "w6.tracking": {
+     "got": 418.359375,
+     "want": 334.6875
+    },
+    "w7.falloff_m": {
+     "got": 8223.75,
+     "want": 9675.0
+    },
+    "w7.tracking": {
+     "got": 418.359375,
+     "want": 334.6875
+    },
+    "w8.falloff_m": {
+     "got": 8223.75,
+     "want": 9675.0
+    },
+    "w8.tracking": {
+     "got": 418.359375,
+     "want": 334.6875
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "slot_booster_three_slots_exct_rifter",
+   "mismatches": {
+    "cap_capacity": {
+     "got": 242.1875,
+     "want": 312.5
+    },
+    "cap_stable_percent": {
+     "got": 78.415265,
+     "want": 83.49598710843377
+    },
+    "ehp.shield": {
+     "got": 452.687808,
+     "want": 584.1133004926107
+    },
+    "hp.shield": {
+     "got": 287.173828,
+     "want": 370.54687499999994
+    },
+    "tank.passive": {
+     "got": 1.531594,
+     "want": 1.9762499999999996
+    },
+    "w6.optimal_m": {
+     "got": 581.25,
+     "want": 750.0
+    },
+    "w7.optimal_m": {
+     "got": 581.25,
+     "want": 750.0
+    },
+    "w8.optimal_m": {
+     "got": 581.25,
+     "want": 750.0
+    },
+    "w9.explosion_velocity": {
+     "got": 149.9625,
+     "want": 193.5
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "slot_implant_slot_first_wins_exct_rifter",
+   "mismatches": {
+    "align_time_s": {
+     "got": 5.191408,
+     "want": 5.245170868083969
+    }
+   }
+  },
+  {
+   "error": null,
+   "id": "slot_implant_slot_first_wins_rev_exct_rifter",
+   "mismatches": {
+    "max_velocity": {
+     "got": 1155.126031,
+     "want": 1148.5220290723812
+    }
+   }
+  }
+ ],
+ "passed": 86,
+ "rc": 0,
+ "suite": "mutated-suite",
+ "suite_ref": "mutated-suite 2ac7c00, 93 stats cases + EFT export/import",
+ "timeouts": [],
+ "total": 93,
+ "values": "6148/6184",
+ "wall_s": 0.6000000000000001
+}

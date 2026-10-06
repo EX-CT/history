@@ -1,0 +1,94 @@
+{
+ "case": "exct_fuzz_rifter_standup_cap_battery",
+ "oracle": "pyfa",
+ "stats": {
+  "agility": 2.16,
+  "align_time_s": 3.195020339960234,
+  "calibration_used": 0.0,
+  "cap_capacity": 62812.5,
+  "cap_recharge_peak": 1675.0,
+  "cap_recharge_peak_plus_added": 1675.0,
+  "cap_recharge_s": 93.75,
+  "cap_stable": true,
+  "cap_state": 100,
+  "cap_used": 0,
+  "cpu_total": 162.5,
+  "cpu_used": 4000.0,
+  "dps": 0,
+  "drone_bandwidth_used": 0,
+  "drone_control_range": 60000.0,
+  "drone_dps": 0,
+  "drone_volley": 0,
+  "drones": [],
+  "ehp": {
+   "armor": 833.3333333333333,
+   "hull": 652.9850746268656,
+   "shield": 775.8620689655172
+  },
+  "fighters": [],
+  "hi_slots": 3.0,
+  "hp": {
+   "armor": 562.5,
+   "hull": 437.5,
+   "shield": 562.5
+  },
+  "jam_chance": 0,
+  "launcher_hardpoints": 2.0,
+  "low_slots": 4.0,
+  "mass": 1067000.0,
+  "max_target_range": 28125.0,
+  "max_targets": 4,
+  "max_velocity": 456.25,
+  "max_warp_distance": 52561.0021421877,
+  "med_slots": 3.0,
+  "power_total": 51.25,
+  "power_used": 300000.0,
+  "probe_size": 3.6458333333333335,
+  "resonance": {
+   "armor": {
+    "em": 0.4,
+    "explosive": 0.9,
+    "kinetic": 0.75,
+    "thermal": 0.65
+   },
+   "hull": {
+    "em": 0.67,
+    "explosive": 0.67,
+    "kinetic": 0.67,
+    "thermal": 0.67
+   },
+   "shield": {
+    "em": 1.0,
+    "explosive": 0.5,
+    "kinetic": 0.6,
+    "thermal": 0.8
+   }
+  },
+  "scan_resolution": 825.0,
+  "scan_strength": 9.6,
+  "signature_radius": 35.0,
+  "sustainable_tank": {
+   "armorRepair": 0,
+   "armorRepairFullSpool": 0,
+   "armorRepairPreSpool": 0,
+   "hullRepair": 0,
+   "passiveShield": 3.0,
+   "shieldRepair": 0
+  },
+  "tank": {
+   "armorRepair": 0,
+   "armorRepairFullSpool": 0,
+   "armorRepairPreSpool": 0,
+   "hullRepair": 0,
+   "passiveShield": 3.0,
+   "shieldRepair": 0
+  },
+  "turret_hardpoints": 3.0,
+  "volley": 0,
+  "warp_scramble_status": 0.0,
+  "warp_speed": 5.0,
+  "weapon_dps": 0,
+  "weapon_volley": 0,
+  "weapons": []
+ }
+}

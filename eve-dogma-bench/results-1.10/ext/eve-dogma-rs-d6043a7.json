@@ -1,0 +1,5484 @@
+{
+ "name": "eve-dogma-rs-d6043a7",
+ "pass": 18,
+ "total": 116,
+ "cases": {
+  "bomb_basilisk": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     7.4
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.1
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     6.8
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     6.5
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     9.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     8.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     8.3
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     8.0
+    ]
+   ]
+  },
+  "bomb_dominix": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     8.6
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     8.2
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     7.4
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     7.1
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     8.6
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     8.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     7.5
+    ]
+   ]
+  },
+  "bomb_dominix_red_giant6": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     4.3
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     4.1
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     3.9
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     3.7
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     3.6
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     3.5
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     4.3
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     4.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     3.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     3.8
+    ]
+   ]
+  },
+  "bomb_hulk": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     8.6
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     8.2
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     7.5
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     7.2
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     9.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     8.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     8.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     8.0
+    ]
+   ]
+  },
+  "bomb_ishtar": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     4.8
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     4.6
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     4.2
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     4.0
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     3.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     4.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     4.6
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     4.2
+    ]
+   ]
+  },
+  "bomb_ishtar_shieldext": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     7.6
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     7.2
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     6.9
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     6.6
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     6.3
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     10.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     9.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     9.3
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     8.9
+    ]
+   ]
+  },
+  "bomb_purifier": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     4.8
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     4.6
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     4.2
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     4.0
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     3.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     5.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     5.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     5.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     4.9
+    ]
+   ]
+  },
+  "bomb_rifter": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     5.2
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     5.0
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     4.7
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     4.5
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     4.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     4.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     4.6
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     4.2
+    ]
+   ]
+  },
+  "bomb_rifter_red_giant3": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     3.3
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     3.2
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     3.0
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     2.9
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     2.8
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     2.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     3.0
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     2.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     2.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     2.7
+    ]
+   ]
+  },
+  "bomb_rorqual": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     141.8
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     135.1
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     128.9
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     123.3
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     118.2
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     113.5
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     149.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     142.6
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     136.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     130.2
+    ]
+   ]
+  },
+  "bomb_vexor": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     4.9
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     4.6
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     4.4
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     4.2
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     4.1
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     3.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     4.5
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     4.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     4.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     3.9
+    ]
+   ]
+  },
+  "dehp_dominix_mixed": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 87,
+   "mismatches": 21,
+   "not_implemented": 21,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     1200.0000000000002
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     1800.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     620.6896551724138
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     810.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     1800.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     4.5
+    ],
+    [
+     "/drones/items[drone_index=1]/ehp/armor",
+     null,
+     300.00000000000006
+    ],
+    [
+     "/drones/items[drone_index=1]/ehp/hull",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=1]/ehp/shield",
+     null,
+     155.17241379310346
+    ]
+   ]
+  },
+  "dehp_dominix_ogre_enhancer": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     1875.0000000000002
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     2812.5
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     969.8275862068966
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     1265.625
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     2812.5
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     703.125
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     7.03125
+    ]
+   ]
+  },
+  "dehp_ishtar_hammerhead_explosive": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     900.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     405.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     900.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     225.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     2.8125
+    ]
+   ]
+  },
+  "dehp_vexor_hobgoblin": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     300.00000000000006
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     155.17241379310346
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     202.5
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     112.5
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     2.25
+    ]
+   ]
+  },
+  "dehp_vexor_hobgoblin_skills0": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     160.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     240.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     82.75862068965517
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     108.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     240.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     60.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.2
+    ]
+   ]
+  },
+  "fleet_booster_claymore_only": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_armor_all": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_drones": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 60,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_info": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_max_aggregate_dup": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_min_aggregate_dup": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_override_booster_claymore": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_shield_all": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_shield_resist": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_skills0": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_skirmish": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "fleet_buffs_titan_generators": {
+   "pass": true,
+   "feature": "fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 55,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "mining_covetor_strip_i": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     3.90625
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     3.90625
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     15.97222222222222
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     16.571180555555554
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     20.477430555555554
+    ]
+   ]
+  },
+  "mining_hulk_fleet_buffs": {
+   "pass": false,
+   "feature": "mining+fleet.buffs",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     27.183662392292565
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     21.047052038808605
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     21.047052038808605
+    ]
+   ]
+  },
+  "mining_hulk_skills4": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     19.10751144385027
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     14.738450618181819
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     14.738450618181819
+    ]
+   ]
+  },
+  "mining_hulk_strip": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     7.6003125
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     5.671875
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     27.45237289504038
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     21.255102148212234
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     26.926977148212234
+    ]
+   ]
+  },
+  "mining_porpoise_drones": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     11.40046875
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     8.5078125
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     8.5078125
+    ]
+   ]
+  },
+  "mining_porpoise_ice_drones": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     17.64609053497942
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     13.168724279835388
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     13.168724279835388
+    ]
+   ]
+  },
+  "mining_procurer_ice": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     9.925925925925927
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     7.685185185185185
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     7.685185185185185
+    ]
+   ]
+  },
+  "mining_venture": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     3.0401249999999997
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     2.26875
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     11.410937500000001
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     8.8349609375
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     11.1037109375
+    ]
+   ]
+  },
+  "mining_venture_gas": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     3.5733333333333333
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     2.6666666666666665
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     2.6666666666666665
+    ]
+   ]
+  },
+  "mining_venture_skills0": {
+   "pass": false,
+   "feature": "mining",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0.8333333333333334
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0.8333333333333334
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     5.36
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     4.08
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     4.913333333333333
+    ]
+   ]
+  },
+  "ovr_charge_damage_volley": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "ovr_module_shield_extender_x2": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "ovr_rifter_shield_skills0": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "ovr_rifter_shield_skills5": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "ovr_rifter_velocity_skills0": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "ovr_rifter_velocity_skills5": {
+   "pass": true,
+   "feature": "overrides",
+   "source": "hand-derived (non-Pyfa)",
+   "checks": 1,
+   "mismatches": 0,
+   "not_implemented": 0,
+   "first": []
+  },
+  "pool_bombing_fsweep00000": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "random legal fit fsweep00000.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     8.6
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     8.2
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     7.5
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     7.2
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     8.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     8.3
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     7.9
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     7.6
+    ]
+   ]
+  },
+  "pool_bombing_fsweep06421": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "random legal fit fsweep06421.json (gen_legal pool; Pyfa oracle)",
+   "checks": 82,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     400.5
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     381.4
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     364.1
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     348.2
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     333.7
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     320.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     351.0
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     334.3
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     319.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     305.3
+    ]
+   ]
+  },
+  "pool_bombing_fsweep17389": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "random legal fit fsweep17389.json (gen_legal pool; Pyfa oracle)",
+   "checks": 90,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     8.1
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     7.7
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.4
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     7.0
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     6.8
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.5
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     7.4
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     7.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     6.7
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     6.5
+    ]
+   ]
+  },
+  "pool_bombing_fsweep17392": {
+   "pass": false,
+   "feature": "bombing",
+   "source": "random legal fit fsweep17392.json (gen_legal pool; Pyfa oracle)",
+   "checks": 90,
+   "mismatches": 24,
+   "not_implemented": 24,
+   "first": [
+    [
+     "/bombing/em/covert_ops_0",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/em/covert_ops_1",
+     null,
+     7.4
+    ],
+    [
+     "/bombing/em/covert_ops_2",
+     null,
+     7.1
+    ],
+    [
+     "/bombing/em/covert_ops_3",
+     null,
+     6.8
+    ],
+    [
+     "/bombing/em/covert_ops_4",
+     null,
+     6.5
+    ],
+    [
+     "/bombing/em/covert_ops_5",
+     null,
+     6.2
+    ],
+    [
+     "/bombing/explosive/covert_ops_0",
+     null,
+     7.8
+    ],
+    [
+     "/bombing/explosive/covert_ops_1",
+     null,
+     7.5
+    ],
+    [
+     "/bombing/explosive/covert_ops_2",
+     null,
+     7.1
+    ],
+    [
+     "/bombing/explosive/covert_ops_3",
+     null,
+     6.8
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep06267": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep06267.json (gen_legal pool; Pyfa oracle)",
+   "checks": 63,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     50.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     50.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17345": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17345.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17360": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17360.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17361": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17361.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17362": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17362.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17363": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17363.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     300.00000000000006
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     155.17241379310346
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     202.5
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     450.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     112.5
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     2.25
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17375": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17375.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17376": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17376.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17379": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17379.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_drone_ehp_fsweep17380": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep17380.json (gen_legal pool; Pyfa oracle)",
+   "checks": 73,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/drones/items[drone_index=0]/ehp/armor",
+     null,
+     200.00000000000003
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/ehp/shield",
+     null,
+     103.44827586206897
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/armor",
+     null,
+     135.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/hull",
+     null,
+     300.0
+    ],
+    [
+     "/drones/items[drone_index=0]/hp/shield",
+     null,
+     75.0
+    ],
+    [
+     "/drones/items[drone_index=0]/shield_peak_recharge_hp_s",
+     null,
+     1.5
+    ]
+   ]
+  },
+  "pool_fighter_ehp_fsweep06420": {
+   "pass": false,
+   "feature": "drone_ehp",
+   "source": "random legal fit fsweep06420.json (gen_legal pool; Pyfa oracle)",
+   "checks": 65,
+   "mismatches": 7,
+   "not_implemented": 7,
+   "first": [
+    [
+     "/fighters/items[fighter_index=0]/ehp/armor",
+     null,
+     0.0
+    ],
+    [
+     "/fighters/items[fighter_index=0]/ehp/hull",
+     null,
+     100.0
+    ],
+    [
+     "/fighters/items[fighter_index=0]/ehp/shield",
+     null,
+     4106.25
+    ],
+    [
+     "/fighters/items[fighter_index=0]/hp/armor",
+     null,
+     0.0
+    ],
+    [
+     "/fighters/items[fighter_index=0]/hp/hull",
+     null,
+     100.0
+    ],
+    [
+     "/fighters/items[fighter_index=0]/hp/shield",
+     null,
+     4106.25
+    ],
+    [
+     "/fighters/items[fighter_index=0]/shield_peak_recharge_hp_s",
+     null,
+     14.665178571428571
+    ]
+   ]
+  },
+  "pool_heat_fsweep11325": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep11325.json (gen_legal pool; Pyfa oracle)",
+   "checks": 58,
+   "mismatches": 2,
+   "not_implemented": 2,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     968
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     2468.3999999999996
+    ]
+   ]
+  },
+  "pool_heat_fsweep17714": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17714.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17748": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17748.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17750": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17750.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     25
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     191.25
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     103
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     244.28037184981676
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     18
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     90.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17751": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17751.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     25
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     191.25
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     103
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     244.28037184981676
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     18
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     90.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17752": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17752.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     111
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     263.25360461485104
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     105
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     249.02368004107532
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     18
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     90.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17753": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17753.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     24
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     183.6
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     105
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     249.02368004107532
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     100
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     237.1654095629289
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     17
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     85.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17755": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17755.json (gen_legal pool; Pyfa oracle)",
+   "checks": 81,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     24
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     183.6
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     99
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     234.7937554672996
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     97
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     230.050447276041
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     29
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     147.89999999999998
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17756": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17756.json (gen_legal pool; Pyfa oracle)",
+   "checks": 81,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     24
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     183.6
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     105
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     249.02368004107532
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     100
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     237.1654095629289
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     18
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     90.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17759": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17759.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     100
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     237.1654095629289
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17760": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17760.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17761": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17761.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     25
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     191.25
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     103
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     244.28037184981676
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17762": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17762.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17765": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17765.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     106
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     251.3953341367046
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17768": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17768.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17783": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17783.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     237.14999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     110
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     260.8819505192218
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     106
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     251.3953341367046
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17784": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17784.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     237.14999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     110
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     260.8819505192218
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     106
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     251.3953341367046
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     22
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     110.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17785": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17785.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     237.14999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     110
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     260.8819505192218
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     106
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     251.3953341367046
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     22
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     110.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17786": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17786.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     29
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     221.85
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     113
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     267.99691280610966
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     33
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     168.29999999999998
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17798": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17798.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     109
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     258.5102964235925
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17799": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17799.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     109
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     258.5102964235925
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17802": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17802.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     109
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     258.5102964235925
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17803": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17803.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     109
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     258.5102964235925
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17812": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17812.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     111
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     263.25360461485104
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     105
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     249.02368004107532
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17815": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17815.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     27
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     206.54999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     109
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     258.5102964235925
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17827": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17827.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     192.10398174597233
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     184.98901945908446
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     20
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     100.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17828": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17828.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     26
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     198.89999999999998
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     107
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     253.76698823233392
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     102
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     241.90871775418748
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     31
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     158.1
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     19
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     95.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17841": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17841.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     28
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     214.2
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     110
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     260.8819505192218
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     105
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     249.02368004107532
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17842": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17842.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     29
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     221.85
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_heat_fsweep17843": {
+   "pass": false,
+   "feature": "heat",
+   "source": "random legal fit fsweep17843.json (gen_legal pool; Pyfa oracle)",
+   "checks": 80,
+   "mismatches": 14,
+   "not_implemented": 14,
+   "first": [
+    [
+     "/modules[module_index=0]/heat/burn_cycles",
+     null,
+     29
+    ],
+    [
+     "/modules[module_index=0]/heat/burnout_s",
+     null,
+     221.85
+    ],
+    [
+     "/modules[module_index=3]/heat/burn_cycles",
+     null,
+     108
+    ],
+    [
+     "/modules[module_index=3]/heat/burnout_s",
+     null,
+     256.1386423279632
+    ],
+    [
+     "/modules[module_index=4]/heat/burn_cycles",
+     null,
+     104
+    ],
+    [
+     "/modules[module_index=4]/heat/burnout_s",
+     null,
+     246.65202594544604
+    ],
+    [
+     "/modules[module_index=6]/heat/burn_cycles",
+     null,
+     32
+    ],
+    [
+     "/modules[module_index=6]/heat/burnout_s",
+     null,
+     163.2
+    ],
+    [
+     "/modules[module_index=7]/heat/burn_cycles",
+     null,
+     21
+    ],
+    [
+     "/modules[module_index=7]/heat/burnout_s",
+     null,
+     105.0
+    ]
+   ]
+  },
+  "pool_mining_drones_fsweep06266": {
+   "pass": false,
+   "feature": "mining",
+   "source": "random legal fit fsweep06266.json (gen_legal pool; Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     1.5625
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     1.5625
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     1.5625
+    ]
+   ]
+  },
+  "pool_mining_fsweep00106": {
+   "pass": false,
+   "feature": "mining",
+   "source": "random legal fit fsweep00106.json (gen_legal pool; Pyfa oracle)",
+   "checks": 61,
+   "mismatches": 5,
+   "not_implemented": 5,
+   "first": [
+    [
+     "/mining/drones_drain_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/drones_m3_s",
+     null,
+     0
+    ],
+    [
+     "/mining/modules_drain_m3_s",
+     null,
+     1.0416666666666667
+    ],
+    [
+     "/mining/modules_m3_s",
+     null,
+     1.0807291666666667
+    ],
+    [
+     "/mining/total_m3_s",
+     null,
+     1.0807291666666667
+    ]
+   ]
+  },
+  "pool_outgoing_drones_fsweep06283": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep06283.json (gen_legal pool; Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     30.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     30.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep00075": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep00075.json (gen_legal pool; Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     16.333333333333332
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     16.333333333333332
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     16.333333333333332
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17291": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17291.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17325": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17325.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17327": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17327.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17328": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17328.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17329": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17329.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17330": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17330.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17332": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17332.json (gen_legal pool; Pyfa oracle)",
+   "checks": 79,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17333": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17333.json (gen_legal pool; Pyfa oracle)",
+   "checks": 79,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17336": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17336.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17337": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17337.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17338": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17338.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17339": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17339.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "pool_outgoing_fsweep17342": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "random legal fit fsweep17342.json (gen_legal pool; Pyfa oracle)",
+   "checks": 78,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     85.33333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_basilisk": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     70.2
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     340.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     70.2
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     340.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     70.2
+    ]
+   ]
+  },
+  "rr_dominix_heavy_bots": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     90.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     90.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     90.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_dominix_shield_bots": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     90.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     90.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_guardian": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     70.2
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     70.2
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     70.2
+    ]
+   ]
+  },
+  "rr_guardian_skills0": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_oneiros": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_scimitar": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     340.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     340.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_vexor_light_bots": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 68,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     15.0
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     15.0
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     15.0
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_zarmazd_spool": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     597.3333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     597.3333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  },
+  "rr_zarmazd_spool_full": {
+   "pass": false,
+   "feature": "outgoing",
+   "source": "hand-built (Pyfa oracle)",
+   "checks": 67,
+   "mismatches": 12,
+   "not_implemented": 12,
+   "first": [
+    [
+     "/outgoing/current/armor_per_s",
+     null,
+     597.3333333333333
+    ],
+    [
+     "/outgoing/current/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/current/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/armor_per_s",
+     null,
+     597.3333333333333
+    ],
+    [
+     "/outgoing/spool_max/capacitor_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/hull_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_max/shield_per_s",
+     null,
+     0.0
+    ],
+    [
+     "/outgoing/spool_min/armor_per_s",
+     null,
+     341.3333333333333
+    ],
+    [
+     "/outgoing/spool_min/capacitor_per_s",
+     null,
+     0.0
+    ]
+   ]
+  }
+ }
+}

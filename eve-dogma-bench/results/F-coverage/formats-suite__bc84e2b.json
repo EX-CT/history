@@ -1,0 +1,125 @@
+{
+ "crashes": [],
+ "f_ref": "bc84e2b",
+ "failing": [
+  {
+   "category": "edge_export:import_xml",
+   "detail": {
+    "error": null,
+    "expected_error": null,
+    "reasons": [
+     "name"
+    ]
+   },
+   "id": "edge_export/name_newline.json@import:xml"
+  },
+  {
+   "category": "edge:eft",
+   "detail": {
+    "error": null,
+    "expected_error": {
+     "code": "IMPORT_ERROR",
+     "pyfa": "no fit produced (1 null)"
+    },
+    "reasons": [
+     "expected_error"
+    ]
+   },
+   "id": "eft_case_names.eft.txt@auto"
+  },
+  {
+   "category": "edge:eft",
+   "detail": {
+    "error": null,
+    "expected_error": {
+     "code": "IMPORT_ERROR",
+     "pyfa": "no fit produced (1 null)"
+    },
+    "reasons": [
+     "expected_error"
+    ]
+   },
+   "id": "eft_header_empty_name.eft.txt@auto"
+  },
+  {
+   "category": "edge:xml",
+   "detail": {
+    "error": null,
+    "expected_error": {
+     "code": "IMPORT_ERROR",
+     "pyfa": "ExpatError: no element found: line 5, column 0"
+    },
+    "reasons": [
+     "expected_error"
+    ]
+   },
+   "id": "xml_malformed.xml@auto"
+  },
+  {
+   "category": "edge:xml",
+   "detail": {
+    "error": null,
+    "expected_error": {
+     "code": "IMPORT_ERROR",
+     "pyfa": "no fit produced (0 null)"
+    },
+    "reasons": [
+     "expected_error"
+    ]
+   },
+   "id": "xml_no_fittings.xml@auto"
+  },
+  {
+   "category": "edge:forced",
+   "detail": {
+    "error": null,
+    "expected_error": {
+     "code": "IMPORT_ERROR",
+     "pyfa": "ExpatError: syntax error: line 1, column 0"
+    },
+    "reasons": [
+     "expected_error"
+    ]
+   },
+   "id": "auto_garbage.txt@xml"
+  }
+ ],
+ "gate": false,
+ "groups": {
+  "edge": {
+   "pass": 88,
+   "total": 93,
+   "unscored": 11
+  },
+  "edge_export": {
+   "pass": 124,
+   "total": 125,
+   "unscored": 0
+  },
+  "export": {
+   "pass": 3257,
+   "total": 3257,
+   "unscored": 3
+  },
+  "import": {
+   "pass": 1304,
+   "total": 1304,
+   "unscored": 0
+  }
+ },
+ "passed": 4773,
+ "rc": 1,
+ "report_only_disagreeing": [
+  "esf_items_7.json@export:shipstats",
+  "esf_structure_bonus_1.json@export:shipstats",
+  "eft_renamed_item.eft.txt@auto",
+  "esi_missing_description.esi.json@auto",
+  "xml_no_description.xml@auto"
+ ],
+ "score_pct": 98.4559,
+ "suite": "formats-suite",
+ "suite_ref": "formats-suite 7c716e7, FORMATS 0.1, 4779 scored rows",
+ "timeouts": [],
+ "total": 4779,
+ "wall_s": 1.4
+}
